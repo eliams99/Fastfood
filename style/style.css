@@ -1,0 +1,58 @@
+.masthead {
+    padding-top: 5em;
+    background-image: url('header.jpg');
+}
+
+.masthead-heading {
+    font-size: 5em;
+    font-weight: bolder;
+    margin-top: 2em;
+}
+
+.divider-custom {
+    margin: 1em;
+    margin-top: 2em;
+}
+
+.masthead-subheading {
+    font-size: 1.4em;
+    margin: 2em;
+    margin-bottom: 4em;
+}
+
+.page-section {
+    margin: 2em;
+}
+
+#header {
+    background-image: url('header.jpg');
+}
+
+footer {
+    padding: 3em;
+}
+
+.nav-link {
+    font-size: 1.3em;
+    text-transform: uppercase;
+    margin: 0.5em;
+}
+
+.navbar-brand {
+    font-size: 2em;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.portfolio-item:hover {
+    box-shadow: 0 4px 15px grey;
+}
+
+.portfolio-item {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+h2 {
+    margin: 1em;
+}
