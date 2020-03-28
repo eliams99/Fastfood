@@ -1,6 +1,14 @@
-.masthead {
+body {
     padding-top: 5em;
-    background-image: url('header.jpg');
+    background-image: url("header.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .masthead-heading {
@@ -20,8 +28,19 @@
     margin-bottom: 4em;
 }
 
-.page-section {
-    margin: 2em;
+#suggested,
+#menu {
+    margin: auto;
+    padding: 2em;
+    width: 85%;
+}
+
+#suggested {
+    border-radius: 30px 30px 0 0;
+}
+
+#menu {
+    border-radius: 0 0 30px 30px;
 }
 
 #header {
@@ -45,11 +64,12 @@ footer {
 }
 
 .portfolio-item:hover {
-    box-shadow: 0 4px 15px grey;
+    box-shadow: 0 4px 40px grey;
 }
 
-.portfolio-item {
-    border-radius: 10px;
+.portfolio-item,
+.carousel-item {
+    border-radius: 20px;
     cursor: pointer;
 }
 
