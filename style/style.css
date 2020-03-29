@@ -55,6 +55,11 @@ footer {
     font-size: 1.3em;
     text-transform: uppercase;
     margin: 0.5em;
+    transition: all .1s linear;
+}
+
+.nav-link:hover {
+    transform: scale(1.1);
 }
 
 .navbar-brand {
@@ -63,13 +68,27 @@ footer {
     vertical-align: middle;
 }
 
-.portfolio-item:hover {
-    box-shadow: 0 4px 40px grey;
+.img-fluid {
+    transition: all .2s linear;
 }
 
-.portfolio-item,
-.carousel-item {
+.img-fluid:hover {
+    transform: scale(1.1);
+}
+
+.portfolio-item:hover {
+    box-shadow: 0 4px 40px grey;
+    transform: scale(1.1);
+}
+
+.portfolio-item {
     border-radius: 20px;
+    cursor: pointer;
+    padding: 2em;
+    transition: all .1s linear;
+}
+
+.carousel-item {
     cursor: pointer;
 }
 
