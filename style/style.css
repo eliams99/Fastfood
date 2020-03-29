@@ -70,14 +70,6 @@ h2 {
 
 /* Div Consigli */
 
-.img-fluid {
-    transition: all .2s linear;
-}
-
-.img-fluid:hover {
-    transform: scale(1.1);
-}
-
 .portfolio-item:hover {
     box-shadow: 0 4px 40px grey;
     transform: scale(1.1);
