@@ -6,7 +6,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
-    /* Create the parallax scrolling effect */
+    /* Parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -25,14 +25,15 @@ h2 {
 
 /* Navbar */
 
-.navbar a {
+.nav-link {
     font-size: 1.3em;
     text-transform: uppercase;
     margin: 0.5em;
     transition: all .1s linear;
 }
 
-.navbar a:hover {
+.nav-link:hover,
+.navbar-brand:hover {
     transform: scale(1.1);
 }
 
@@ -40,6 +41,7 @@ h2 {
     font-size: 2em;
     font-weight: bold;
     vertical-align: middle;
+    transition: all .1s linear;
 }
 
 
