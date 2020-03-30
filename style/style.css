@@ -2,7 +2,7 @@
 
 body {
     padding-top: 5em;
-    background-image: url("header.jpg");
+    background-image: url("../img/header.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -20,6 +20,28 @@ body {
 
 h2 {
     margin: 1em;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+    transition: all .1s linear;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+a:active {
+    color: white;
+    text-decoration: none;
 }
 
 
@@ -72,16 +94,16 @@ h2 {
 
 /* Div Consigli */
 
-.portfolio-item:hover {
-    box-shadow: 0 4px 40px grey;
-    transform: scale(1.1);
-}
-
 .portfolio-item {
     border-radius: 20px;
     cursor: pointer;
     padding: 2em;
     transition: all .1s linear;
+}
+
+.portfolio-item:hover {
+    box-shadow: 0 4px 40px grey;
+    transform: scale(1.1);
 }
 
 #suggested {

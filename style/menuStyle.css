@@ -1,0 +1,46 @@
+#menu {
+    background-color: white;
+    border-radius: 30px;
+    margin: auto;
+}
+
+.card {
+    transition: all .1s linear;
+    display: block;
+    border-radius: 20px;
+}
+
+.discover {
+    display: none;
+    height: 100px;
+    width: 200px;
+    background-color: goldenrod;
+    margin: auto;
+    margin-top: 1em;
+    border-radius: 20px;
+    height: 200px;
+}
+
+.fas {
+    color: white;
+}
+
+.card-img-top {
+    display: block;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 40px grey;
+    cursor: pointer;
+}
+
+.card:hover .discover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover .card-img-top {
+    display: none;
+}
