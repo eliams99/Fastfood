@@ -70,54 +70,73 @@
         <div class="container text-dark">
             <h1 class="text-uppercase text-center my-4">Menù</h1>
             <div class="row">
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal1">
-                    <img src="../img/bbqburger.png" class="img-fluid card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bbq Burger</h5>
-                        <p class="card-text">Il gusto del bacon e quello della carne alla griglia si sposano perfettamente con quello della salsa BBQ!</p>
+                <div class="col-3 text-dark">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Panini</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Snack</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Dessert</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Bevande</a>
                     </div>
                 </div>
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal2">
-                    <img src="../img/chicken.png" class="card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Chicken Burger</h5>
-                        <p class="card-text">Succoso pollo con una panatura croccante. Un tocco di spezie e lattuga fresca. Un bagno di maionese.</p>
-                    </div>
-                </div>
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal3">
-                    <img src="../img/fries.png" class="card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Patatine fritte</h5>
-                        <p class="card-text">Deliziose patate, colore dorato e croccantezza.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal1">
-                    <img src="../img/bbqburger.png" class="card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Bbq Burger</h5>
-                        <p class="card-text">Il gusto del bacon e quello della carne alla griglia si sposano perfettamente con quello della salsa BBQ!</p>
-                    </div>
-                </div>
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal2">
-                    <img src="../img/chicken.png" class="card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Chicken Burger</h5>
-                        <p class="card-text">Succoso pollo con una panatura croccante. Un tocco di spezie e lattuga fresca. Un bagno di maionese.</p>
-                    </div>
-                </div>
-                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal3">
-                    <img src="../img/fries.png" class="card-img-top" alt="...">
-                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Patatine fritte</h5>
-                        <p class="card-text">Deliziose patate, colore dorato e croccantezza.</p>
+                <div class="col-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="row">
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal1">
+                                    <img src="../img/bbqburger.png" class="img-fluid card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bbq Burger</h5>
+                                        <p class="card-text">Il gusto del bacon e quello della carne alla griglia si sposano perfettamente con quello della salsa BBQ!</p>
+                                    </div>
+                                </div>
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal2">
+                                    <img src="../img/chicken.png" class="card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chicken Burger</h5>
+                                        <p class="card-text">Succoso pollo con una panatura croccante. Un tocco di spezie e lattuga fresca. Un bagno di maionese.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal3">
+                                    <img src="../img/fries.png" class="card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Patatine fritte</h5>
+                                        <p class="card-text">Deliziose patate, colore dorato e croccantezza.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal1">
+                                    <img src="../img/bbqburger.png" class="card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bbq Burger</h5>
+                                        <p class="card-text">Il gusto del bacon e quello della carne alla griglia si sposano perfettamente con quello della salsa BBQ!</p>
+                                    </div>
+                                </div>
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal2">
+                                    <img src="../img/chicken.png" class="card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Chicken Burger</h5>
+                                        <p class="card-text">Succoso pollo con una panatura croccante. Un tocco di spezie e lattuga fresca. Un bagno di maionese.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-sm m-4" style="width: 18rem;" data-toggle="modal" data-target="#portfolioModal3">
+                                    <img src="../img/fries.png" class="card-img-top" alt="...">
+                                    <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Patatine fritte</h5>
+                                        <p class="card-text">Deliziose patate, colore dorato e croccantezza.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
                     </div>
                 </div>
             </div>
@@ -132,7 +151,7 @@
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">
-          <i class="fas fa-times text-dark float-right m-3"></i>
+          <i class="fas fa-times float-right m-3"></i>
         </span>
       </button>
                 <div class="modal-body text-center">
@@ -145,7 +164,7 @@
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon">
-                                        <i class="fas fa-star text-dark"></i>
+                                        <i class="fas fa-star"></i>
                                     </div>
                                     <div class="divider-custom-line"></div>
                                 </div>
@@ -171,7 +190,7 @@
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true ">
-          <i class="fas fa-times float-right text-dark m-3"></i>
+          <i class="fas fa-times float-right m-3"></i>
         </span>
       </button>
                 <div class="modal-body text-center">
@@ -184,7 +203,7 @@
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon">
-                                        <i class="fas text-dark fa-star"></i>
+                                        <i class="fas fa-star"></i>
                                     </div>
                                     <div class="divider-custom-line"></div>
                                 </div>
@@ -210,7 +229,7 @@
             <div class="modal-content ">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">
-          <i class="fas fa-times text-dark float-right m-3"></i>
+          <i class="fas fa-times float-right m-3"></i>
         </span>
       </button>
                 <div class="modal-body text-center">
@@ -223,7 +242,7 @@
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon">
-                                        <i class="fas fa-star text-dark"></i>
+                                        <i class="fas fa-star"></i>
                                     </div>
                                     <div class="divider-custom-line"></div>
                                 </div>

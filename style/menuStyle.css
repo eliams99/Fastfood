@@ -4,6 +4,10 @@
     margin: auto;
 }
 
+.fas {
+    color: white;
+}
+
 .card {
     transition: all .1s linear;
     display: block;
@@ -12,17 +16,11 @@
 
 .discover {
     display: none;
-    height: 100px;
-    width: 200px;
+    height: 130px;
     background-color: goldenrod;
     margin: auto;
     margin-top: 1em;
     border-radius: 20px;
-    height: 200px;
-}
-
-.fas {
-    color: white;
 }
 
 .card-img-top {

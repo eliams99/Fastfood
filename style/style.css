@@ -22,24 +22,24 @@ h2 {
     margin: 1em;
 }
 
-a:link {
+#orderNow:link {
     color: white;
     text-decoration: none;
     transition: all .1s linear;
 }
 
-a:visited {
+#orderNow:visited {
     color: white;
     text-decoration: none;
 }
 
-a:hover {
+#orderNow:hover {
     color: white;
     text-decoration: none;
     transform: scale(1.1);
 }
 
-a:active {
+#orderNow:active {
     color: white;
     text-decoration: none;
 }
