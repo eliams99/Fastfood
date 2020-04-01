@@ -18,30 +18,15 @@ body {
     margin-top: 2em;
 }
 
+h1 {
+    font-size: 5em;
+    font-weight: bolder;
+    display: table-cell;
+    vertical-align: middle;
+}
+
 h2 {
     margin: 1em;
-}
-
-#orderNow:link {
-    color: white;
-    text-decoration: none;
-    transition: all .1s linear;
-}
-
-#orderNow:visited {
-    color: white;
-    text-decoration: none;
-}
-
-#orderNow:hover {
-    color: white;
-    text-decoration: none;
-    transform: scale(1.1);
-}
-
-#orderNow:active {
-    color: white;
-    text-decoration: none;
 }
 
 
@@ -70,22 +55,42 @@ h2 {
 /* Div Masthead (Ordina ora!) */
 
 .masthead-heading {
-    font-size: 5em;
-    font-weight: bolder;
-    margin-top: 2em;
+    margin: 6em;
 }
 
 .masthead-subheading {
     font-size: 1.4em;
-    margin: 2em;
-    margin-bottom: 4em;
+    margin-bottom: 1.8em;
+}
+
+.masthead-heading:link {
+    color: white;
+    text-decoration: none;
+    transition: all .1s linear;
+}
+
+.masthead-heading:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.masthead-heading:hover {
+    color: white;
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+.masthead-heading:active {
+    color: white;
+    text-decoration: none;
 }
 
 
 /* Div Consigli e Menù */
 
 #suggested,
-#menu,#form {
+#menu,
+#form {
     margin: auto;
     padding: 2em;
     width: 85%;
@@ -106,7 +111,8 @@ h2 {
     transform: scale(1.1);
 }
 
-#suggested,#form {
+#suggested,
+#form {
     border-radius: 30px 30px 0 0;
 }
 
