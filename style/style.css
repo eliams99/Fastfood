@@ -56,6 +56,9 @@ h2 {
 
 .masthead-heading {
     margin: 6em;
+    font-size: 5em;
+    font-weight: bolder;
+    margin-top: 1em;
 }
 
 .masthead-subheading {
