@@ -9,9 +9,9 @@ function nav() {
         */
         $(window).scroll(function() {
             if ($(window).scrollTop() > 56) {
-                $(".navbar").addClass("bg-dark shadow");
+                $(".navbar").addClass("bg-dark shadow shrink");
             } else {
-                $(".navbar").removeClass("bg-dark shadow");
+                $(".navbar").removeClass("bg-dark shadow shrink");
             }
         });
         // If Mobile, add background color when toggler is clicked

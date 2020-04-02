@@ -29,17 +29,34 @@ h2 {
     margin: 1em;
 }
 
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+    background-color: rgb(216, 140, 0) !important;
+    border-color: rgb(216, 140, 0) !important;
+}
+
+.btn-primary:hover {
+    background-color: rgb(255, 176, 30) !important;
+    border-color: rgb(255, 176, 30) !important;
+    /*box-shadow: 0 1px 8px grey;*/
+}
+
 
 /* Navbar */
 
-.nav-link {
+nav.navbar {
+    padding: 1.2em;
+}
+
+.nav-item>.nav-link {
     font-size: 1.3em;
     text-transform: uppercase;
     margin: 0.5em;
     transition: all .1s linear;
 }
 
-.nav-link:hover,
+.nav-item>.nav-link:hover,
 .navbar-brand:hover {
     transform: scale(1.1);
 }
@@ -49,6 +66,21 @@ h2 {
     font-weight: bold;
     vertical-align: middle;
     transition: all .1s linear;
+}
+
+nav.navbar.shrink {
+    min-height: 35px;
+    padding: 0.1em;
+}
+
+nav.shrink .nav-link {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    font-size: 1.1em;
+}
+
+nav.shrink .navbar-brand {
+    font-size: 1.7em;
 }
 
 

@@ -4,6 +4,21 @@
     margin: auto;
 }
 
+.page-section {
+    height: 900px;
+}
+
+.nav>.nav-link.active {
+    font-weight: bolder;
+    color: white !important;
+    background-color: rgb(216, 140, 0) !important;
+    border-color: rgb(216, 140, 0) !important;
+}
+
+.nav>.nav-link {
+    color: rgb(216, 140, 0) !important;
+}
+
 .discover>.fas {
     color: white;
 }
@@ -17,7 +32,7 @@
 .discover {
     display: none;
     height: 130px;
-    background-color: goldenrod;
+    background-color: rgb(216, 140, 0);
     margin: auto;
     margin-top: 1em;
     border-radius: 20px;
