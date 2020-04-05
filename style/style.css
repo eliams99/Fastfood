@@ -1,14 +1,9 @@
 /* Generale */
+
 .dropdown-menu {
     margin-right: 50em;
     border-radius: 10px;
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.363);
-}
-
-.carousel-inner > .carousel-item > img {
-    width: 320px;
-    height: 180px;
-    margin-bottom: 1em;
 }
 
 body {
@@ -150,7 +145,7 @@ nav.shrink .navbar-brand {
 }
 
 .portfolio-item:hover {
-    box-shadow: 0 4px 40px grey;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.363);
     transform: scale(1.1);
 }
 
@@ -168,6 +163,16 @@ nav.shrink .navbar-brand {
 
 .carousel-item {
     cursor: pointer;
+}
+
+.carousel-inner>.carousel-item>img {
+    width: 420px;
+    height: 280px;
+    transition: all .1s linear;
+}
+
+.carousel-inner>.carousel-item>img:hover {
+    transform: scale(1.1);
 }
 
 

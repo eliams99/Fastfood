@@ -4,8 +4,13 @@
     margin: auto;
 }
 
-.page-section {
-    height: 900px;
+.card {
+    margin: 1.5em;
+}
+
+.nav {
+    margin-top: 1.5em;
+    margin-left: 1.5em;
 }
 
 .nav>.nav-link.active {
@@ -31,10 +36,9 @@
 
 .discover {
     display: none;
-    height: 130px;
+    height: 142px;
     background-color: rgb(216, 140, 0);
-    margin: auto;
-    margin-top: 1em;
+    margin: 2em;
     border-radius: 20px;
 }
 
@@ -44,7 +48,7 @@
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 40px grey;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.363);
     cursor: pointer;
 }
 
