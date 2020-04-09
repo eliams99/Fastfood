@@ -49,6 +49,35 @@ h2 {
 }
 
 
+/* Input text */
+
+.form-control:focus {
+    border-color: rgb(216, 140, 0) !important;
+    box-shadow: 0 1px 5px rgba(216, 140, 0, 0.568) !important;
+}
+
+
+/* Dropdown */
+
+.dropdown-item:focus {
+    background-color: rgb(216, 140, 0) !important;
+}
+
+
+/* Nav */
+
+.nav>.nav-link.active {
+    font-weight: bolder;
+    color: white !important;
+    background-color: rgb(216, 140, 0) !important;
+    border-color: rgb(216, 140, 0) !important;
+}
+
+.nav>.nav-link {
+    color: rgb(216, 140, 0) !important;
+}
+
+
 /* Navbar */
 
 nav.navbar {
@@ -87,6 +116,10 @@ nav.shrink .nav-link {
 
 nav.shrink .navbar-brand {
     font-size: 1.7em;
+}
+
+#loginDropdown {
+    display: none;
 }
 
 
