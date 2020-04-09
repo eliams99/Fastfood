@@ -64,66 +64,98 @@
     </header>
 
     <!-- Gestione profilo -->
-    <section class="page-section bg-light portfolio" id="form">
+    <section class="page-section bg-light portfolio justify-content-center" id="form">
         <div class="row">
-            <div class="col-2 justify-content-center">
+            <div class="col-3 justify-content-center">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-personalData-tab" data-toggle="pill" href="#v-pills-personalData" role="tab" aria-controls="v-pills-personalData" aria-selected="true">Dati personali</a>
                     <a class="nav-link" id="v-pills-menuManagement-tab" data-toggle="pill" href="#v-pills-menuManagement" role="tab" aria-controls="v-pills-menuManagement" aria-selected="false">Gestione menù</a>
                     <a class="nav-link" id="v-pills-statistics-tab" data-toggle="pill" href="#v-pills-statistics" role="tab" aria-controls="v-pills-statistics" aria-selected="false">Statistiche</a>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
+
+                        <!-- Section Heading -->
+                        <h4 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h4>
+
                         <div class="form-group">
-                            <h4> Dati utente</h4>
                             <div class="row">
                                 <div class="col-md">
                                     <label>Nome</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" placeholder="Es. Mario">
                                 </div>
                                 <div class="col-md">
                                     <label>Cognome</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" placeholder="Es. Rossi">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="address">Indirizzo</label>
+                                    <input type="text" class="form-control" id="addressInputText" placeholder="Es. via Verdi 8">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="municipality">Comune</label>
+                                    <input type="text" class="form-control" id="municipalityInputText" placeholder="Es. Milano">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="province">Provincia</label>
+                                    <input type="text" class="form-control" id="provinceInputText" placeholder="Es. MI">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="CAP">CAP</label>
+                                    <input type="text" class="form-control" id="CAPInputText" placeholder="Es. 20121">
                                 </div>
                             </div>
 
                             <label for="exampleInputEmail1">Indirizzo email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
-                            <h4 class="mt-4">Dati ristorante</h4>
-
-                            <label for="exampleInputPassword1">Nome del ristorante</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
 
                             <div class="row">
-                                <div class="col-md-6">
-                                    <label for="exampleInputPassword1">Indirizzo</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="exampleInputPassword1">Comune</label>
-                                    <input type="text" class="form-control" id="">
+                                <div class="col-md">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password">
                                 </div>
                                 <div class="col-md">
-                                    <label for="exampleInputPassword1">Provincia</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
-                                <div class="col-md">
-                                    <label for="exampleInputPassword1">CAP</label>
-                                    <input type="text" class="form-control" id="">
+                                    <label for="exampleInputPassword1">Conferma password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conferma Password">
                                 </div>
                             </div>
-                            <label for="exampleInputPassword1">Numero di telefono</label>
-                            <input type="text" class="form-control" id="">
-
-                            <label for="exampleInputPassword1">Partita IVA</label>
-                            <input type="text" class="form-control" id="">
-
-                            <label for="exampleInputPassword1">Indirizzo</label>
-                            <input type="text" class="form-control" id="">
                         </div>
+                        <!--Sezione di registrazione del ristorante-->
+                        <h4 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h4>
+                        <div id="registrazione_ristorante">
+                            <label>Nome del ristorante</label>
+                            <input type="text" class="form-control" placeholder="Es. FastFood delle Rose">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Indirizzo del ristorante</label>
+                                    <input type="text" class="form-control" placeholder="Es. Via Verdi 8, Milano">
+                                </div>
+                                <div class="col-md">
+                                    <label>CAP del ristorante</label>
+                                    <input type="text" class="form-control" placeholder="Es. 20121">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Numero di telefono del ristorante</label>
+                                    <input type="text" class="form-control" placeholder="Es. 0331123123">
+                                </div>
+                                <div class="col-md">
+                                    <label>Numero di partita IVA</label>
+                                    <input type="text" class="form-control" placeholder="Es. 0764352056C">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="bottone_registrati">
+                            <button type="submit" class="btn btn-primary mb-2">Salva modifiche</button>
+                        </div>
+
                     </div>
                     <div class="tab-pane fade" id="v-pills-menuManagement" role="tabpanel" aria-labelledby="v-pills-menuManagement-tab">
                         Ciao 2
@@ -131,6 +163,7 @@
                     <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Nessun contenuto</div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 

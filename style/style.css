@@ -48,6 +48,11 @@ h2 {
     /*box-shadow: 0 1px 8px grey;*/
 }
 
+.button:focus,
+button:focus {
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.363) !important;
+}
+
 
 /* Input text */
 

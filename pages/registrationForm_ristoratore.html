@@ -84,86 +84,94 @@
 
             <!-- Section Heading -->
             <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
-            
-            </div>
-            <div class="form-group">
-                <div class = "row">
-                    <div class="col-md">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" placeholder="Es. Mario">
-                    </div>
-                    <div class = "col-md">
-                        <label>Cognome</label>
-                        <input type="text" class="form-control" placeholder="Es. Rossi">
-                    </div>
-                </div>
-                
-                <div class = "row">
-                    <div class="col-md">
-                        <label>Indirizzo</label>
-                        <input type="text" class="form-control" placeholder="Es. Via Verdi 8, Milano">
-                    </div>
-                    <div class = "col-md">
-                        <label>CAP</label>
-                        <input type="text" class="form-control" placeholder="Es. 20121">
-                    </div>
-                </div>
 
-                <label for="exampleInputEmail1">Indirizzo email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
-                
-                <div class = "row">
-                    <div class="col-md">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password">
-                    </div>
-                    <div class = "col-md">
-                        <label for="exampleInputPassword1">Conferma password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conferma Password">
-                    </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" placeholder="Es. Mario">
+                </div>
+                <div class="col-md">
+                    <label>Cognome</label>
+                    <input type="text" class="form-control" placeholder="Es. Rossi">
                 </div>
             </div>
-            <!--Sezione di registrazione del ristorante-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
-            <div id = "registrazione_ristorante">
-                <label>Nome del ristorante</label>
-                <input type="text" class="form-control" placeholder="Es. FastFood delle Rose">
-                <div class = "row">
-                    <div class="col-md">
-                        <label>Indirizzo del ristorante</label>
-                        <input type="text" class="form-control" placeholder="Es. Via Verdi 8, Milano">
-                    </div>
-                    <div class = "col-md">
-                        <label>CAP del ristorante</label>
-                        <input type="text" class="form-control" placeholder="Es. 20121">
-                    </div>
-                </div>
-                <div class = "row">
-                    <div class="col-md">
-                        <label>Numero di telefono del ristorante</label>
-                        <input type="text" class="form-control" placeholder="Es. 0331123123">
-                    </div>
-                    <div class = "col-md">
-                        <label>Numero di partita IVA</label>
-                        <input type="text" class="form-control" placeholder="Es. 0764352056C">
-                    </div>
-                </div>
 
+            <div class="row">
+                <div class="col-md">
+                    <label for="address">Indirizzo</label>
+                    <input type="text" class="form-control" id="addressInputText" placeholder="Es. via Verdi 8">
+                </div>
+                <div class="col-md-3">
+                    <label for="municipality">Comune</label>
+                    <input type="text" class="form-control" id="municipalityInputText" placeholder="Es. Milano">
+                </div>
+                <div class="col-md-2">
+                    <label for="province">Provincia</label>
+                    <input type="text" class="form-control" id="provinceInputText" placeholder="Es. MI">
+                </div>
+                <div class="col-md-2">
+                    <label for="CAP">CAP</label>
+                    <input type="text" class="form-control" id="CAPInputText" placeholder="Es. 20121">
+                </div>
             </div>
 
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
-                </label>
-                <div id="bottone_registrati">
-                    <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+            <label for="exampleInputEmail1">Indirizzo email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
+
+            <div class="row">
+                <div class="col-md">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password">
+                </div>
+                <div class="col-md">
+                    <label for="exampleInputPassword1">Conferma password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conferma Password">
                 </div>
             </div>
         </div>
-        
+        <!--Sezione di registrazione del ristorante-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
+        <div id="registrazione_ristorante">
+            <label>Nome del ristorante</label>
+            <input type="text" class="form-control" placeholder="Es. FastFood delle Rose">
+            <div class="row">
+                <div class="col-md">
+                    <label>Indirizzo del ristorante</label>
+                    <input type="text" class="form-control" placeholder="Es. Via Verdi 8, Milano">
+                </div>
+                <div class="col-md">
+                    <label>CAP del ristorante</label>
+                    <input type="text" class="form-control" placeholder="Es. 20121">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <label>Numero di telefono del ristorante</label>
+                    <input type="text" class="form-control" placeholder="Es. 0331123123">
+                </div>
+                <div class="col-md">
+                    <label>Numero di partita IVA</label>
+                    <input type="text" class="form-control" placeholder="Es. 0764352056C">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                  Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
+                </label>
+            <div id="bottone_registrati">
+                <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+            </div>
+        </div>
+        </div>
+
     </section>
-    
+
     <footer class="footer text-center text-light">
         <div class="container ">
             <div class="row ">
@@ -184,4 +192,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
 </body>
+
 </html>
