@@ -1,3 +1,5 @@
-#ristoratore, #cliente {
-    
+.linkscelta:link, .linkscelta:hover, .linkscelta:visited {
+    text-decoration: none;
 }
+
+
