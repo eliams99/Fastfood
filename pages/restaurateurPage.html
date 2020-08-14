@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
+    <link rel="stylesheet" href="../style/restaurateurStyle.css" />
     <script src="../navbar.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
@@ -75,6 +76,7 @@
             </div>
             <div class="col-9">
                 <div class="tab-content" id="v-pills-tabContent">
+                    <!-- DATI PERSONALI -->
                     <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
 
                         <!-- Section Heading -->
@@ -125,6 +127,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!--Sezione di registrazione del ristorante-->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary">Modifica i dati del ristorante</h4>
                         <div id="registrazione_ristorante">
@@ -157,15 +160,250 @@
                         </div>
 
                     </div>
+
+                    <!-- GESTIONE MENU -->
                     <div class="tab-pane fade" id="v-pills-menuManagement" role="tabpanel" aria-labelledby="v-pills-menuManagement-tab">
-                        Ciao 2
+                        <!-- Panini comuni-->
+                        <h4 class="page-section-heading text-center text-uppercase text-secondary">Panini comuni</h4>
+                        <form>
+                            <table>
+                                <div class="list-group">
+                                    <li href="#" class="list-group-item">
+                                        <div class="form-check form-check-inline mt-0">
+                                            <input class="form-check-input" type="checkbox" id="dishCheckbox1" value="option1">
+                                            <label class="form-check-label mx-2">Double cheeseburger</label>
+                                        </div>
+                                        <button class="btn btn-secondary mx-1 float-right" type="button" data-toggle="modal" data-target="#dishModal1">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Modifica
+                                        </button>
+                                    </li>
+                                    <li href="#" class="list-group-item">
+                                        <div class="form-check form-check-inline mt-0">
+                                            <input class="form-check-input" type="checkbox" id="dishCheckbox2" value="option2">
+                                            <label class="form-check-label mx-2">Chicken burger</label>
+                                        </div>
+                                        <button class="btn btn-secondary mx-1 float-right" type="button">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Modifica
+                                        </button>
+                                    </li>
+                                    <li href="#" class="list-group-item">
+                                        <div class="form-check form-check-inline mt-0">
+                                            <input class="form-check-input" type="checkbox" id="dishCheckbox3" value="option3">
+                                            <label class="form-check-label mx-2">Fries</label>
+                                        </div>
+                                        <button class="btn btn-secondary mx-1 float-right" type="button">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Modifica
+                                        </button>
+                                    </li>
+                                </div>
+                            </table>
+                            <button type="submit" class="btn btn-primary m-2">
+                                <i class="fas fa-check fa-fw"></i>
+                                Conferma modifiche
+                            </button>
+                        </form>
+
+                        <!-- Panini personalizzati -->
+                        <h4 class="page-section-heading text-center text-uppercase text-secondary mt-4">Panini personalizzati</h4>
+                        <form>
+                            <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#newDishModal1">
+                                <i class="fas fa-plus fa-fw"></i>
+                                Aggiungi piatto
+                            </button>
+                            <table>
+                                <div class="list-group">
+                                    <li href="#" class="list-group-item">
+                                        <div class="form-check form-check-inline mt-0">
+                                            <input class="form-check-input" type="checkbox" id="dishCheckbox1" value="option1">
+                                            <label class="form-check-label mx-2">Hamburger Salsa Agrodolce</label>
+                                        </div>
+                                        <button class="btn btn-danger mx-1 float-right" type="button">
+                                            <i class="fas fa-trash-alt fa-fw"></i>
+                                            Elimina
+                                        </button>
+                                        <button class="btn btn-secondary mx-1 float-right" type="button" data-toggle="modal" data-target="#dishModal1">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Modifica
+                                        </button>
+                                    </li>
+                                    <li href="#" class="list-group-item">
+                                        <div class="form-check form-check-inline mt-0">
+                                            <input class="form-check-input" type="checkbox" id="dishCheckbox2" value="option2">
+                                            <label class="form-check-label mx-2">Gold Onion Rings</label>
+                                        </div>
+                                        <button class="btn btn-danger mx-1 float-right" type="button">
+                                            <i class="fas fa-trash-alt fa-fw"></i>
+                                            Elimina
+                                        </button>
+                                        <button class="btn btn-secondary mx-1 float-right" type="button">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Modifica
+                                        </button>
+                                    </li>
+                                </div>
+                                <button type="submit" class="btn btn-primary m-2">
+                                    <i class="fas fa-check fa-fw"></i>
+                                    Conferma modifiche
+                                </button>
+                            </table>
+                        </form>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Nessun contenuto</div>
+
+                    <!-- STATISTICHE -->
+                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Da fare</div>
                 </div>
             </div>
         </div>
         </div>
     </section>
+
+    <!-- Modal - Modifica piatto -->
+    <div class="portfolio-modal modal fade" id="dishModal1" tabindex="-1" role="dialog" aria-labelledby="dishModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-l" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                      <i class="fas fa-times float-right m-3"></i>
+                    </span>
+                </button>
+                <div class="modal-body text-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modal - Title -->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Double cheeseburger</h2>
+                                <!-- Icon Divider -->
+                                <div class="divider-custom d-flex justify-content-center">
+                                    <hr class="divider-custom-line my-auto flex-grow-0">
+                                    <div class="divider-custom-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <hr class="divider-custom-line my-auto flex-grow-0">
+                                </div>
+                                <form>
+                                    <!-- Modal - Image -->
+                                    <div class="imageDiv">
+                                        <img class="img-fluid rounded" src="../img/doublecheese.png" alt="">
+                                        <button class="btn btn-secondary mb-5 float-right" type="button">
+                                            <i class="fas fa-edit fa-fw"></i>
+                                            Cambia immagine
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword4">Nome</label>
+                                        <input type="text" class="form-control" id="name" placeholder="es. Double Cheeseburger">
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-7">
+                                            <label for="inputEmail4">Tipologia</label>
+                                            <input type="text" class="form-control" id="type" placeholder="es. Hamburger">
+                                        </div>
+
+                                        <div class="form-group col-md-5">
+                                            <label for="inputAddress">Prezzo</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">€</div>
+                                                </div>
+                                                <input type="text" class="form-control" id="price" placeholder="7.50" size="5">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Descrizione</label>
+                                        <textarea class="form-control" id="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                      <i class="fas fa-edit fa-fw"></i>
+                                      Conferma modifiche
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal - Aggiungi piatto personalizzato -->
+    <div class="portfolio-modal modal fade" id="newDishModal1" tabindex="-1" role="dialog" aria-labelledby="newDishModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-l" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">
+          <i class="fas fa-times float-right m-3"></i>
+        </span>
+      </button>
+                <div class="modal-body text-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Modal - Title -->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Aggiungi piatto</h2>
+                                <!-- Icon Divider -->
+                                <div class="divider-custom d-flex justify-content-center">
+                                    <hr class="divider-custom-line my-auto flex-grow-0">
+                                    <div class="divider-custom-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <hr class="divider-custom-line my-auto flex-grow-0">
+                                </div>
+                                <form>
+                                    <!-- Modal - Image -->
+                                    <div class="form-group">
+                                        <button class="btn btn-secondary" type="button">
+                                            <i class="fas fa-plus fa-fw"></i>
+                                            Aggiungi immagine
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputPassword4">Nome</label>
+                                        <input type="text" class="form-control" id="name" placeholder="es. Double Cheeseburger">
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-7">
+                                            <label for="inputEmail4">Tipologia</label>
+                                            <input type="text" class="form-control" id="type" placeholder="es. Hamburger">
+                                        </div>
+
+                                        <div class="form-group col-md-5">
+                                            <label for="inputAddress">Prezzo</label>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">€</div>
+                                                </div>
+                                                <input type="text" class="form-control" id="price" placeholder="7.50" size="5">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Descrizione</label>
+                                        <textarea class="form-control" id="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                      <i class="fas fa-check fa-fw"></i>
+                                      Aggiungi piatto
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="footer text-center text-light">
         <div class="container ">

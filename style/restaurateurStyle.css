@@ -1,0 +1,16 @@
+/* Container needed to position the button. Adjust the width as needed */
+
+.imageDiv {
+    position: relative;
+}
+
+
+/* Style the button and place it in the middle of the container/image */
+
+.imageDiv button {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

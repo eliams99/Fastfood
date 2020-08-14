@@ -1,0 +1,9 @@
+Nuovo divider:
+
+<div class="divider-custom d-flex justify-content-center">
+                <hr class="divider-custom-line my-auto flex-grow-0">
+                <div class="divider-custom-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <hr class="divider-custom-line my-auto flex-grow-0">
+            </div>
