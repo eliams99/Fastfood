@@ -179,7 +179,7 @@ nav.shrink .navbar-brand {
 
 #suggested,
 #menu,
-#form {
+#form, #carrello {
     margin: auto;
     padding: 2em;
     width: 85%;
@@ -201,7 +201,7 @@ nav.shrink .navbar-brand {
 }
 
 #suggested,
-#form {
+#form, #carrello {
     border-radius: 30px 30px 0 0;
 }
 
@@ -233,7 +233,7 @@ footer {
     padding: 3em;
 }
 
-#bottone_registrati {
+#bottone_registrati, #bottone_cancellati, #bottone_acquista {
     margin-top: 2rem;
     text-align: center;
 }
