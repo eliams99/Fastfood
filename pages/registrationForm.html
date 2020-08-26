@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <script src="../navbar.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
+    <script src="../script/sendJson.js" type="text/javascript"></script>
 </head>
 
 <body onload="nav()">
@@ -81,80 +82,82 @@
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
         <div class="container">
+            <form id="registrationForm">
 
-            <!-- Section Heading -->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
+                <!-- Section Heading -->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" placeholder="Es. Mario">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" id="nameInputText" name="nome" placeholder="Es. Mario">
+                        </div>
+                        <div class="col-md">
+                            <label>Cognome</label>
+                            <input type="text" class="form-control" id="surnameInputText" name="cognome" placeholder="Es. Rossi">
+                        </div>
                     </div>
-                    <div class="col-md">
-                        <label>Cognome</label>
-                        <input type="text" class="form-control" placeholder="Es. Rossi">
+
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="address">Indirizzo</label>
+                            <input type="text" class="form-control" id="addressInputText" name="indirizzo" placeholder="Es. via Verdi 8">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="municipality">Comune</label>
+                            <input type="text" class="form-control" id="municipalityInputText" name="comune" placeholder="Es. Milano">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="province">Provincia</label>
+                            <input type="text" class="form-control" id="provinceInputText" name="provincia" placeholder="Es. MI">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="CAP">CAP</label>
+                            <input type="text" class="form-control" id="CAPInputText" name="CAP" placeholder="Es. 20121">
+                        </div>
+                    </div>
+
+                    <label for="exampleInputEmail1">Indirizzo email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
+
+                    <div class="row">
+                        <div class="col-md">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Inserisci Password">
+                        </div>
+                        <div class="col-md">
+                            <label for="exampleInputPassword1">Conferma password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Conferma Password">
+                        </div>
+                    </div>
+
+                    <label for="PaymentMethod">Come preferisci pagare?</label>
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
+                        <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md">
-                        <label for="address">Indirizzo</label>
-                        <input type="text" class="form-control" id="addressInputText" placeholder="Es. via Verdi 8">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="municipality">Comune</label>
-                        <input type="text" class="form-control" id="municipalityInputText" placeholder="Es. Milano">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="province">Provincia</label>
-                        <input type="text" class="form-control" id="provinceInputText" placeholder="Es. MI">
-                    </div>
-                    <div class="col-md-2">
-                        <label for="CAP">CAP</label>
-                        <input type="text" class="form-control" id="CAPInputText" placeholder="Es. 20121">
-                    </div>
-                </div>
-
-                <label for="exampleInputEmail1">Indirizzo email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
-
-                <div class="row">
-                    <div class="col-md">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password">
-                    </div>
-                    <div class="col-md">
-                        <label for="exampleInputPassword1">Conferma password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conferma Password">
-                    </div>
-                </div>
-
-                <label for="PaymentMethod">Come preferisci pagare?</label>
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
-                    <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>
-                </div>
-            </div>
-
-            <div>
-                <label>Fai sapere le tue preferenze!</label>
-                <select class="form-control form-control-sm">
+                <div>
+                    <label>Fai sapere le tue preferenze!</label>
+                    <select class="form-control form-control-sm">
                     <option value="">Cosa ti piace di più?</option>
                     <option value="pollo">Pollo</option>
                     <option value="suino">Manzo</option>
                     <option value="veg">Non mangio carne</option>
                   </select>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
                   Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
                 </label>
-                <div id="bottone_registrati">
-                    <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+                    <div id="bottone_registrati">
+                        <button type="button" onclick="submitData()" class="btn btn-primary mb-2">Registrati</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
