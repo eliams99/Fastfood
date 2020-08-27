@@ -82,7 +82,7 @@
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
         <div class="container">
-            <form id="registrationForm">
+            <form id="registrationForm" method="POST" action="submitForm.php">
 
                 <!-- Section Heading -->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
@@ -134,18 +134,20 @@
 
                     <label for="PaymentMethod">Come preferisci pagare?</label>
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
-                        <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>
+                        <section><input type="radio" name="preferenzePagamento" value="carta"> <label for="preferenzePagamento">Carta di credito</label></section>
+                        <section><input type="radio" name="preferenzePagamento" value="contanti"> <label for="preferenzePagamento">Contanti</label></section>
+                        <!--    <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
+                        <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>-->
                     </div>
                 </div>
 
                 <div>
-                    <label>Fai sapere le tue preferenze!</label>
-                    <select class="form-control form-control-sm">
-                    <option value="">Cosa ti piace di più?</option>
-                    <option value="pollo">Pollo</option>
-                    <option value="suino">Manzo</option>
-                    <option value="veg">Non mangio carne</option>
+                    <label>Facci sapere le tue preferenze!</label>
+                    <select name="preferenzeCibo" class="form-control form-control-sm">
+                    <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
+                    <option name="preferenzeCibo" value="pollo">Pollo</option>
+                    <option name="preferenzeCibo" value="suino">Manzo</option>
+                    <option name="preferenzeCibo" value="veg">Vegano</option>
                   </select>
                 </div>
                 <div class="form-check">
@@ -154,7 +156,7 @@
                   Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
                 </label>
                     <div id="bottone_registrati">
-                        <button type="button" onclick="submitData()" class="btn btn-primary mb-2">Registrati</button>
+                        <button type="submit" class="btn btn-primary mb-2">Registrati</button>
                     </div>
                 </div>
             </form>

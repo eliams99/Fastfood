@@ -179,7 +179,8 @@ nav.shrink .navbar-brand {
 
 #suggested,
 #menu,
-#form, #carrello {
+#form,
+#carrello {
     margin: auto;
     padding: 2em;
     width: 85%;
@@ -201,7 +202,8 @@ nav.shrink .navbar-brand {
 }
 
 #suggested,
-#form, #carrello {
+#form,
+#carrello {
     border-radius: 30px 30px 0 0;
 }
 
@@ -233,7 +235,9 @@ footer {
     padding: 3em;
 }
 
-#bottone_registrati, #bottone_cancellati, #bottone_acquista {
+#bottone_registrati,
+#bottone_cancellati,
+#bottone_acquista {
     margin-top: 2rem;
     text-align: center;
 }
@@ -242,44 +246,51 @@ footer {
     margin-top: 1em;
 }
 
-/* Carrello */
-.table1 { 
-    border-spacing: 0 10px; 
-    font-family: 'Open Sans', sans-serif; 
-    font-weight: bold; 
-    width: 100%;
-    } 
-    .table1 th { 
-    padding: 10px 20px; 
-    background: #56433D; 
-    color: #F9C941; 
-    border-right: 2px solid;  
-    font-size: 0.9em; 
-    } 
-    .table1 th:first-child { 
-    text-align: left; 
-    } 
-    .table1 th:last-child { 
-    border-right: none; 
-    } 
-    .table1 td { 
-    vertical-align: middle; 
-    padding: 10px; 
-    font-size: 14px; 
-    text-align: center; 
-    border-top: 2px solid #56433D; 
-    border-bottom: 2px solid #56433D; 
-    border-right: 2px solid #56433D; 
-    } 
-    .table1 td:first-child { 
-    border-left: 2px solid #56433D; 
-    border-right: none; 
-    } 
-    .table1 td:nth-child(2){ 
-    text-align: left; 
-    } 
 
-    .cartImg {
-        height: 5em;
-        width: 5em;
-    }
+/* Carrello */
+
+.table1 {
+    border-spacing: 0 10px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.table1 th {
+    padding: 10px 20px;
+    background: #56433D;
+    color: #F9C941;
+    border-right: 2px solid;
+    font-size: 0.9em;
+}
+
+.table1 th:first-child {
+    text-align: left;
+}
+
+.table1 th:last-child {
+    border-right: none;
+}
+
+.table1 td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border-top: 2px solid #56433D;
+    border-bottom: 2px solid #56433D;
+    border-right: 2px solid #56433D;
+}
+
+.table1 td:first-child {
+    border-left: 2px solid #56433D;
+    border-right: none;
+}
+
+.table1 td:nth-child(2) {
+    text-align: left;
+}
+
+.cartImg {
+    height: 5em;
+    width: 5em;
+}
