@@ -80,91 +80,59 @@
 
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
-        <form action="../php/submitRestaurRegistrationJson.php" method="POST">
-            <!-- Section Heading -->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md">
-                        <label>Nome</label>
-                        <input type="text" name="nome" class="form-control" placeholder="Es. Mario" required>
-                    </div>
-                    <div class="col-md">
-                        <label>Cognome</label>
-                        <input type="text" name="cognome" class="form-control" placeholder="Es. Rossi" required>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md">
-                        <label for="address">Indirizzo</label>
-                        <input type="text" name="indirizzo" class="form-control" id="addressInputText" placeholder="Es. via Verdi 8" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="municipality">Comune</label>
-                        <input type="text" name="comune" class="form-control" id="municipalityInputText" placeholder="Es. Milano" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="province">Provincia</label>
-                        <input type="text" name="provincia" class="form-control" id="provinceInputText" placeholder="Es. MI" required>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="CAP">CAP</label>
-                        <input type="text" name="CAP" class="form-control" id="CAPInputText" placeholder="Es. 20121" required>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md">
-                        <label for="exampleInputEmail1">Indirizzo email</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
-                    </div>
-                    <div class="col-md">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password" required>
-                    </div>
-                </div>
-            </div>
-            <!--Sezione di registrazione del ristorante-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
-            <div id="registrazione_ristorante">
-                <label>Nome del ristorante</label>
-                <input type="text" name="nomeRistorante" class="form-control" placeholder="Es. FastFood delle Rose">
-                <div class="row">
-                    <div class="col-md">
-                        <label>Indirizzo del ristorante</label>
-                        <input type="text" name="indirizzoRistorante" class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
-                    </div>
-                    <div class="col-md">
-                        <label>CAP del ristorante</label>
-                        <input type="text" name="capRistorante" class="form-control" placeholder="Es. 20121" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md">
-                        <label>Numero di telefono del ristorante</label>
-                        <input type="text" name="numeroTel" class="form-control" placeholder="Es. 0331123123" required>
-                    </div>
-                    <div class="col-md">
-                        <label>Numero di partita IVA</label>
-                        <input type="text" name="partitaIVA" class="form-control" placeholder="Es. 0764352056C" required>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
-                <label class="form-check-label" for="defaultCheck1">
-                  Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
-                </label>
-                <div id="bottone_registrati">
-                    <button type="submit" class="btn btn-primary mb-2">Registrati</button>
-                </div>
-            </div>
-        </form>
-
+<?php 
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+          
+        function get_data() { 
+            $datae = array(); 
+            $array = json_decode(file_get_contents("../../FastFood/Utenti.json"), true);
+            if ($array != null) {
+                $datae = array( 
+                    'nome' => $_POST['nome'], 
+                    'cognome' => $_POST['cognome'], 
+                    'indirizzo' => $_POST['indirizzo'],
+                    'comune' => $_POST['comune'],
+                    'provincia' => $_POST['provincia'],
+                    'CAP' => $_POST['CAP'],
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    'prefCibo' => $_POST['preferenzeCibo'],
+                    'prefPagamento' => $_POST['preferenzePagamento']
+                );
+                array_push($array, $datae);
+                return json_encode($array);
+            } else {
+                $datae[] = array( 
+                    'nome' => $_POST['nome'], 
+                    'cognome' => $_POST['cognome'], 
+                    'indirizzo' => $_POST['indirizzo'],
+                    'comune' => $_POST['comune'],
+                    'provincia' => $_POST['provincia'],
+                    'CAP' => $_POST['CAP'],
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    'prefCibo' => $_POST['preferenzeCibo'],
+                    'prefPagamento' => $_POST['preferenzePagamento']
+                );
+                return json_encode($datae); 
+            }
+        } 
+       
+        if(file_put_contents( 
+            "../../FastFood/Utenti.json", get_data())) { 
+                echo'<h2 class="page-section-heading text-center text-uppercase text-secondary">Utente aggiunto!</h2>';
+                echo'<div class="text-center mt-4">
+                <a class="btn btn-secondary" href="pages/menuPage.html">
+                    <i class="fas fa-home mr-2"></i> Torna alla home
+                </a>
+                </div>';
+            } 
+        else { 
+            echo 'There is some error'; 
+        } 
+    } 
+?>
     </section>
 
     <footer class="footer text-center text-light">
