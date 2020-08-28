@@ -4,9 +4,8 @@
 
     request.onreadystatechange = function(e) {
         if (request.readyState == 4 && this.status == 200) {
-            console.log("Response: " + this.response)
-            console.log(username)
-            username.innerHTML = "Ciao " + JSON.parse(this.response)[0].Nome
+            console.log(JSON.parse(this.response)[0])
+            username.innerHTML = "Ciao " + JSON.parse(this.response)[0].nome
             localStorage.setItem("utenti", this.response)
         }
     }
