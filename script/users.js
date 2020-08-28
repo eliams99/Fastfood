@@ -4,9 +4,7 @@
 
     request.onreadystatechange = function(e) {
         if (request.readyState == 4 && this.status == 200) {
-            console.log(JSON.parse(this.response)[0])
-            username.innerHTML = "Ciao " + JSON.parse(this.response)[0].nome
-            localStorage.setItem("utenti", this.response)
+            sessionStorage.setItem("utenti", this.response)
         }
     }
     request.open("GET", "http://localhost/FastFood/Utenti.json")
