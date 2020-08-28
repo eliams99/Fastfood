@@ -129,7 +129,7 @@
             "../../FastFood/Ristoratori.json", get_data())) { 
                 echo'<h2 class="page-section-heading text-center text-uppercase text-secondary">Ristoratore aggiunto!</h2>';
                 echo'<div class="text-center mt-4">
-                <a class="btn btn-secondary" href="pages/menuPage.html">
+                <a class="btn btn-secondary" href="../index.html">
                     <i class="fas fa-home mr-2"></i> Torna alla home
                 </a>
                 </div>';
