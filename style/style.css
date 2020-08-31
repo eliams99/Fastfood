@@ -134,11 +134,13 @@ nav.shrink .navbar-brand {
     font-size: 1.7em;
 }
 
-
-/*
-#loginDropdown {
+#accountDanger {
     display: none;
-}*/
+}
+
+#accountDropdown {
+    display: none;
+}
 
 
 /* Div Masthead (Ordina ora!) */

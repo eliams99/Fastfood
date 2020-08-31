@@ -22,7 +22,6 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
@@ -39,13 +38,15 @@
                         <div class="dropdown-menu">
                             <div id="loginDropdown">
                                 <form class="px-4 py-3">
+                                    <div class="alert alert-danger" role="alert" id="accountDanger">
+                                    </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
                                         <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value = "" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
@@ -55,17 +56,17 @@
                                       </label>
                                         </div>
                                     </div>
-                                    <button type="button" onclick = 'validate()' class="btn btn-primary">Accedi</button>
+                                    <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
-                                    <h3 id="displayName"> Ciao Elia! </h3>
+                                    <h3 id="displayName"> </h3>
                                 </span>
-                                <a class="dropdown-item" id = "accountArea">Accedi alla tua area riservata</a>
-                                <a class="dropdown-item" onclick = "logout()" >Logout</a>
+                                <a class="dropdown-item" id="accountArea">Accedi alla tua area riservata</a>
+                                <a class="dropdown-item" onclick="logout()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -333,12 +334,11 @@
         </div>
     </footer>
     <!-- Optional JavaScript -->
+    <script src="script/getUser.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
-    
-    <script src="script/getuser.js" type="text/javascript"></script>
 </body>
 
 </html>
