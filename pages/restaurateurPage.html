@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <link rel="stylesheet" href="../style/restaurateurStyle.css" />
     <script src="../navbar.js" type="text/javascript"></script>
+    <script src="../script/users.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -111,12 +112,12 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Nome</label>
-                                    <input type="text" class="form-control" placeholder="Es. Mario">
+                                    <label for="nameInputText">Nome</label>
+                                    <input type="text" class="form-control" id="nameInputText" placeholder="Es. Mario">
                                 </div>
                                 <div class="col-md">
-                                    <label>Cognome</label>
-                                    <input type="text" class="form-control" placeholder="Es. Rossi">
+                                    <label for="surnameInputText">Cognome</label>
+                                    <input type="text" class="form-control" id="surnameInputText" placeholder="Es. Rossi">
                                 </div>
                             </div>
 
@@ -139,17 +140,17 @@
                                 </div>
                             </div>
 
-                            <label for="exampleInputEmail1">Indirizzo email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
+                            <label for="inputEmail">Indirizzo email</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Es. email@dominio.com">
 
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Inserisci Password">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Inserisci Password">
                                 </div>
                                 <div class="col-md">
-                                    <label for="exampleInputPassword1">Conferma password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conferma Password">
+                                    <label for="confirmInputPassword1">Conferma password</label>
+                                    <input type="password" class="form-control" id="confirmInputPassword1" placeholder="Conferma Password">
                                 </div>
                             </div>
                         </div>
@@ -157,26 +158,26 @@
                         <!--Sezione di registrazione del ristorante-->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary">Modifica i dati del ristorante</h4>
                         <div id="registrazione_ristorante">
-                            <label>Nome del ristorante</label>
-                            <input type="text" class="form-control" placeholder="Es. FastFood delle Rose">
+                            <label for="restaurNameInputText">Nome del ristorante</label>
+                            <input type="text" class="form-control" id="restaurNameInputText" placeholder="Es. FastFood delle Rose">
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Indirizzo del ristorante</label>
-                                    <input type="text" class="form-control" placeholder="Es. Via Verdi 8, Milano">
+                                    <label for="restaurAddressInputText">Indirizzo del ristorante</label>
+                                    <input type="text" id="restaurAddressInputText" class="form-control" placeholder="Es. Via Verdi 8, Milano">
                                 </div>
                                 <div class="col-md">
-                                    <label>CAP del ristorante</label>
-                                    <input type="text" class="form-control" placeholder="Es. 20121">
+                                    <label for="restaurCAPInputText">CAP del ristorante</label>
+                                    <input type="text" id="restaurCAPInputText" class="form-control" placeholder="Es. 20121">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
-                                    <label>Numero di telefono del ristorante</label>
-                                    <input type="text" class="form-control" placeholder="Es. 0331123123">
+                                    <label for="restaurPhoneInputText">Numero di telefono del ristorante</label>
+                                    <input type="text" id="restaurPhoneInputText" class="form-control" placeholder="Es. 0331123123">
                                 </div>
                                 <div class="col-md">
-                                    <label>Numero di partita IVA</label>
-                                    <input type="text" class="form-control" placeholder="Es. 0764352056C">
+                                    <label for="partitaIVAInputText">Numero di partita IVA</label>
+                                    <input type="text" id="partitaIVAInputText" class="form-control" placeholder="Es. 0764352056C">
                                 </div>
                             </div>
 
@@ -447,6 +448,7 @@
     </footer>
     <!-- Optional JavaScript -->
     <script src="../script/getUser.js" type="text/javascript"></script>
+    <script src="../script/restaurateurInformation.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>

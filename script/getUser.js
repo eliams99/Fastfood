@@ -4,7 +4,6 @@ if (actualUser != null) {
     document.getElementById('accountDropdown').style.display = "initial"
     document.getElementById("displayName").innerHTML = "Ciao " + actualUser.nome
     document.getElementById('navbarDropdown').innerHTML = "<i class='fas fa-user mr-2'></i>" + actualUser.nome + " " + actualUser.cognome
-    correctCredentials()
 }
 
 function logout() {

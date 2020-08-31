@@ -5,19 +5,18 @@ function validate() {
     validateUsers("Utenti")
     setTimeout(() => {
         if (userFound) {
-            console.log("qui")
             document.getElementById("accountArea").href = 'pages/customerPage.html'
         } else {
-            console.log("qui2")
             validateUsers("Ristoratori")
-            if (userFound) {
-                document.getElementById("accountArea").href = 'pages/restaurateurPage.html'
-            } else {
-                uncorrectCredentials()
-            }
+            setTimeout(() => {
+                if (userFound) {
+                    document.getElementById("accountArea").href = 'pages/restaurateurPage.html'
+                } else {
+                    uncorrectCredentials()
+                }
+            }, 10)
         }
     }, 10)
-
 }
 
 function validateUsers(fileName) {

@@ -1,0 +1,12 @@
+var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+document.getElementById("nameInputText").value = actualUser.nome
+document.getElementById("surnameInputText").value = actualUser.cognome
+document.getElementById("inputEmail").value = actualUser.email
+document.getElementById("addressInputText").value = actualUser.indirizzo
+document.getElementById("municipalityInputText").value = actualUser.comune
+document.getElementById("provinceInputText").value = actualUser.provincia
+document.getElementById("restaurNameInputText").value = actualUser.nomeRistorante
+document.getElementById("restaurAddressInputText").value = actualUser.indirizzoRistorante
+document.getElementById("restaurCAPInputText").value = actualUser.capRistorante
+document.getElementById("restaurPhoneInputText").value = actualUser.numeroTel
+document.getElementById("partitaIVAInputText").value = actualUser.partitaIVA
