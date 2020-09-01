@@ -1,5 +1,10 @@
 var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
 if (actualUser != null) {
+    if(sessionStorage.getItem("userType") == "Utenti") {
+        document.getElementById("accountArea").href = 'customerPage.html'
+    } else {
+        document.getElementById("accountArea").href = 'restaurateurPage.html'
+    }
     document.getElementById('loginDropdown').style.display = "none"
     document.getElementById('accountDropdown').style.display = "initial"
     document.getElementById("displayName").innerHTML = "Ciao " + actualUser.nome

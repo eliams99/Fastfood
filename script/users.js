@@ -5,18 +5,18 @@ function validate() {
     validateUsers("Utenti")
     setTimeout(() => {
         if (userFound) {
-            document.getElementById("accountArea").href = 'pages/customerPage.html'
+            document.getElementById("accountArea").href = 'customerPage.html'
         } else {
             validateUsers("Ristoratori")
             setTimeout(() => {
                 if (userFound) {
-                    document.getElementById("accountArea").href = 'pages/restaurateurPage.html'
+                    document.getElementById("accountArea").href = 'restaurateurPage.html'
                 } else {
                     uncorrectCredentials()
                 }
-            }, 10)
+            }, 40)
         }
-    }, 10)
+    }, 40)
 }
 
 function validateUsers(fileName) {
@@ -27,12 +27,12 @@ function validateUsers(fileName) {
     request.onreadystatechange = function(e) {
         if (request.readyState == 4 && this.status == 200) {
             sessionStorage.setItem("utenti", this.response)
-            getUsers()
+            getUsers(fileName)
         }
     }
 }
 
-function getUsers() {
+function getUsers(fileName) {
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
     var users = JSON.parse(sessionStorage.getItem('utenti'))
@@ -40,10 +40,10 @@ function getUsers() {
 
     for (var i = 0; i < users.length; i++) {
         if (users[i].password == password && users[i].email == email) {
+            sessionStorage.setItem('userType', fileName)
             sessionStorage.setItem("actualUser", JSON.stringify(users[i]))
             showUser()
             userFound = true
-
             return true
         }
     };
