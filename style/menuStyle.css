@@ -50,3 +50,10 @@
 .card:hover .card-img-top {
     display: none;
 }
+
+
+/* Modal */
+
+.modal-dialog {
+    border-radius: 30px;
+}

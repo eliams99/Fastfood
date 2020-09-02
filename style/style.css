@@ -82,14 +82,14 @@ button:focus {
 
 /* Nav */
 
-.nav>.nav-link.active {
+.nav .nav-link.active {
     font-weight: bolder;
     color: white !important;
     background-color: rgb(216, 140, 0) !important;
     border-color: rgb(216, 140, 0) !important;
 }
 
-.nav>.nav-link {
+.nav .nav-link {
     color: rgb(216, 140, 0) !important;
 }
 
@@ -100,14 +100,14 @@ nav.navbar {
     padding: 1.2em;
 }
 
-.nav-item>.nav-link {
+.navbar-nav>.nav-item>.nav-link {
     font-size: 1.3em;
     text-transform: uppercase;
     margin: 0.5em;
     transition: all .1s linear;
 }
 
-.nav-item>.nav-link:hover,
+.navbar-nav>.nav-item>.nav-link:hover,
 .navbar-brand:hover {
     transform: scale(1.1);
 }
@@ -251,45 +251,28 @@ footer {
 
 /* Carrello */
 
-.table1 {
+#cartTable {
     border-spacing: 0 10px;
     font-weight: bold;
     width: 100%;
 }
 
-.table1 th {
-    padding: 10px 20px;
-    background: #56433D;
-    color: #F9C941;
-    border-right: 2px solid;
-    font-size: 0.9em;
-}
-
-.table1 th:first-child {
+#cartTable td:nth-child(2) {
     text-align: left;
 }
 
-.table1 th:last-child {
-    border-right: none;
-}
-
-.table1 td {
+#cartTable td {
     vertical-align: middle;
     padding: 10px;
-    font-size: 14px;
     text-align: center;
-    border-top: 2px solid #56433D;
-    border-bottom: 2px solid #56433D;
-    border-right: 2px solid #56433D;
 }
 
-.table1 td:first-child {
-    border-left: 2px solid #56433D;
-    border-right: none;
-}
-
-.table1 td:nth-child(2) {
-    text-align: left;
+#cartTable th {
+    padding: 10px 20px;
+    background: rgb(216, 140, 0);
+    color: white;
+    border-right: 2px solid;
+    text-align: center;
 }
 
 .cartImg {

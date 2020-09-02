@@ -53,81 +53,179 @@
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
         <div class="container">
-            <form id="registrationForm" method="POST" action="../php/submitCustomerRegistrationJson.php">
+            <ul class="nav nav-pills mb-5 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-customer-tab" data-toggle="pill" href="#pills-customer" role="tab" aria-controls="pills-customer" aria-selected="true">Cliente</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-restaurateur-tab" data-toggle="pill" href="#pills-restaurateur" role="tab" aria-controls="pills-restaurateur" aria-selected="false">Ristoratore</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-customer" role="tabpanel" aria-labelledby="pills-customer-tab">
+                    <form id="registrationForm" method="POST" action="../php/submitCustomerRegistrationJson.php">
 
-                <!-- Section Heading -->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
+                        <!-- Section Heading -->
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Nome</label>
-                            <input type="text" class="form-control" id="nameInputText" name="nome" placeholder="Es. Mario" required>
-                        </div>
-                        <div class="col-md">
-                            <label>Cognome</label>
-                            <input type="text" class="form-control" id="surnameInputText" name="cognome" placeholder="Es. Rossi" required>
-                        </div>
-                    </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Nome</label>
+                                    <input type="text" class="form-control" id="nameInputText" name="nome" placeholder="Es. Mario" required>
+                                </div>
+                                <div class="col-md">
+                                    <label>Cognome</label>
+                                    <input type="text" class="form-control" id="surnameInputText" name="cognome" placeholder="Es. Rossi" required>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md">
-                            <label for="address">Indirizzo</label>
-                            <input type="text" class="form-control" id="addressInputText" name="indirizzo" placeholder="Es. via Verdi 8" required>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="municipality">Comune</label>
-                            <input type="text" class="form-control" id="municipalityInputText" name="comune" placeholder="Es. Milano" required>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="province">Provincia</label>
-                            <input type="text" class="form-control" id="provinceInputText" name="provincia" placeholder="Es. MI" required>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="CAP">CAP</label>
-                            <input type="text" class="form-control" id="CAPInputText" name="CAP" placeholder="Es. 20121" required>
-                        </div>
-                    </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="address">Indirizzo</label>
+                                    <input type="text" class="form-control" id="addressInputText" name="indirizzo" placeholder="Es. via Verdi 8" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="municipality">Comune</label>
+                                    <input type="text" class="form-control" id="municipalityInputText" name="comune" placeholder="Es. Milano" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="province">Provincia</label>
+                                    <input type="text" class="form-control" id="provinceInputText" name="provincia" placeholder="Es. MI" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="CAP">CAP</label>
+                                    <input type="text" class="form-control" id="CAPInputText" name="CAP" placeholder="Es. 20121" required>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md">
-                            <label for="inputEmail">Indirizzo email</label>
-                            <input type="email" class="form-control" id="InputEmail" name="email" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
-                        </div>
-                        <div class="col-md">
-                            <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="" placeholder="Inserisci Password" required>
-                        </div>
-                    </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="inputEmail">Indirizzo email</label>
+                                    <input type="email" class="form-control" id="InputEmail" name="email" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
+                                </div>
+                                <div class="col-md">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="" placeholder="Inserisci Password" required>
+                                </div>
+                            </div>
 
-                    <label for="preferenzePagamento">Come preferisci pagare?</label>
-                    <div class="input-group-prepend">
-                        <section><input type="radio" name="preferenzePagamento" value="carta" required> <label for="preferenzePagamento">Carta di credito</label></section>
-                        <section><input type="radio" class="ml-3" name="preferenzePagamento" value="contanti" required> <label for="preferenzePagamento">Contanti</label></section>
-                        <!--    <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
-                        <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>-->
-                    </div>
+                            <label for="preferenzePagamento">Come preferisci pagare?</label>
+                            <div class="input-group-prepend">
+                                <section><input type="radio" name="preferenzePagamento" value="carta" required> <label for="preferenzePagamento">Carta di credito</label></section>
+                                <section><input type="radio" class="ml-3" name="preferenzePagamento" value="contanti" required> <label for="preferenzePagamento">Contanti</label></section>
+                                <!--    <button class="btn btn-outline-secondary" type="button" id="carta" value="carta">Carta di Credito</button>
+                                <button class="btn btn-outline-secondary" type="button" value="contanti">Contanti</button>-->
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>Facci sapere le tue preferenze!</label>
+                            <select name="preferenzeCibo" class="form-control form-control-sm" required>
+                            <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
+                            <option name="preferenzeCibo" value="pollo">Pollo</option>
+                            <option name="preferenzeCibo" value="suino">Manzo</option>
+                            <option name="preferenzeCibo" value="veg">Vegano</option>
+                          </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck1" required>
+                            <label class="form-check-label" for="defaultCheck1">
+                            Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
+                        </label>
+                            <div id="bottone_registrati">
+                                <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <div class="tab-pane fade" id="pills-restaurateur" role="tabpanel" aria-labelledby="pills-restaurateur-tab">
+                    <form action="../php/submitRestaurRegistrationJson.php" method="POST">
+                        <!-- Section Heading -->
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
 
-                <div>
-                    <label>Facci sapere le tue preferenze!</label>
-                    <select name="preferenzeCibo" class="form-control form-control-sm" required>
-                    <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
-                    <option name="preferenzeCibo" value="pollo">Pollo</option>
-                    <option name="preferenzeCibo" value="suino">Manzo</option>
-                    <option name="preferenzeCibo" value="veg">Vegano</option>
-                  </select>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Nome</label>
+                                    <input type="text" name="nome" class="form-control" placeholder="Es. Mario" required>
+                                </div>
+                                <div class="col-md">
+                                    <label>Cognome</label>
+                                    <input type="text" name="cognome" class="form-control" placeholder="Es. Rossi" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="address">Indirizzo</label>
+                                    <input type="text" name="indirizzo" class="form-control" id="addressInputText" placeholder="Es. via Verdi 8" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="municipality">Comune</label>
+                                    <input type="text" name="comune" class="form-control" id="municipalityInputText" placeholder="Es. Milano" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="province">Provincia</label>
+                                    <input type="text" name="provincia" class="form-control" id="provinceInputText" placeholder="Es. MI" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="CAP">CAP</label>
+                                    <input type="text" name="CAP" class="form-control" id="CAPInputText" placeholder="Es. 20121" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="inputEmail">Indirizzo email</label>
+                                    <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
+                                </div>
+                                <div class="col-md">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Inserisci Password" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Sezione di registrazione del ristorante-->
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
+                        <div id="registrazione_ristorante">
+                            <label>Nome del ristorante</label>
+                            <input type="text" name="nomeRistorante" class="form-control" placeholder="Es. FastFood delle Rose">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Indirizzo del ristorante</label>
+                                    <input type="text" name="indirizzoRistorante" class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
+                                </div>
+                                <div class="col-md">
+                                    <label>CAP del ristorante</label>
+                                    <input type="text" name="capRistorante" class="form-control" placeholder="Es. 20121" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label>Numero di telefono del ristorante</label>
+                                    <input type="text" name="numeroTel" class="form-control" placeholder="Es. 0331123123" required>
+                                </div>
+                                <div class="col-md">
+                                    <label>Numero di partita IVA</label>
+                                    <input type="text" name="partitaIVA" class="form-control" placeholder="Es. 0764352056C" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                            <label class="form-check-label" for="defaultCheck1">
+                              Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
+                            </label>
+                            <div id="bottone_registrati">
+                                <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck1" required>
-                    <label class="form-check-label" for="defaultCheck1">
-                    Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
-                </label>
-                    <div id="bottone_registrati">
-                        <button type="submit" class="btn btn-primary mb-2">Registrati</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 

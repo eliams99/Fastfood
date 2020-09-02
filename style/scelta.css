@@ -1,7 +1,22 @@
-.linkscelta:link, .linkscelta:hover, .linkscelta:visited {
+.linkscelta:link,
+.linkscelta:hover,
+.linkscelta:visited {
     text-decoration: none;
 }
 
-#insertdata{
+#insertdata {
     margin-bottom: 1.2em;
+}
+
+.scelta {
+    border-color: gray;
+    border-width: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .1s linear;
+}
+
+.scelta:hover {
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.363);
+    transform: scale(1.1);
 }
