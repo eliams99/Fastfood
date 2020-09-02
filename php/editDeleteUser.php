@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FastFood - Registrazione Ristoratore</title>
+    <title>FastFood - Modifica dati</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
-    <script src="../navbar.js" type="text/javascript"></script>
     <script src="../script/users.js" type="text/javascript"></script>
+    <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -23,20 +23,20 @@
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="../pages/index.html"><i class="fas fa-home mr-2"></i>Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../pages/index.html"><i class="fas fa-home mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../pages/Cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> Accedi
+                            <i class="fas fa-user"></i> Accedi<span class="sr-only">(current)</span>
                         </a>
                         <!-- Login -->
                         <div class="dropdown-menu">
@@ -56,14 +56,14 @@
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
+                                <a class="dropdown-item" href="../pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
@@ -85,58 +85,74 @@
 
             <!-- Masthead Heading -->
             <a href="#form" class="masthead-heading text-uppercase">
-                <h1>Registrati</h1>
+                <h1>Modifica dati</h1>
             </a>
         </div>
     </header>
 
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
-    <?php
+        <?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    function get_data()
-    {
-        $array = json_decode(file_get_contents("../../FastFood/Utenti.json"), true);
-        
-        if ($_POST['action'] == 'delete') {
-            for($i=0; $i < count($array); $i++) {
-                if ($array[$i]['email'] == $_POST['email']) {
-                    array_splice($array, $i, 1);
-                }
-            }
-        } else if ($_POST['action'] == 'edit') {
-            foreach($array as &$item) {
-                if ($item['email'] == $_POST['email']) {
-                    $item['nome'] = $_POST['nome'];
-                    $item['cognome'] = $_POST['cognome'];
-                    $item['indirizzo'] = $_POST['indirizzo'];
-                    $item['comune'] = $_POST['comune'];
-                    $item['provincia'] = $_POST['provincia'];
-                    $item['CAP'] = $_POST['CAP'];
-                    $item['email'] = $_POST['email'];
-                    $item['password'] = $_POST['password'];
-                }
-            }
-        }
-        return json_encode($array);
-    }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            function get_data()
+            {
+                $array = json_decode(file_get_contents("../../FastFood/Utenti.json"), true);
 
-    if(file_put_contents( 
-        "../../FastFood/Utenti.json", get_data())) { 
-            echo'<h2 class="page-section-heading text-center text-uppercase text-secondary">Operazione eseguita!</h2>';
-            echo'<div class="text-center mt-4">
+                if ($_POST['action'] == 'delete') {
+                    for ($i = 0; $i < count($array); $i++) {
+                        if ($array[$i]['email'] == $_POST['email']) {
+                            array_splice($array, $i, 1);
+                            echo '<script src="../script/getUser.js" type="text/javascript">',
+                                'logout();',
+                                '</script>';
+                        }
+                    }
+                } else if ($_POST['action'] == 'edit') {
+                    foreach ($array as &$item) {
+                        if ($item['email'] == $_POST['email']) {
+                            $item['nome'] = $_POST['nome'];
+                            $item['cognome'] = $_POST['cognome'];
+                            $item['indirizzo'] = $_POST['indirizzo'];
+                            $item['comune'] = $_POST['comune'];
+                            $item['provincia'] = $_POST['provincia'];
+                            $item['CAP'] = $_POST['CAP'];
+                            $item['email'] = $_POST['email'];
+                            $item['password'] = $_POST['password'];
+                        }
+                    }
+                }
+                return json_encode($array);
+            }
+
+            if (file_put_contents(
+                "../../FastFood/Utenti.json",
+                get_data()
+            )) {
+                if ($_POST['action'] == 'delete') {
+                    echo '<script type="text/javascript">',
+                        'sessionStorage.getItem("actualUser", "");',
+                        '</script>';
+                    echo '<h2 class="page-section-heading text-center text-uppercase text-secondary">Utente cancellato correttamente!</h2>';
+                } else if ($_POST['action'] == 'edit') {
+                    echo '<script type="text/javascript">',
+                        'getUsers("Utenti", true);',
+                        '</script>';
+                    echo '<h2 class="page-section-heading text-center text-uppercase text-secondary">Modifiche apportate!</h2>';
+                }
+                echo '<div class="text-center mt-4">
             <a class="btn btn-secondary" href="../pages/index.html">
                 <i class="fas fa-home mr-2"></i> Torna alla home
             </a>
             </div>';
-        } 
-    else { 
-        echo 'There is some error'; 
-    } 
-}
+            } else {
+                echo "<div class='alert alert-danger text-center' role='alert'>
+                    C'è stato un errore
+                  </div>";
+            }
+        }
 
-?>
+        ?>
 
     </section>
 

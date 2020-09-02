@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
-    <script src="../navbar.js" type="text/javascript"></script>
+    <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/users.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
@@ -23,18 +23,18 @@
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../pages/index.html"><i class="fas fa-home mr-2"></i>Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../pages/Cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
                         </a>
@@ -56,14 +56,14 @@
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
+                                <a class="dropdown-item" href="../pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
@@ -92,65 +92,87 @@
 
     <!-- form di registrazione -->
     <section class="page-section bg-light portfolio" id="form">
-    <?php 
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-          
-        function get_data() { 
-            $datae = array(); 
-            $array = json_decode(file_get_contents("../../FastFood/Ristoratori.json"), true);
-            if ($array != null) {
-                $datae = array( 
-                    'nome' => $_POST['nome'], 
-                    'cognome' => $_POST['cognome'], 
-                    'indirizzo' => $_POST['indirizzo'],
-                    'comune' => $_POST['comune'],
-                    'provincia' => $_POST['provincia'],
-                    'CAP' => $_POST['CAP'],
-                    'email' => $_POST['email'],
-                    'password' => $_POST['password'],
-                    'nomeRistorante' => $_POST['nomeRistorante'],
-                    'indirizzoRistorante' => $_POST['indirizzoRistorante'],
-                    'capRistorante' => $_POST['capRistorante'],
-                    'numeroTel' => $_POST['numeroTel'],
-                    'partitaIVA' => $_POST['partitaIVA']
-                );
-                array_push($array, $datae);
-                return json_encode($array);
-            } else {
-                $datae[] = array( 
-                    'nome' => $_POST['nome'], 
-                    'cognome' => $_POST['cognome'], 
-                    'indirizzo' => $_POST['indirizzo'],
-                    'comune' => $_POST['comune'],
-                    'provincia' => $_POST['provincia'],
-                    'CAP' => $_POST['CAP'],
-                    'email' => $_POST['email'],
-                    'password' => $_POST['password'],
-                    'nomeRistorante' => $_POST['nomeRistorante'],
-                    'indirizzoRistorante' => $_POST['indirizzoRistorante'],
-                    'capRistorante' => $_POST['capRistorante'],
-                    'numeroTel' => $_POST['numeroTel'],
-                    'partitaIVA' => $_POST['partitaIVA']
-                );
-                return json_encode($datae); 
+        <?php
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            function get_data()
+            {
+                $datae = array();
+                $array = json_decode(file_get_contents("../../FastFood/Ristoratori.json"), true);
+                if ($array != null) {
+                    $datae = array(
+                        'nome' => $_POST['nome'],
+                        'cognome' => $_POST['cognome'],
+                        'indirizzo' => $_POST['indirizzo'],
+                        'comune' => $_POST['comune'],
+                        'provincia' => $_POST['provincia'],
+                        'CAP' => $_POST['CAP'],
+                        'email' => $_POST['email'],
+                        'password' => $_POST['password'],
+                        'nomeRistorante' => $_POST['nomeRistorante'],
+                        'indirizzoRistorante' => $_POST['indirizzoRistorante'],
+                        'capRistorante' => $_POST['capRistorante'],
+                        'numeroTel' => $_POST['numeroTel'],
+                        'partitaIVA' => $_POST['partitaIVA']
+                    );
+                    array_push($array, $datae);
+                    return json_encode($array);
+                } else {
+                    $datae[] = array(
+                        'nome' => $_POST['nome'],
+                        'cognome' => $_POST['cognome'],
+                        'indirizzo' => $_POST['indirizzo'],
+                        'comune' => $_POST['comune'],
+                        'provincia' => $_POST['provincia'],
+                        'CAP' => $_POST['CAP'],
+                        'email' => $_POST['email'],
+                        'password' => $_POST['password'],
+                        'nomeRistorante' => $_POST['nomeRistorante'],
+                        'indirizzoRistorante' => $_POST['indirizzoRistorante'],
+                        'capRistorante' => $_POST['capRistorante'],
+                        'numeroTel' => $_POST['numeroTel'],
+                        'partitaIVA' => $_POST['partitaIVA']
+                    );
+                    return json_encode($datae);
+                }
             }
-        } 
-       
-        if(file_put_contents( 
-            "../../FastFood/Ristoratori.json", get_data())) { 
-                echo'<h2 class="page-section-heading text-center text-uppercase text-secondary">Ristoratore aggiunto!</h2>';
-                echo'<div class="text-center mt-4">
+
+            $uniqueEmail = true;
+            $array = json_decode(file_get_contents("../../FastFood/Ristoratori.json"), true);
+            $arrayTot = array_merge($array, json_decode(file_get_contents("../../FastFood/Utenti.json"), true));
+            foreach ($arrayTot as $item) {
+                if ($item['email'] == $_POST['email']) {
+                    echo "<div class='alert alert-danger text-center' role='alert'>
+                    Attenzione, email già registrata
+                    </div>";
+                    echo '<div class="text-center mt-4">
+                        <a class="btn btn-secondary" href="../pages/registrationForm.html">
+                        <i class="fas fa-home mr-2"></i> Torna alla registrazione
+                        </a>
+                        </div>';
+                    $uniqueEmail = false;
+                }
+            }
+            if ($uniqueEmail) {
+                if (file_put_contents(
+                    "../../FastFood/Ristoratori.json",
+                    get_data()
+                )) {
+                    echo '<h2 class="page-section-heading text-center text-uppercase text-secondary">Ristoratore aggiunto!</h2>';
+                    echo '<div class="text-center mt-4">
                 <a class="btn btn-secondary" href="../pages/index.html">
                     <i class="fas fa-home mr-2"></i> Torna alla home
                 </a>
                 </div>';
-            } 
-        else { 
-            echo 'There is some error'; 
-        } 
-    } 
-?>
+                } else {
+                    echo "<div class='alert alert-danger text-center' role='alert'>
+                    C'è stato un errore
+                  </div>";
+                }
+            }
+        }
+        ?>
     </section>
 
     <footer class="footer text-center text-light">

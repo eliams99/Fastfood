@@ -2,12 +2,12 @@ var userFound
 
 function validate() {
     sessionStorage.clear()
-    validateUsers("Utenti")
+    getUsers("Utenti", false)
     setTimeout(() => {
         if (userFound) {
             document.getElementById("accountArea").href = 'customerPage.html'
         } else {
-            validateUsers("Ristoratori")
+            getUsers("Ristoratori", false)
             setTimeout(() => {
                 if (userFound) {
                     document.getElementById("accountArea").href = 'restaurateurPage.html'
@@ -19,23 +19,44 @@ function validate() {
     }, 40)
 }
 
-function validateUsers(fileName) {
+function getUsers(fileName, updateUser) {
     var request = new XMLHttpRequest()
     request.open("GET", "http://localhost/FastFood/" + fileName + ".json", true)
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+    request.setRequestHeader("Cache-Control", "no-cache")
     request.send()
     request.onreadystatechange = function(e) {
         if (request.readyState == 4 && this.status == 200) {
-            sessionStorage.setItem("utenti", this.response)
-            getUsers(fileName)
+            if (updateUser) { // Se le credenziali devono essere aggiornate dopo una modifica di esse
+                sessionStorage.setItem("oldUsers", sessionStorage.getItem("users"))
+                sessionStorage.removeItem("users")
+                sessionStorage.setItem("users", this.response)
+                updateUsers()
+            } else {
+                sessionStorage.setItem("users", this.response)
+                validateUsers(fileName)
+            }
         }
     }
 }
 
-function getUsers(fileName) {
+function updateUsers() {
+    var users = JSON.parse(sessionStorage.getItem('users'))
+    var oldUsers = JSON.parse(sessionStorage.getItem('oldUsers'))
+    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+
+    for (var i = 0; i < users.length; i++) {
+        if (actualUser.password == oldUsers[i].password && actualUser.email == oldUsers[i].email) {
+            sessionStorage.setItem("actualUser", JSON.stringify(users[i]))
+        }
+    }
+    sessionStorage.removeItem("oldUsers")
+}
+
+function validateUsers(fileName) {
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
-    var users = JSON.parse(sessionStorage.getItem('utenti'))
+    var users = JSON.parse(sessionStorage.getItem('users'))
     userFound = false
 
     for (var i = 0; i < users.length; i++) {
@@ -46,7 +67,7 @@ function getUsers(fileName) {
             userFound = true
             return true
         }
-    };
+    }
 }
 
 function showUser() {
