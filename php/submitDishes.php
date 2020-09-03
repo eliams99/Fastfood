@@ -63,7 +63,7 @@
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../pages/sceltaRegistrazione.html">Prima volta qui? Registrati</a>
+                                <a class="dropdown-item" href="../pages/registrationForm.html">Prima volta qui? Registrati</a>
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
@@ -98,75 +98,99 @@
 
             function get_data()
             {
-                $datae = array();
-                $restaurants = json_decode(file_get_contents("../../FastFood/Panini.json"), true)["paniniRistoranti"];
+                $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
+                $restaurants = $allDishes["paniniRistoranti"];
 
-                foreach($restaurants as $restaurant)
+                // Aggiunta/rimozione panini comuni
+                if ($_POST['action'] == 'common') {
+                    $restaurantFound = false;
 
-                if ($array != null) {
-                    $datae = array(
-                        'nome' => $_POST['nome'],
-                        'cognome' => $_POST['cognome'],
-                        'indirizzo' => $_POST['indirizzo'],
-                        'comune' => $_POST['comune'],
-                        'provincia' => $_POST['provincia'],
-                        'CAP' => $_POST['CAP'],
-                        'email' => $_POST['email'],
-                        'password' => $_POST['password'],
-                        'prefCibo' => $_POST['preferenzeCibo'],
-                        'prefPagamento' => $_POST['preferenzePagamento']
-                    );
-                    array_push($array, $datae);
-                    return json_encode($array);
-                } else {
-                    $datae[] = array(
-                        'nome' => $_POST['nome'],
-                        'cognome' => $_POST['cognome'],
-                        'indirizzo' => $_POST['indirizzo'],
-                        'comune' => $_POST['comune'],
-                        'provincia' => $_POST['provincia'],
-                        'CAP' => $_POST['CAP'],
-                        'email' => $_POST['email'],
-                        'password' => $_POST['password'],
-                        'prefCibo' => $_POST['preferenzeCibo'],
-                        'prefPagamento' => $_POST['preferenzePagamento']
-                    );
-                    return json_encode($datae);
+                    // Controlla se il ristorante è già nel json
+                    foreach ($restaurants as &$restaurant) {
+                        // Se il ristorante è presente nel json
+                        if ($restaurant["email"] == $_POST["restaurantEmail"]) {
+                            $restaurantFound = true;
+                            $commonDishes = array();
+                            if (isset($_POST["dishCheckbox"])) {
+                                foreach ($_POST["dishCheckbox"] as $commonDish) {
+                                    $dish = array(
+                                        "nome" => $commonDish
+                                    );
+                                    array_push($commonDishes, $dish);
+                                }
+                            }
+                            $restaurant["paniniComuni"] = $commonDishes;
+                        }
+                    }
+                    // Se il ristorante non è nel json (nuovo utente che non ha mai aggiunto/rimosso panini)
+                    if (!$restaurantFound) {
+                        $newRestaurant = array(
+                            "nome" => $_POST["restaurantName"],
+                            "email" => $_POST["restaurantEmail"],
+                            "paniniPersonalizzati" => array(),
+                            "paniniComuni" => array()
+                        );
+                        $commonDishes = array();
+                        foreach ($_POST["dishCheckbox"] as $commonDish) {
+                            $dish = array(
+                                "nome" => $commonDish
+                            );
+                            array_push($commonDishes, $dish);
+                        }
+                        $newRestaurant["paniniComuni"] = $commonDishes;
+                        array_push($restaurants, $newRestaurant);
+                    }
+                    $allDishes["paniniRistoranti"] = $restaurants;
+
+                }  // Aggiunta/rimozione/modifica panini personalizzati
+                else if ($_POST['action'] == 'custom') {
                 }
+                return json_encode($allDishes);
+                // if ($array != null) {
+                //     $datae = array(
+                //         'nome' => $_POST['nome'],
+                //         'cognome' => $_POST['cognome'],
+                //         'indirizzo' => $_POST['indirizzo'],
+                //         'comune' => $_POST['comune'],
+                //         'provincia' => $_POST['provincia'],
+                //         'CAP' => $_POST['CAP'],
+                //         'email' => $_POST['email'],
+                //         'password' => $_POST['password'],
+                //         'prefCibo' => $_POST['preferenzeCibo'],
+                //         'prefPagamento' => $_POST['preferenzePagamento']
+                //     );
+                //     array_push($array, $datae);
+                //     return json_encode($array);
+                // } else {
+                //     $datae[] = array(
+                //         'nome' => $_POST['nome'],
+                //         'cognome' => $_POST['cognome'],
+                //         'indirizzo' => $_POST['indirizzo'],
+                //         'comune' => $_POST['comune'],
+                //         'provincia' => $_POST['provincia'],
+                //         'CAP' => $_POST['CAP'],
+                //         'email' => $_POST['email'],
+                //         'password' => $_POST['password'],
+                //         'prefCibo' => $_POST['preferenzeCibo'],
+                //         'prefPagamento' => $_POST['preferenzePagamento']
+                //     );
+                //     return json_encode($datae);
+                // }
             }
-
-            $uniqueEmail = true;
-            $array = json_decode(file_get_contents("../../FastFood/Utenti.json"), true);
-            $arrayTot = array_merge($array, json_decode(file_get_contents("../../FastFood/Ristoratori.json"), true));
-            foreach ($arrayTot as $item) {
-                if ($item['email'] == $_POST['email']) {
-                    echo "<div class='alert alert-danger text-center' role='alert'>
-                    Attenzione, email già registrata
-                    </div>";
-                    echo '<div class="text-center mt-4">
-                        <a class="btn btn-secondary" href="../pages/registrationForm.html">
-                        <i class="fas fa-home mr-2"></i> Torna alla registrazione
-                        </a>
-                        </div>';
-                    $uniqueEmail = false;
-                }
-            }
-            if ($uniqueEmail) {
-                if (file_put_contents(
-                    "../../FastFood/Utenti.json",
-                    get_data()
-                )) {
-                    echo '<h2 class="page-section-heading text-center text-uppercase text-secondary">Utente aggiunto!</h2>';
-                    echo '<div class="text-center mt-4">
+            if (file_put_contents(
+                "../../FastFood/Panini.json",
+                get_data()
+            )) {
+                echo '<h2 class="page-section-heading text-center text-uppercase text-secondary">Panini modificati!</h2>';
+                echo '<div class="text-center mt-4">
                     <a class="btn btn-secondary" href="../pages/index.html">
                         <i class="fas fa-home mr-2"></i> Torna alla home
                     </a>
                     </div>';
-                } else {
-                    echo "<div class='alert alert-danger text-center' role='alert'>
+            } else {
+                echo "<div class='alert alert-danger text-center' role='alert'>
                     C'è stato un errore
                   </div>";
-                }
             }
         }
         ?>
