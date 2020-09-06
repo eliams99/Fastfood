@@ -25,8 +25,8 @@
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -58,8 +58,8 @@
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
@@ -103,6 +103,95 @@
                 </div>
             </div>
             <div class="col-9">
+
+                <!-- PHP AGGIUNTA/RIMOZIONE/MODIFICA PANINI -->
+                <?php
+
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+                    function get_data()
+                    {
+                        $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
+                        $restaurants = $allDishes["paniniRistoranti"];
+
+                        echo $_POST["action"];
+
+                        // Aggiunta/rimozione panini comuni
+                        if ($_POST['action'] == 'common') {
+                            $restaurantFound = false;
+
+                            // Controlla se il ristorante è già nel json
+                            foreach ($restaurants as &$restaurant) {
+                                // Se il ristorante è presente nel json
+                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
+                                    $restaurantFound = true;
+                                    $commonDishes = array();
+                                    if (isset($_POST["dishCheckbox"])) {
+                                        foreach ($_POST["dishCheckbox"] as $commonDish) {
+                                            $dish = array(
+                                                "nome" => $commonDish
+                                            );
+                                            array_push($commonDishes, $dish);
+                                        }
+                                    }
+                                    $restaurant["paniniComuni"] = $commonDishes;
+                                }
+                            }
+                            // Se il ristorante non è nel json (nuovo utente che non ha mai aggiunto/rimosso panini)
+                            if (!$restaurantFound) {
+                                $newRestaurant = array(
+                                    "nome" => $_POST["restaurantName"],
+                                    "email" => $_POST["restaurantEmail"],
+                                    "paniniPersonalizzati" => array(),
+                                    "paniniComuni" => array()
+                                );
+                                $commonDishes = array();
+                                foreach ($_POST["dishCheckbox"] as $commonDish) {
+                                    $dish = array(
+                                        "nome" => $commonDish
+                                    );
+                                    array_push($commonDishes, $dish);
+                                }
+                                $newRestaurant["paniniComuni"] = $commonDishes;
+                                array_push($restaurants, $newRestaurant);
+                            }
+                            $allDishes["paniniRistoranti"] = $restaurants;
+                        }  // Aggiunta/rimozione/modifica panini personalizzati
+                        else if ($_POST['action'] == 'addCustom') {
+                            echo "QUI";
+                            $customDish = $allDishes["paniniRistoranti"][2];
+                            $datae = array(
+                                'nome' => $_POST['name'],
+                                'tipologia' => $_POST['type'],
+                                'prezzo' => $_POST['price'],
+                                'descrizione' => $_POST['description']
+                            );
+                            array_push($customDish, $datae);
+                            return json_encode($customDish);
+                        }
+                        return json_encode($allDishes);
+                    }
+                    if (file_put_contents(
+                        "../../FastFood/Panini.json",
+                        get_data()
+                    )) {
+                        echo "<div class='alert alert-success text-center' role='alert'>
+                            Panini modificati!
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            </div>";
+                    } else {
+                        echo "<div class='alert alert-danger text-center' role='alert'>
+                            C'è stato un errore
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            </div>";
+                    }
+                }
+                ?>
                 <div class="tab-content" id="v-pills-tabContent">
                     <!-- DATI PERSONALI -->
                     <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
@@ -192,7 +281,7 @@
                     <div class="tab-pane fade" id="v-pills-menuManagement" role="tabpanel" aria-labelledby="v-pills-menuManagement-tab">
                         <!-- Panini comuni-->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary">Panini comuni</h4>
-                        <form action="../php/submitDishes.php" method="POST">
+                        <form method="POST">
                             <table>
                                 <div class="list-group" id="commonDishes">
                                 </div>
@@ -205,7 +294,7 @@
 
                         <!-- Panini personalizzati -->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary mt-4">Panini personalizzati</h4>
-                        <form action="../php/submitDishes.php" method="POST">
+                        <form method="POST">
                             <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#newDishModal1">
                                 <i class="fas fa-plus fa-fw"></i>
                                 Aggiungi piatto
@@ -213,10 +302,6 @@
                             <table>
                                 <div class="list-group" id="customizedDishes">
                                 </div>
-                                <button type="submit" name="action" value="custom" class="btn btn-primary m-2">
-                                    <i class="fas fa-check fa-fw"></i>
-                                    Conferma modifiche
-                                </button>
                             </table>
                         </form>
                     </div>
@@ -235,7 +320,7 @@
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
-                      <i class="fas fa-times float-right m-3"></i>
+                        <i class="fas fa-times float-right m-3"></i>
                     </span>
                 </button>
                 <div class="modal-body text-center">
@@ -252,7 +337,7 @@
                                     </div>
                                     <hr class="divider-custom-line my-auto flex-grow-0">
                                 </div>
-                                <form>
+                                <form method="POST">
                                     <!-- Modal - Image -->
                                     <div class="imageDiv">
                                         <img class="img-fluid rounded" src="../img/doublecheese.png" alt="">
@@ -264,13 +349,13 @@
 
                                     <div class="form-group">
                                         <label for="inputPassword4">Nome</label>
-                                        <input type="text" class="form-control" id="nameEdit" placeholder="es. Double Cheeseburger">
+                                        <input type="text" class="form-control" name="nameEdit" id="nameEdit" placeholder="es. Double Cheeseburger">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
                                             <label for="inputEmail4">Tipologia</label>
-                                            <input type="text" class="form-control" id="typeEdit" placeholder="es. Hamburger">
+                                            <input type="text" class="form-control" name="typeEdit" id="typeEdit" placeholder="es. Hamburger">
                                         </div>
 
                                         <div class="form-group col-md-5">
@@ -279,19 +364,19 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">€</div>
                                                 </div>
-                                                <input type="text" class="form-control" id="priceEdit" placeholder="7.50" size="5">
+                                                <input type="text" class="form-control" name="priceEdit" id="priceEdit" placeholder="7.50" size="5">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress2">Descrizione</label>
-                                        <textarea class="form-control" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
+                                        <textarea class="form-control" name="description" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                      <i class="fas fa-edit fa-fw"></i>
-                                      Conferma modifiche
+                                    <button class="btn btn-primary" name="action" value="editCustom" href="#" data-dismiss="modal">
+                                        <i class="fas fa-edit fa-fw"></i>
+                                        Conferma modifiche
                                     </button>
                                 </form>
                             </div>
@@ -307,10 +392,10 @@
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">
-          <i class="fas fa-times float-right m-3"></i>
-        </span>
-      </button>
+                    <span aria-hidden="true">
+                        <i class="fas fa-times float-right m-3"></i>
+                    </span>
+                </button>
                 <div class="modal-body text-center">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -325,7 +410,7 @@
                                     </div>
                                     <hr class="divider-custom-line my-auto flex-grow-0">
                                 </div>
-                                <form>
+                                <form method="POST">
                                     <!-- Modal - Image -->
                                     <div class="form-group">
                                         <button class="btn btn-secondary" type="button">
@@ -336,13 +421,13 @@
 
                                     <div class="form-group">
                                         <label for="inputPassword4">Nome</label>
-                                        <input type="text" class="form-control" id="nameNew" placeholder="es. Double Cheeseburger">
+                                        <input type="text" class="form-control" name="name" id="nameNew" placeholder="es. Double Cheeseburger">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
                                             <label for="inputEmail4">Tipologia</label>
-                                            <input type="text" class="form-control" id="typeNew" placeholder="es. Hamburger">
+                                            <input type="text" class="form-control" name="type" id="typeNew" placeholder="es. Hamburger">
                                         </div>
 
                                         <div class="form-group col-md-5">
@@ -351,19 +436,19 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">€</div>
                                                 </div>
-                                                <input type="text" class="form-control" id="priceNew" placeholder="7.50" size="5">
+                                                <input type="text" class="form-control" name="price" id="priceNew" placeholder="7.50" size="5">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputAddress2">Descrizione</label>
-                                        <textarea class="form-control" id="descriptionNew" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
+                                        <textarea class="form-control" id="descriptionNew" name="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                      <i class="fas fa-check fa-fw"></i>
-                                      Aggiungi piatto
+                                    <button class="btn btn-primary" href="#" name="action" value="addCustom" data-dismiss="modal">
+                                        <i class="fas fa-check fa-fw"></i>
+                                        Aggiungi piatto
                                     </button>
                                 </form>
                             </div>

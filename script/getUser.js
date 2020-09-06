@@ -3,7 +3,7 @@ if (actualUser != null) {
     if(sessionStorage.getItem("userType") == "Utenti") {
         document.getElementById("accountArea").href = 'customerPage.html'
     } else {
-        document.getElementById("accountArea").href = 'restaurateurPage.html'
+        document.getElementById("accountArea").href = '../php/restaurateurPage.php'
     }
     document.getElementById('loginDropdown').style.display = "none"
     document.getElementById('accountDropdown').style.display = "initial"

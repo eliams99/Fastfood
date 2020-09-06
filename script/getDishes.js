@@ -71,11 +71,15 @@ function deleteButtonClicked(button) {
         button.className = "btn btn-danger mx-1 float-right"
         button.value = "delete"
         button.parentNode.childNodes[2].disabled = false
+        document.getElementById("deleteCustomButton").remove()
     } else {
         button.innerHTML = "<i class='fas fa-undo fa-fw'></i> Annulla"
         button.className = "btn btn-secondary mx-1 float-right"
         button.value = "undo"
         button.parentNode.childNodes[2].disabled = true
+        button.parentNode.parentNode.parentNode.innerHTML += '<button type="submit" id="deleteCustomButton" name="action" value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right">' +
+        + '</button>'
+        document.getElementById("deleteCustomButton").innerHTML = '<i class="fas fa-check fa-fw"></i> Conferma eliminazione'
     }
 
 }
