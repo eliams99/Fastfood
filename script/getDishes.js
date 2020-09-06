@@ -4,20 +4,42 @@ request.open("GET", "http://localhost/FastFood/Panini.json", true)
 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
 request.setRequestHeader("Cache-Control", "no-cache")
 request.send()
-request.onreadystatechange = function(e) {
+request.onreadystatechange = function (e) {
     if (request.readyState == 4 && this.status == 200) {
-        var dish = JSON.parse(this.response).comuni
-
-        for (var i = 0; i < dish.length; i++) {
-            document.getElementById("commonDishes").innerHTML += '<li href="#" class="list-group-item">' +
-                '<div class="form-check form-check-inline mt-0">' +
-                '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="' + dish[i].nome + '">' +
-                '<label class="form-check-label mx-2">' + dish[i].nome + '</label>'
+        // Mostra i panini comuni con le checkbox
+        restaurateur = JSON.parse(this.response).paniniRistoranti
+        // Scorre i ristoratori
+        for (var i = 0; i < restaurateur.length; i++) {
+            // Se il ristorante corrisponde all'utente che ha fatto l'accesso
+            if (restaurateur[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
+                var dish = JSON.parse(this.response).comuni
+                // Scorre tutti i panini comuni
+                for (var j = 0; j < dish.length; j++) {
+                    var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
+                    // Scorre i panini comuni del ristorante
+                    selectedDishes = restaurateur[i].paniniComuni
+                    var dishFound = false
+                    for (var a = 0; a < selectedDishes.length; a++) {
+                        if (dish[j].nome == selectedDishes[a].nome) {
+                            dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
+                                + dish[j].nome + '" checked>'
+                            dishFound = true
+                        }
+                    }
+                    if (!dishFound) {
+                        dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
+                            + dish[j].nome + '">'
+                    }
+                    dishList += '<label class="form-check-label mx-2">'
+                        + dish[j].nome + '</label></div></li>'
+                    document.getElementById("commonDishes").innerHTML += dishList
+                    document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+                        '<input type="hidden" name="restaurantName" value="' +
+                        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+                }
+            }
         }
-        document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-            JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' + '</div></li>' +
-            '<input type="hidden" name="restaurantName" value="' +
-            JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>' + '</div></li>'
         var restaurants = JSON.parse(this.response).paniniRistoranti
         for (var j = 0; j < restaurants.length; j++) {
             if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
@@ -29,7 +51,7 @@ request.onreadystatechange = function(e) {
                         '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete[]" value="' + customDish[i].nome + '">' +
                         '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
                         '</button>' +
-                        '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="edit[]" value="' + customDish[i].nome + '">' +
+                        '<button class="btn btn-secondary mx-1 float-right" type="button"  data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
                         '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
                         '   </button>' +
                         '</li>'
