@@ -15,6 +15,11 @@
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/users.js" type="text/javascript"></script>
     </script>
+    <script type="text/javascript">
+        function submit() {
+            document.getElementById("addForm").submit()
+        }
+    </script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -115,8 +120,6 @@
                         $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
                         $restaurants = $allDishes["paniniRistoranti"];
 
-                        echo $_POST["action"];
-
                         // Aggiunta/rimozione panini comuni
                         if ($_POST['action'] == 'common') {
                             $restaurantFound = false;
@@ -159,16 +162,22 @@
                             $allDishes["paniniRistoranti"] = $restaurants;
                         }  // Aggiunta/rimozione/modifica panini personalizzati
                         else if ($_POST['action'] == 'addCustom') {
-                            echo "QUI";
-                            $customDish = $allDishes["paniniRistoranti"][2];
-                            $datae = array(
-                                'nome' => $_POST['name'],
-                                'tipologia' => $_POST['type'],
-                                'prezzo' => $_POST['price'],
-                                'descrizione' => $_POST['description']
-                            );
-                            array_push($customDish, $datae);
-                            return json_encode($customDish);
+
+                            
+                            foreach ($restaurants as &$restaurant) {
+                                // Se il ristorante è presente nel json
+                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
+                                    $datae = array(
+                                        'nome' => $_POST['name'],
+                                        'tipologia' => $_POST['type'],
+                                        'prezzo' => $_POST['price'],
+                                        'descrizione' => $_POST['description']
+                                    );
+                                    array_push($restaurant["paniniPersonalizzati"], $datae);
+                                    $allDishes["paniniRistoranti"] = $restaurants;
+                                    return json_encode($allDishes);
+                                }
+                            }
                         }
                         return json_encode($allDishes);
                     }
@@ -294,7 +303,7 @@
 
                         <!-- Panini personalizzati -->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary mt-4">Panini personalizzati</h4>
-                        <form method="POST">
+                        <div>
                             <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#newDishModal1">
                                 <i class="fas fa-plus fa-fw"></i>
                                 Aggiungi piatto
@@ -303,7 +312,7 @@
                                 <div class="list-group" id="customizedDishes">
                                 </div>
                             </table>
-                        </form>
+                        </div>
                     </div>
 
                     <!-- STATISTICHE -->
@@ -328,7 +337,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalTitle">Double cheeseburger</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalTitle"></h2>
                                 <!-- Icon Divider -->
                                 <div class="divider-custom d-flex justify-content-center">
                                     <hr class="divider-custom-line my-auto flex-grow-0">
@@ -374,7 +383,7 @@
                                         <textarea class="form-control" name="description" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
-                                    <button class="btn btn-primary" name="action" value="editCustom" href="#" data-dismiss="modal">
+                                    <button type="submit" class="btn btn-primary" name="action" value="editCustom" data-dismiss="modal">
                                         <i class="fas fa-edit fa-fw"></i>
                                         Conferma modifiche
                                     </button>
@@ -410,7 +419,7 @@
                                     </div>
                                     <hr class="divider-custom-line my-auto flex-grow-0">
                                 </div>
-                                <form method="POST">
+                                <form method="POST" id="addForm">
                                     <!-- Modal - Image -->
                                     <div class="form-group">
                                         <button class="btn btn-secondary" type="button">
@@ -446,7 +455,9 @@
                                         <textarea class="form-control" id="descriptionNew" name="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
-                                    <button class="btn btn-primary" href="#" name="action" value="addCustom" data-dismiss="modal">
+                                    <input type="hidden" name="action" value="addCustom">
+
+                                    <button type="submit" class="btn btn-primary" onclick="submit()" data-dismiss="modal">
                                         <i class="fas fa-check fa-fw"></i>
                                         Aggiungi piatto
                                     </button>

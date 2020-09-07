@@ -37,6 +37,10 @@ request.onreadystatechange = function (e) {
                         JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
                         '<input type="hidden" name="restaurantName" value="' +
                         JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+                    document.getElementById("addForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+                        '<input type="hidden" name="restaurantName" value="' +
+                        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
                 }
             }
         }
@@ -78,7 +82,7 @@ function deleteButtonClicked(button) {
         button.value = "undo"
         button.parentNode.childNodes[2].disabled = true
         button.parentNode.parentNode.parentNode.innerHTML += '<button type="submit" id="deleteCustomButton" name="action" value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right">' +
-        + '</button>'
+            + '</button>'
         document.getElementById("deleteCustomButton").innerHTML = '<i class="fas fa-check fa-fw"></i> Conferma eliminazione'
     }
 

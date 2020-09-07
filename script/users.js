@@ -10,7 +10,7 @@ function validate() {
             getUsers("Ristoratori", false)
             setTimeout(() => {
                 if (userFound) {
-                    document.getElementById("accountArea").href = 'restaurateurPage.html'
+                    document.getElementById("accountArea").href = 'restaurateurPage.php'
                 } else {
                     uncorrectCredentials()
                 }
