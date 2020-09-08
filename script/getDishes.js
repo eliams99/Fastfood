@@ -7,6 +7,7 @@ request.send()
 request.onreadystatechange = function (e) {
     if (request.readyState == 4 && this.status == 200) {
         // Mostra i panini comuni con le checkbox
+        sessionStorage.setItem("dishes", this.response)
         restaurateur = JSON.parse(this.response).paniniRistoranti
         // Scorre i ristoratori
         for (var i = 0; i < restaurateur.length; i++) {
@@ -33,37 +34,43 @@ request.onreadystatechange = function (e) {
                     dishList += '<label class="form-check-label mx-2">'
                         + dish[j].nome + '</label></div></li>'
                     document.getElementById("commonDishes").innerHTML += dishList
-                    document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
-                        '<input type="hidden" name="restaurantName" value="' +
-                        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
-                    document.getElementById("addForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
-                        '<input type="hidden" name="restaurantName" value="' +
-                        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
                 }
+                document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+                    '<input type="hidden" name="restaurantName" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+                document.getElementById("addForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+                    '<input type="hidden" name="restaurantName" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+                document.getElementById("editForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+                    '<input type="hidden" name="restaurantName" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
             }
         }
         var restaurants = JSON.parse(this.response).paniniRistoranti
+        // Scorre i ristoranti
         for (var j = 0; j < restaurants.length; j++) {
             if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
                 var customDish = restaurants[j].paniniPersonalizzati
+                // Scorre i panini personalizzati del ristorante
                 for (var i = 0; i < customDish.length; i++) {
                     document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item">' +
-                        '<div class="form-check form-check-inline mt-0">' +
-                        '<label class="form-check-label mx-2">' + customDish[i].nome + '</label></div>' +
-                        '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete[]" value="' + customDish[i].nome + '">' +
+                        '<label class="form-check-label mx-2">' + customDish[i].nome + '</label>' +
+                        '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
                         '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
                         '</button>' +
-                        '<button class="btn btn-secondary mx-1 float-right" type="button"  data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
+                        '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
                         '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
                         '   </button>' +
+                        '<input type="hidden" name="deleteValue[]" value="delete"/>' +
                         '</li>'
-                    document.getElementById("modalTitle").innerText = customDish[i].nome
-                    document.getElementById("nameEdit").value = customDish[i].nome
-                    document.getElementById("typeEdit").value = customDish[i].tipologia
-                    document.getElementById("priceEdit").value = customDish[i].prezzo
                 }
+                document.getElementById("customizedDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).email + '">' +
+                    '<input type="hidden" name="restaurantName" value="' +
+                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '">'
             }
         }
     }
@@ -74,17 +81,40 @@ function deleteButtonClicked(button) {
         button.innerHTML = "<i class='fas fa-trash-alt fa-fw'></i> Elimina"
         button.className = "btn btn-danger mx-1 float-right"
         button.value = "delete"
-        button.parentNode.childNodes[2].disabled = false
+        button.parentNode.childNodes[3].value = "delete"    // input type hidden deleteValue[]
+        button.parentNode.childNodes[2].disabled = false    // button edit
         document.getElementById("deleteCustomButton").remove()
     } else {
         button.innerHTML = "<i class='fas fa-undo fa-fw'></i> Annulla"
         button.className = "btn btn-secondary mx-1 float-right"
         button.value = "undo"
-        button.parentNode.childNodes[2].disabled = true
+        button.parentNode.childNodes[3].value = "undo"      // input type hidden deleteValue[]
+        button.parentNode.childNodes[2].disabled = true     // button edit
         button.parentNode.parentNode.parentNode.innerHTML += '<button type="submit" id="deleteCustomButton" name="action" value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right">' +
             + '</button>'
         document.getElementById("deleteCustomButton").innerHTML = '<i class="fas fa-check fa-fw"></i> Conferma eliminazione'
     }
 
 }
-// data-toggle="modal" data-target="#editDishModal"
+
+function editButtonClicked(button) {
+    document.getElementById("editForm").innerHTML += '<input type="hidden" name="dishName" value="' +
+        button.value + '"/>'
+
+    var restaurants = JSON.parse(sessionStorage.getItem("dishes")).paniniRistoranti
+    for (var j = 0; j < restaurants.length; j++) {
+        if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
+            var customDish = restaurants[j].paniniPersonalizzati
+            // Scorre i panini personalizzati del ristorante
+            for (var i = 0; i < customDish.length; i++) {
+                if (customDish[i].nome == button.value) {
+                    document.getElementById("modalTitle").innerText = customDish[i].nome
+                    document.getElementById("nameEdit").value = customDish[i].nome
+                    document.getElementById("typeEdit").value = customDish[i].tipologia
+                    document.getElementById("priceEdit").value = customDish[i].prezzo
+                    document.getElementById("descriptionEdit").value = customDish[i].descrizione
+                }
+            }
+        }
+    }
+}

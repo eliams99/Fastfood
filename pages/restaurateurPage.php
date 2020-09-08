@@ -16,8 +16,12 @@
     <script src="../script/users.js" type="text/javascript"></script>
     </script>
     <script type="text/javascript">
-        function submit() {
+        function addSubmit() {
             document.getElementById("addForm").submit()
+        }
+
+        function editSubmit() {
+            document.getElementById("editForm").submit()
         }
     </script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
@@ -113,13 +117,12 @@
                 <?php
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+                    $message = "";
 
                     function get_data()
                     {
                         $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
                         $restaurants = $allDishes["paniniRistoranti"];
-
                         // Aggiunta/rimozione panini comuni
                         if ($_POST['action'] == 'common') {
                             $restaurantFound = false;
@@ -160,10 +163,9 @@
                                 array_push($restaurants, $newRestaurant);
                             }
                             $allDishes["paniniRistoranti"] = $restaurants;
-                        }  // Aggiunta/rimozione/modifica panini personalizzati
+                            $GLOBALS["message"] = "Panini comuni modificati correttamente";
+                        }  // Aggiunta panini personalizzati
                         else if ($_POST['action'] == 'addCustom') {
-
-                            
                             foreach ($restaurants as &$restaurant) {
                                 // Se il ristorante è presente nel json
                                 if ($restaurant["email"] == $_POST["restaurantEmail"]) {
@@ -175,9 +177,44 @@
                                     );
                                     array_push($restaurant["paniniPersonalizzati"], $datae);
                                     $allDishes["paniniRistoranti"] = $restaurants;
-                                    return json_encode($allDishes);
                                 }
                             }
+                            $GLOBALS["message"] = "Panino personalizzato aggiunto correttamente";
+                        }  // Modifica panini personalizzati
+                        else if ($_POST['action'] == 'editCustom') {
+                            foreach ($restaurants as &$restaurant) {
+                                // Se il ristorante è presente nel json
+                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
+                                    // Scorre i panini personalizzati
+                                    foreach ($restaurant["paniniPersonalizzati"] as &$dish) {
+                                        if ($dish['nome'] == $_POST['dishName']) {
+                                            $dish = array(
+                                                'nome' => $_POST['nameEdit'],
+                                                'tipologia' => $_POST['typeEdit'],
+                                                'prezzo' => $_POST['priceEdit'],
+                                                'descrizione' => $_POST['descriptionEdit']
+                                            );
+                                            $allDishes["paniniRistoranti"] = $restaurants;
+                                        }
+                                    }
+                                }
+                            }
+                            $GLOBALS["message"] = "Panino personalizzato modificato correttamente";
+                        } // Eliminazione panini personalizzati
+                        else if ($_POST['action'] == 'deleteCustom') {
+                            foreach ($restaurants as &$restaurant) {
+                                // Se il ristorante è presente nel json
+                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
+                                    // Scorre i panini personalizzati
+                                    for ($i = 0; $i < count($restaurant["paniniPersonalizzati"]); $i++) {
+                                        if ($_POST['deleteValue'][$i] == "undo") {
+                                            array_splice($restaurant["paniniPersonalizzati"], $i, 1);
+                                        }
+                                    }
+                                }
+                            }
+                            $allDishes["paniniRistoranti"] = $restaurants;
+                            $GLOBALS["message"] = "Panino personalizzato eliminato correttamente";
                         }
                         return json_encode($allDishes);
                     }
@@ -185,9 +222,9 @@
                         "../../FastFood/Panini.json",
                         get_data()
                     )) {
-                        echo "<div class='alert alert-success text-center' role='alert'>
-                            Panini modificati!
-                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        echo "<div class='alert alert-success text-center' role='alert'>"
+                            .$GLOBALS["message"].
+                            "! <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                             </div>";
@@ -291,10 +328,8 @@
                         <!-- Panini comuni-->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary">Panini comuni</h4>
                         <form method="POST">
-                            <table>
-                                <div class="list-group" id="commonDishes">
-                                </div>
-                            </table>
+                            <div class="list-group" id="commonDishes">
+                            </div>
                             <button type="submit" name="action" value="common" class="btn btn-primary m-2">
                                 <i class="fas fa-check fa-fw"></i>
                                 Conferma modifiche
@@ -303,16 +338,14 @@
 
                         <!-- Panini personalizzati -->
                         <h4 class="page-section-heading text-center text-uppercase text-secondary mt-4">Panini personalizzati</h4>
-                        <div>
+                        <form method="POST">
                             <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#newDishModal1">
                                 <i class="fas fa-plus fa-fw"></i>
                                 Aggiungi piatto
                             </button>
-                            <table>
-                                <div class="list-group" id="customizedDishes">
-                                </div>
-                            </table>
-                        </div>
+                            <div class="list-group" id="customizedDishes">
+                            </div>
+                        </form>
                     </div>
 
                     <!-- STATISTICHE -->
@@ -346,7 +379,7 @@
                                     </div>
                                     <hr class="divider-custom-line my-auto flex-grow-0">
                                 </div>
-                                <form method="POST">
+                                <form id="editForm" method="POST">
                                     <!-- Modal - Image -->
                                     <div class="imageDiv">
                                         <img class="img-fluid rounded" src="../img/doublecheese.png" alt="">
@@ -380,11 +413,13 @@
 
                                     <div class="form-group">
                                         <label for="inputAddress2">Descrizione</label>
-                                        <textarea class="form-control" name="description" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
+                                        <textarea class="form-control" name="descriptionEdit" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary" name="action" value="editCustom" data-dismiss="modal">
-                                        <i class="fas fa-edit fa-fw"></i>
+                                    <input type="hidden" name="action" value="editCustom">
+
+                                    <button type="submit" class="btn btn-primary" onclick="editSubmit()" data-dismiss="modal">
+                                        <i class="fas fa-check fa-fw"></i>
                                         Conferma modifiche
                                     </button>
                                 </form>
@@ -457,7 +492,7 @@
 
                                     <input type="hidden" name="action" value="addCustom">
 
-                                    <button type="submit" class="btn btn-primary" onclick="submit()" data-dismiss="modal">
+                                    <button type="submit" class="btn btn-primary" onclick="addSubmit()" data-dismiss="modal">
                                         <i class="fas fa-check fa-fw"></i>
                                         Aggiungi piatto
                                     </button>
