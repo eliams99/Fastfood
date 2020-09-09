@@ -8,70 +8,80 @@ request.onreadystatechange = function (e) {
     if (request.readyState == 4 && this.status == 200) {
         // Mostra i panini comuni con le checkbox
         sessionStorage.setItem("dishes", this.response)
-        restaurateur = JSON.parse(this.response).paniniRistoranti
-        // Scorre i ristoratori
-        for (var i = 0; i < restaurateur.length; i++) {
-            // Se il ristorante corrisponde all'utente che ha fatto l'accesso
-            if (restaurateur[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
-                var dish = JSON.parse(this.response).comuni
-                // Scorre tutti i panini comuni
-                for (var j = 0; j < dish.length; j++) {
-                    var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
-                    // Scorre i panini comuni del ristorante
-                    selectedDishes = restaurateur[i].paniniComuni
-                    var dishFound = false
-                    for (var a = 0; a < selectedDishes.length; a++) {
-                        if (dish[j].nome == selectedDishes[a].nome) {
-                            dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
-                                + dish[j].nome + '" checked>'
-                            dishFound = true
-                        }
-                    }
-                    if (!dishFound) {
+        showCommonDishes(JSON.parse(this.response).paniniRistoranti, JSON.parse(this.response))
+        showCustomDishes(JSON.parse(this.response).paniniRistoranti)
+    }
+}
+
+function showCommonDishes(restaurateur, allDishes) {
+    // Scorre i ristoratori
+    for (var i = 0; i < restaurateur.length; i++) {
+        // Se il ristorante corrisponde all'utente che ha fatto l'accesso
+        if (restaurateur[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
+            var dish = allDishes.comuni
+            // Scorre tutti i panini comuni
+            for (var j = 0; j < dish.length; j++) {
+                var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
+                // Scorre i panini comuni del ristorante
+                selectedDishes = restaurateur[i].paniniComuni
+                var dishFound = false
+                for (var a = 0; a < selectedDishes.length; a++) {
+                    if (dish[j].nome == selectedDishes[a].nome) {
                         dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
-                            + dish[j].nome + '">'
+                            + dish[j].nome + '" checked>'
+                        dishFound = true
                     }
-                    dishList += '<label class="form-check-label mx-2">'
-                        + dish[j].nome + '</label></div></li>'
-                    document.getElementById("commonDishes").innerHTML += dishList
                 }
-                document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
-                    '<input type="hidden" name="restaurantName" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
-                document.getElementById("addForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
-                    '<input type="hidden" name="restaurantName" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
-                document.getElementById("editForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
-                    '<input type="hidden" name="restaurantName" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+                if (!dishFound) {
+                    dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
+                        + dish[j].nome + '">'
+                }
+                dishList += '<label class="form-check-label mx-2">'
+                    + dish[j].nome + '</label></div></li>'
+                document.getElementById("commonDishes").innerHTML += dishList
             }
+            setHiddenValues()
         }
-        var restaurants = JSON.parse(this.response).paniniRistoranti
-        // Scorre i ristoranti
-        for (var j = 0; j < restaurants.length; j++) {
-            if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
-                var customDish = restaurants[j].paniniPersonalizzati
-                // Scorre i panini personalizzati del ristorante
-                for (var i = 0; i < customDish.length; i++) {
-                    document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item">' +
-                        '<label class="form-check-label mx-2">' + customDish[i].nome + '</label>' +
-                        '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
-                        '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
-                        '</button>' +
-                        '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
-                        '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
-                        '   </button>' +
-                        '<input type="hidden" name="deleteValue[]" value="delete"/>' +
-                        '</li>'
-                }
-                document.getElementById("customizedDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).email + '">' +
-                    '<input type="hidden" name="restaurantName" value="' +
-                    JSON.parse(sessionStorage.getItem('actualUser')).nome + '">'
+    }
+}
+
+function setHiddenValues() {
+    document.getElementById("commonDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+        '<input type="hidden" name="restaurantName" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+    document.getElementById("addForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+        '<input type="hidden" name="restaurantName" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+    document.getElementById("editForm").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).email + '"/>' +
+        '<input type="hidden" name="restaurantName" value="' +
+        JSON.parse(sessionStorage.getItem('actualUser')).nome + '"/>'
+}
+
+function showCustomDishes(restaurants) {
+    // Scorre i ristoranti
+    for (var j = 0; j < restaurants.length; j++) {
+        if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
+            var customDish = restaurants[j].paniniPersonalizzati
+            // Scorre i panini personalizzati del ristorante
+            for (var i = 0; i < customDish.length; i++) {
+                document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item">' +
+                    '<label class="form-check-label mx-2">' + customDish[i].nome + '</label>' +
+                    '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
+                    '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
+                    '</button>' +
+                    '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
+                    '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
+                    '   </button>' +
+                    '<input type="hidden" name="deleteValue[]" value="delete"/>' +
+                    '</li>'
             }
+            document.getElementById("customizedDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+                JSON.parse(sessionStorage.getItem('actualUser')).email + '">' +
+                '<input type="hidden" name="restaurantName" value="' +
+                JSON.parse(sessionStorage.getItem('actualUser')).nome + '">'
         }
     }
 }
