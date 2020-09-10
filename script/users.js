@@ -91,3 +91,4 @@ function uncorrectCredentials() {
     document.getElementById("email").style.border = "1px solid #CC0000"
     document.getElementById("password").style.border = "1px solid #CC0000"
 }
+
