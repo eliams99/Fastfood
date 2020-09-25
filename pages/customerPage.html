@@ -8,11 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
+    <script src="../script/sendJson.js" type="text/javascript"></script>
     <script src="../script/navbar.js" type="text/javascript"></script>
-    <script src="../script/users.js" type="text/javascript"></script>
+    <script src="../script/login.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -22,7 +24,8 @@
             <a class="navbar-brand align-middle" href="index.html">
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -36,7 +39,8 @@
                         <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
                     </li>
                     <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
                         </a>
                         <div class="dropdown-menu">
@@ -46,18 +50,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password"
+                                            placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
@@ -73,10 +79,9 @@
                                 <a class="dropdown-item" onclick="logout()">Logout</a>
                             </div>
                         </div>
+                    </li>
+                </ul>
             </div>
-            </li>
-            </ul>
-        </div>
         </div>
     </nav>
 
@@ -96,43 +101,54 @@
         <div class="row">
             <div class="col-2 justify-content-center">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-personalData-tab" data-toggle="pill" href="#v-pills-personalData" role="tab" aria-controls="v-pills-personalData" aria-selected="true">Dati personali</a>
-                    <a class="nav-link" id="v-pills-statistics-tab" data-toggle="pill" href="#v-pills-statistics" role="tab" aria-controls="v-pills-statistics" aria-selected="false">I tuoi ordini</a>
+                    <a class="nav-link active" id="v-pills-personalData-tab" data-toggle="pill"
+                        href="#v-pills-personalData" role="tab" aria-controls="v-pills-personalData"
+                        aria-selected="true">Dati personali</a>
+                    <a class="nav-link" id="v-pills-statistics-tab" data-toggle="pill" href="#v-pills-statistics"
+                        role="tab" aria-controls="v-pills-statistics" aria-selected="false">I tuoi ordini</a>
                 </div>
             </div>
             <div class="col-10">
+                <div id="message">
+
+                </div>
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
+                    <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel"
+                        aria-labelledby="v-pills-personalData-tab">
                         <div class="form-group">
                             <h4> Dati utente</h4>
 
                             <form method='POST' action="../php/editDeleteUser.php">
                                 <div class="row">
                                     <div class="col-md">
-                                        <label>Nome</label>
+                                        <label for="nameInputText">Nome</label>
                                         <input type="text" class="form-control" id="nameInputText" name="nome" required>
                                     </div>
                                     <div class="col-md">
-                                        <label>Cognome</label>
-                                        <input type="text" class="form-control" id="surnameInputText" name="cognome" required>
+                                        <label for="surnameInputText">Cognome</label>
+                                        <input type="text" class="form-control" id="surnameInputText" name="cognome"
+                                            required>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <label for="exampleInputPassword1">Indirizzo</label>
-                                        <input type="text" class="form-control" id="addressInputText" name="indirizzo" required>
+                                        <label for="addressInputText">Indirizzo</label>
+                                        <input type="text" class="form-control" id="addressInputText" name="indirizzo"
+                                            required>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="exampleInputPassword1">Comune</label>
-                                        <input type="text" class="form-control" id="municipalityInputText" name="comune">
+                                        <label for="municipalityInputText">Comune</label>
+                                        <input type="text" class="form-control" id="municipalityInputText"
+                                            name="comune">
                                     </div>
                                     <div class="col-md-1">
-                                        <label for="exampleInputPassword1">Provincia</label>
-                                        <input type="text" class="form-control" id="provinceInputText" name="provincia" required>
+                                        <label for="provinceInputText">Provincia</label>
+                                        <input type="text" class="form-control" id="provinceInputText" name="provincia"
+                                            required>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="exampleInputPassword1">CAP</label>
+                                        <label for="CAPInputText">CAP</label>
                                         <input type="text" class="form-control" id="CAPInputText" name="CAP" required>
                                     </div>
                                 </div>
@@ -140,23 +156,33 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="inputEmail">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" required>
+                                        <input type="email" class="form-control" id="inputEmail" name="email"
+                                            aria-describedby="emailHelp" required>
                                     </div>
                                     <div class="col-md">
                                         <label for="inputPassword">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Inserisci Password" required>
+                                        <input type="password" class="form-control" id="inputPassword" name="password"
+                                            placeholder="Inserisci Password" required>
                                     </div>
                                 </div>
-                                <div id="bottone_cancellati">
-                                    <button type="submit" name="action" value="edit" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
-                                    <button type="submit" name="action" value="delete" class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
+
+                                <div>
+                                    <input type="hidden" id="prefCibo">
+                                    <input type="hidden" id="prefPagamento">
+                                </div>
+
+                                <div id="deleteButton">
+                                    <button type="button" name="action" value="edit" onclick="editCustomer()"
+                                        class="btn btn-primary mb-2">Modifica i tuoi dati</button>
+                                    <button type="button" name="action" value="delete" onclick="deleteCustomer()"
+                                        class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Nessun contenuto</div>
+                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel"
+                        aria-labelledby="v-pills-statistics-tab">Nessun contenuto</div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -179,9 +205,15 @@
     <script src="../script/getUser.js" type="text/javascript"></script>
     <script src="../script/userInformation.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
 </body>
 
 </html>

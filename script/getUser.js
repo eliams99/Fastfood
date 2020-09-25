@@ -1,6 +1,6 @@
 var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
 if (actualUser != null) {
-    if(sessionStorage.getItem("userType") == "Utenti") {
+    if(sessionStorage.getItem("userType") == "cliente") {
         document.getElementById("accountArea").href = 'customerPage.html'
     } else {
         document.getElementById("accountArea").href = 'restaurateurPage.php'

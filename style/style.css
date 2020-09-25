@@ -237,8 +237,8 @@ footer {
     padding: 3em;
 }
 
-#bottone_registrati,
-#bottone_cancellati,
+#registrationButton,
+#deleteButton,
 #bottone_acquista {
     margin-top: 2rem;
     text-align: center;

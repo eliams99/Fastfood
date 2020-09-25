@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <link rel="stylesheet" href="../style/restaurateurStyle.css" />
     <script src="../script/navbar.js" type="text/javascript"></script>
-    <script src="../script/users.js" type="text/javascript"></script>
+    <script src="../script/login.js" type="text/javascript"></script>
     </script>
     <script type="text/javascript">
         function addSubmit() {
@@ -316,7 +316,7 @@
                                 </div>
 
                             </div>
-                            <div id="bottone_cancellati">
+                            <div id="deleteButton">
                                 <button type="submit" name="action" value="edit" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
                                 <button type="submit" name="action" value="delete" class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
                             </div>

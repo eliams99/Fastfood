@@ -8,12 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
+    <script src="../script/sendJson.js" type="text/javascript"></script>
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
-    <script src="../script/sendJson.js" type="text/javascript"></script>
 </head>
 
 <body onload="nav()">
@@ -22,9 +23,10 @@
             <a class="navbar-brand align-middle" href="index.html">
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -55,158 +57,197 @@
         <div class="container">
             <ul class="nav nav-pills mb-5 justify-content-center" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-customer-tab" data-toggle="pill" href="#pills-customer" role="tab" aria-controls="pills-customer" aria-selected="true">Cliente</a>
+                    <a class="nav-link active" id="pills-customer-tab" data-toggle="pill" href="#pills-customer"
+                        role="tab" aria-controls="pills-customer" aria-selected="true">Cliente</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-restaurateur-tab" data-toggle="pill" href="#pills-restaurateur" role="tab" aria-controls="pills-restaurateur" aria-selected="false">Ristoratore</a>
+                    <a class="nav-link" id="pills-restaurateur-tab" data-toggle="pill" href="#pills-restaurateur"
+                        role="tab" aria-controls="pills-restaurateur" aria-selected="false">Ristoratore</a>
                 </li>
             </ul>
+            <div id="message">
+
+            </div>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-customer" role="tabpanel" aria-labelledby="pills-customer-tab">
+                <!-- Registrazione cliente -->
+                <div class="tab-pane fade show active" id="pills-customer" role="tabpanel"
+                    aria-labelledby="pills-customer-tab">
                     <form id="registrationForm" method="POST" action="../php/submitCustomerRegistrationJson.php">
 
                         <!-- Section Heading -->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati
+                        </h2>
 
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
                                     <label for="nameInputText">Nome</label>
-                                    <input type="text" class="form-control" id="nameInputText" name="nome" placeholder="Es. Mario" required>
+                                    <input type="text" class="form-control" id="nameInputText" name="nome"
+                                        placeholder="Es. Mario" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="surnameInputText">Cognome</label>
-                                    <input type="text" class="form-control" id="surnameInputText" name="cognome" placeholder="Es. Rossi" required>
+                                    <input type="text" class="form-control" id="surnameInputText" name="cognome"
+                                        placeholder="Es. Rossi" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md">
                                     <label for="addressInputText">Indirizzo</label>
-                                    <input type="text" class="form-control" id="addressInputText" name="indirizzo" placeholder="Es. via Verdi 8" required>
+                                    <input type="text" class="form-control" id="addressInputText" name="indirizzo"
+                                        placeholder="Es. via Verdi 8" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="municipalityInputText">Comune</label>
-                                    <input type="text" class="form-control" id="municipalityInputText" name="comune" placeholder="Es. Milano" required>
+                                    <input type="text" class="form-control" id="municipalityInputText" name="comune"
+                                        placeholder="Es. Milano" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="provinceInputText">Provincia</label>
-                                    <input type="text" class="form-control" id="provinceInputText" name="provincia" placeholder="Es. MI" required>
+                                    <input type="text" class="form-control" id="provinceInputText" name="provincia"
+                                        placeholder="Es. MI" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="CAPInputText">CAP</label>
-                                    <input type="text" class="form-control" id="CAPInputText" name="CAP" placeholder="Es. 20121" required>
+                                    <input type="text" class="form-control" id="CAPInputText" name="CAP"
+                                        placeholder="Es. 20121" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md">
                                     <label for="inputEmail">Indirizzo email</label>
-                                    <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
+                                    <input type="email" class="form-control" id="inputEmail" name="email"
+                                        aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="inputPassword">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword" name="password" value="" placeholder="Inserisci Password" required>
+                                    <input type="password" class="form-control" id="inputPassword" name="password"
+                                        value="" placeholder="Inserisci Password" required>
                                 </div>
                             </div>
 
                             <label for="preferenzePagamento">Come preferisci pagare?</label>
                             <div class="input-group-prepend" id="preferenzePagamento">
-                                <section><input type="radio" name="preferenzePagamento" value="carta" required checked> <label for="preferenzePagamento">Carta di credito</label></section>
-                                <section><input type="radio" class="ml-3" name="preferenzePagamento" value="contanti" required> <label for="preferenzePagamento">Contanti</label></section>
+                                <section><input type="radio" name="preferenzePagamento" value="carta" required checked>
+                                    <label for="preferenzePagamento">Carta di credito</label></section>
+                                <section><input type="radio" class="ml-3" name="preferenzePagamento" value="contanti"
+                                        required> <label for="preferenzePagamento">Contanti</label></section>
                             </div>
                         </div>
 
                         <div>
                             <label for="preferenzeCiboSelect">Facci sapere le tue preferenze!</label>
                             <select id="preferenzeCiboSelect" class="form-control form-control-sm" required>
-                            <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
-                            <option name="preferenzeCibo" value="1">Pollo</option>
-                            <option name="preferenzeCibo" value="2">Manzo</option>
-                            <option name="preferenzeCibo" value="3">Vegano</option>
-                          </select>
+                                <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
+                                <option name="preferenzeCibo" value="pollo">Pollo</option>
+                                <option name="preferenzeCibo" value="mazo">Manzo</option>
+                                <option name="preferenzeCibo" value="vegano">Vegano</option>
+                            </select>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck" required>
+                            <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck"
+                                required>
                             <label class="form-check-label" for="defaultCheck">
-                            Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
-                        </label>
-                            <div id="bottone_registrati">
-                                <button type="button" onclick = "submitCustomer()" class="btn btn-primary mb-2">Registrati</button>
-                            </div>
+                                Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla
+                                    privacy</a>.
+                            </label>
+                            <div id="registrationButton">
+                                <button type="button" onclick="submitCustomer()"
+                                class="btn btn-primary mb-2">Registrati</button>
+                            </div> 
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="pills-restaurateur" role="tabpanel" aria-labelledby="pills-restaurateur-tab">
+
+                <!-- Registrazione ristoratore -->
+                <div class="tab-pane fade" id="pills-restaurateur" role="tabpanel"
+                    aria-labelledby="pills-restaurateur-tab">
                     <form action="../php/submitRestaurRegistrationJson.php" method="POST">
                         <!-- Section Heading -->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati
+                        </h2>
 
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
                                     <label for="restNameInputText">Nome</label>
-                                    <input type="text" id="restNameInputText" name="nome" class="form-control" placeholder="Es. Mario" required>
+                                    <input type="text" id="restNameInputText" name="nome" class="form-control"
+                                        placeholder="Es. Mario" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="restSurnameInputText">Cognome</label>
-                                    <input type="text" id="restSurnameInputText" name="cognome" class="form-control" placeholder="Es. Rossi" required>
+                                    <input type="text" id="restSurnameInputText" name="cognome" class="form-control"
+                                        placeholder="Es. Rossi" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md">
                                     <label for="restAddressInputText">Indirizzo</label>
-                                    <input type="text" name="indirizzo" class="form-control" id="restAddressInputText" placeholder="Es. via Verdi 8" required>
+                                    <input type="text" name="indirizzo" class="form-control" id="restAddressInputText"
+                                        placeholder="Es. via Verdi 8" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="restMunicipalityInputText">Comune</label>
-                                    <input type="text" name="comune" class="form-control" id="restMunicipalityInputText" placeholder="Es. Milano" required>
+                                    <input type="text" name="comune" class="form-control" id="restMunicipalityInputText"
+                                        placeholder="Es. Milano" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="restProvinceInputText">Provincia</label>
-                                    <input type="text" name="provincia" class="form-control" id="restProvinceInputText" placeholder="Es. MI" required>
+                                    <input type="text" name="provincia" class="form-control" id="restProvinceInputText"
+                                        placeholder="Es. MI" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="restCAPInputText">CAP</label>
-                                    <input type="text" name="CAP" class="form-control" id="restCAPInputText" placeholder="Es. 20121" required>
+                                    <input type="text" name="CAP" class="form-control" id="restCAPInputText"
+                                        placeholder="Es. 20121" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md">
                                     <label for="restInputEmail">Indirizzo email</label>
-                                    <input type="email" name="email" class="form-control" id="restInputEmail" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
+                                    <input type="email" name="email" class="form-control" id="restInputEmail"
+                                        aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="restInputPassword">Password</label>
-                                    <input type="password" name="password" class="form-control" id="restInputPassword" placeholder="Inserisci Password" required>
+                                    <input type="password" name="password" class="form-control" id="restInputPassword"
+                                        placeholder="Inserisci Password" required>
                                 </div>
                             </div>
                         </div>
                         <!--Sezione di registrazione del ristorante-->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del
+                            ristorante</h2>
                         <div id="registrazione_ristorante">
                             <label>Nome del ristorante</label>
-                            <input type="text" id="restaurantNameInputText" name="nomeRistorante" class="form-control" placeholder="Es. FastFood delle Rose">
+                            <input type="text" id="restaurantNameInputText" name="nomeRistorante" class="form-control"
+                                placeholder="Es. FastFood delle Rose">
                             <div class="row">
                                 <div class="col-md">
                                     <label for="restaurantAddressInputText">Indirizzo del ristorante</label>
-                                    <input type="text" id="restaurantAddressInputText" name="indirizzoRistorante" class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
+                                    <input type="text" id="restaurantAddressInputText" name="indirizzoRistorante"
+                                        class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="restaurantCAPInputText">CAP del ristorante</label>
-                                    <input type="text" id="restaurantCAPInputText" name="capRistorante" class="form-control" placeholder="Es. 20121" required>
+                                    <input type="text" id="restaurantCAPInputText" name="capRistorante"
+                                        class="form-control" placeholder="Es. 20121" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
                                     <label for="phoneInputText">Numero di telefono del ristorante</label>
-                                    <input type="text" id="phoneInputText" name="numeroTel" class="form-control" placeholder="Es. 0331123123" required>
+                                    <input type="text" id="phoneInputText" name="numeroTel" class="form-control"
+                                        placeholder="Es. 0331123123" required>
                                 </div>
                                 <div class="col-md">
                                     <label for="IVAInputText">Numero di partita IVA</label>
-                                    <input type="text" id="IVAInputText" name="partitaIVA" class="form-control" placeholder="Es. 0764352056C" required>
+                                    <input type="text" id="IVAInputText" name="partitaIVA" class="form-control"
+                                        placeholder="Es. 0764352056C" required>
                                 </div>
                             </div>
 
@@ -215,10 +256,11 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="restDefaultCheck" required>
                             <label class="form-check-label" for="restDefaultCheck">
-                              Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla privacy</a>.
+                                Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla
+                                    privacy</a>.
                             </label>
-                            <div id="bottone_registrati">
-                                <button type="submit" class="btn btn-primary mb-2">Registrati</button>
+                            <div id="registrationButton">
+                                <button type="button" class="btn btn-primary mb-2" onclick="submitRestaurateur()">Registrati</button>
                             </div>
                         </div>
                     </form>
@@ -243,9 +285,15 @@
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
 </body>
 
 </html>
