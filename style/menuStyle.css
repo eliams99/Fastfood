@@ -51,6 +51,9 @@
     display: none;
 }
 
+#v-pills-special {
+    padding: 2em;;
+}
 
 /* Modal */
 

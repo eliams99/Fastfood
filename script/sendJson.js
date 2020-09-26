@@ -38,30 +38,48 @@ function submitRestaurateur() {
 
 function editCustomer() {
     localData = JSON.parse(localStorage.getItem("data"))
-    actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
-    for (var i = 0; i < localData.utenti.clienti.length; i++) {
-        if (localData.utenti.clienti[i].email == actualUser.email) {
-            localData.utenti.clienti.splice(localData.utenti.clienti.indexOf(actualUser.email), 1)
-            sessionStorage.setItem("actualUser", JSON.stringify(localData.utenti.clienti[i]))
-            message = "Informazioni modificate correttamente"
-            updateData(localData)
-            return
-        }
-    }
+    localData.utenti.clienti = deleteUser(localData.utenti.clienti)
+    updateData(localData)
+    setTimeout(function() { window.location.replace('index.html') }, 2000);
 }
 
 function deleteCustomer() {
     localData = JSON.parse(localStorage.getItem("data"))
     actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     for (var i = 0; i < localData.utenti.clienti.length; i++) {
-        console.log("qui")
         if (localData.utenti.clienti[i].email == actualUser.email) {
-            delete localData.utenti.clienti[i]
+            localData.utenti.clienti.splice(localData.utenti.clienti.indexOf(localData.utenti.clienti[i]), 1);
             sessionStorage.removeItem("actualUser")
             sessionStorage.removeItem("userType")
             message = "Utente rimosso correttamente"
             updateData(localData)
+            setTimeout(function() { window.location.replace('index.html') }, 2000);
             return
+        }
+    }
+}
+
+function editRestaurateur() {
+
+}
+
+function deleteRestaurateur() {
+    localData = JSON.parse(localStorage.getItem("data"))
+    localData.utenti.ristoratori = deleteUser(localData.utenti.ristoratori)
+    updateData(localData)
+    setTimeout(function() { window.location.replace('index.html') }, 2000);
+}
+
+function deleteUser(users) {
+    localData = JSON.parse(localStorage.getItem("data"))
+    actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].email == actualUser.email) {
+            users.splice(users.indexOf(users[i]), 1);
+            sessionStorage.removeItem("actualUser")
+            sessionStorage.removeItem("userType")
+            message = "Utente rimosso correttamente"
+            return users
         }
     }
 }

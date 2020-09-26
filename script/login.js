@@ -1,14 +1,11 @@
-var userFound
 
 function validate() {
     sessionStorage.clear()
-    validateUsers(JSON.parse(localStorage.getItem('data')).utenti.clienti, "cliente")
-    if (userFound) {
+    if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.clienti, "cliente")) {
         document.getElementById("accountArea").href = 'customerPage.html'
     } else {
-        userFound = false
-        validateUsers(JSON.parse(localStorage.getItem('data')).utenti.ristoratori, "ristoratore")
-        if (userFound) {
+        console.log("QUI")
+        if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.ristoratori, "ristoratore")) {
             document.getElementById("accountArea").href = 'restaurateurPage.php'
         } else {
             uncorrectCredentials()
@@ -19,17 +16,16 @@ function validate() {
 function validateUsers(users, userType) {
     var email = document.getElementById('email').value
     var password = document.getElementById('password').value
-    userFound = false
-
     for (var i = 0; i < users.length; i++) {
+        console.log(users[i].password + " " + password + " " + users[i].email + " " + email)
         if (users[i].password == password && users[i].email == email) {
             sessionStorage.setItem('userType', userType)
             sessionStorage.setItem("actualUser", JSON.stringify(users[i]))
             showUser() 
-            userFound = true
             return true
         }
     }
+    return false
 }
 
 function showUser() {
