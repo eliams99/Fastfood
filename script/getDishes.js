@@ -1,48 +1,46 @@
-document.getElementById("accountArea").href = '../restaurateurPage.html'
-var request = new XMLHttpRequest()
-request.open("GET", "http://localhost/FastFood/Panini.json", true)
-request.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
-request.setRequestHeader("Cache-Control", "no-cache")
-request.send()
-request.onreadystatechange = function (e) {
-    if (request.readyState == 4 && this.status == 200) {
-        // Mostra i panini comuni con le checkbox
-        sessionStorage.setItem("dishes", this.response)
-        showCommonDishes(JSON.parse(this.response).paniniRistoranti, JSON.parse(this.response))
-        showCustomDishes(JSON.parse(this.response).paniniRistoranti)
-    }
-}
+
+data = JSON.parse(localStorage.getItem("data"))
+showCommonDishes(data.panini.paniniRistoranti, data.panini)
+showCustomDishes(data.panini.paniniRistoranti)
 
 function showCommonDishes(restaurateur, allDishes) {
-    // Scorre i ristoratori
+    var i = findRestaurant(restaurateur)
+    var dish = allDishes.comuni
+    // Scorre tutti i panini comuni
+    for (var j = 0; j < dish.length; j++) {
+        var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
+        var dishFound = false
+        if (i) {
+            // Scorre i panini comuni del ristorante
+            selectedDishes = restaurateur[i].paniniComuni
+            for (var a = 0; a < selectedDishes.length; a++) {
+                if (dish[j].nome == selectedDishes[a].nome) {
+                    dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox" value="'
+                        + dish[j].nome + '" checked>'
+                    dishFound = true
+                }
+            }
+        }
+        if (!dishFound) {
+            dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox" value="'
+                + dish[j].nome + '">'
+        }
+        dishList += '<label class="form-check-label mx-2">'
+            + dish[j].nome + '</label></div></li>'
+        document.getElementById("commonDishes").innerHTML += dishList
+    }
+    setHiddenValues()
+}
+
+function findRestaurant(restaurateur) {
+    // Scorre i ristoranti
     for (var i = 0; i < restaurateur.length; i++) {
         // Se il ristorante corrisponde all'utente che ha fatto l'accesso
         if (restaurateur[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
-            var dish = allDishes.comuni
-            // Scorre tutti i panini comuni
-            for (var j = 0; j < dish.length; j++) {
-                var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
-                // Scorre i panini comuni del ristorante
-                selectedDishes = restaurateur[i].paniniComuni
-                var dishFound = false
-                for (var a = 0; a < selectedDishes.length; a++) {
-                    if (dish[j].nome == selectedDishes[a].nome) {
-                        dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
-                            + dish[j].nome + '" checked>'
-                        dishFound = true
-                    }
-                }
-                if (!dishFound) {
-                    dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox[]" value="'
-                        + dish[j].nome + '">'
-                }
-                dishList += '<label class="form-check-label mx-2">'
-                    + dish[j].nome + '</label></div></li>'
-                document.getElementById("commonDishes").innerHTML += dishList
-            }
-            setHiddenValues()
+            return i
         }
     }
+    return false
 }
 
 function setHiddenValues() {

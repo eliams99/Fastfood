@@ -1,5 +1,7 @@
 var message;
 
+/* Creazione account clienti e ristoratori */
+
 function submitCustomer() {
     var localData
 
@@ -36,42 +38,50 @@ function submitRestaurateur() {
     }
 }
 
+/* Modifica dati account cliente ristoratori */
+
 function editCustomer() {
     localData = JSON.parse(localStorage.getItem("data"))
-    localData.utenti.clienti = deleteUser(localData.utenti.clienti)
+    userData = getCustomerData(JSON.parse(sessionStorage.getItem("actualUser")).prefPagamento)
+    localData.utenti.clienti = editUser(localData.utenti.clienti, userData)
     updateData(localData)
-    setTimeout(function() { window.location.replace('index.html') }, 2000);
+    setTimeout(function() { window.location.reload() }, 2000)
 }
 
-function deleteCustomer() {
+function editRestaurateur() {
     localData = JSON.parse(localStorage.getItem("data"))
+    localData.utenti.ristoratori = editUser(localData.utenti.ristoratori, getRestaurateurData())
+    updateData(localData)
+    setTimeout(function() { window.location.reload() }, 2000)
+}
+
+function editUser(users, userData) {
     actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
-    for (var i = 0; i < localData.utenti.clienti.length; i++) {
-        if (localData.utenti.clienti[i].email == actualUser.email) {
-            localData.utenti.clienti.splice(localData.utenti.clienti.indexOf(localData.utenti.clienti[i]), 1);
-            sessionStorage.removeItem("actualUser")
-            sessionStorage.removeItem("userType")
-            message = "Utente rimosso correttamente"
-            updateData(localData)
-            setTimeout(function() { window.location.replace('index.html') }, 2000);
-            return
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].email == actualUser.email) {
+            users[i] = userData
+            sessionStorage.setItem("actualUser", JSON.stringify(users[i]))
+            message = "Informazioni modificate correttamente"
+            return users
         }
     }
 }
 
-function editRestaurateur() {
-
+function deleteCustomer() {
+    localData = JSON.parse(localStorage.getItem("data"))
+    localData.utenti.clienti = deleteUser(localData.utenti.clienti)
+    updateData(localData)
+    setTimeout(function() { window.location.replace('index.html') }, 2000)
 }
 
 function deleteRestaurateur() {
     localData = JSON.parse(localStorage.getItem("data"))
     localData.utenti.ristoratori = deleteUser(localData.utenti.ristoratori)
     updateData(localData)
-    setTimeout(function() { window.location.replace('index.html') }, 2000);
+    setTimeout(function() { window.location.replace('index.html') }, 2000)
 }
 
 function deleteUser(users) {
-    localData = JSON.parse(localStorage.getItem("data"))
     actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     for (var i = 0; i < users.length; i++) {
         if (users[i].email == actualUser.email) {
@@ -138,6 +148,42 @@ function validateEmail(data, emailType) {      // Controlla se l'email è già p
     }
     return true
 }
+
+/* Gestione panini */
+
+function checkCommonDishes() {
+    var localData = JSON.parse(localStorage.getItem("data"))
+    var index = newRestaurant(localData)
+    checkBoxes = document.getElementsByName("dishCheckbox")
+    console.log(checkBoxes.length)
+    for (var i = 0; i < checkBoxes.length; i++) {
+        console.log(checkBoxes[i] + "\n")
+        if (checkBoxes[i].checked) {
+            localData.panini.paniniRistoranti[index].paniniComuni.push({"nome" : checkBoxes[i].value})
+        }
+    }
+    message = "Panini comuni aggiornati"
+    updateData(localData)
+}
+
+function newRestaurant(localData) {
+    actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    for (var i = 0; i < localData.panini.paniniRistoranti.length; i++) {
+        if (localData.panini.paniniRistoranti[i].email == actualUser.email) {
+            return i
+        }
+    }
+    var restaurant = {
+        "nome": actualUser.nome,
+        "email": actualUser.email,
+        "paniniPersonalizzati": [],
+        "paniniComuni": []
+    }
+    localData.panini.paniniRistoranti.push(restaurant)
+    return localData.panini.paniniRistoranti.length - 1
+}
+
+/* Invio dei dati al server e aggiornamento localStorage */
 
 function setLocalStorage() {
     if (!localStorage["data"]) {

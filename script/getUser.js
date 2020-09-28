@@ -35,16 +35,16 @@ function getUserInfo() {
 
 function getRestaurateurInfo() {
     var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
-    document.getElementById("nameInputText").value = actualUser.nome
-    document.getElementById("surnameInputText").value = actualUser.cognome
-    document.getElementById("inputEmail").value = actualUser.email
-    document.getElementById("addressInputText").value = actualUser.indirizzo
-    document.getElementById("municipalityInputText").value = actualUser.comune
-    document.getElementById("provinceInputText").value = actualUser.provincia
-    document.getElementById("CAPInputText").value = actualUser.CAP
-    document.getElementById("restaurNameInputText").value = actualUser.nomeRistorante
-    document.getElementById("restaurAddressInputText").value = actualUser.indirizzoRistorante
-    document.getElementById("restaurCAPInputText").value = actualUser.capRistorante
-    document.getElementById("restaurPhoneInputText").value = actualUser.numeroTel
-    document.getElementById("partitaIVAInputText").value = actualUser.partitaIVA
+    document.getElementById("restNameInputText").value = actualUser.nome
+    document.getElementById("restSurnameInputText").value = actualUser.cognome
+    document.getElementById("restInputEmail").value = actualUser.email
+    document.getElementById("restAddressInputText").value = actualUser.indirizzo
+    document.getElementById("restMunicipalityInputText").value = actualUser.comune
+    document.getElementById("restProvinceInputText").value = actualUser.provincia
+    document.getElementById("restCAPInputText").value = actualUser.CAP
+    document.getElementById("restaurantNameInputText").value = actualUser.nomeRistorante
+    document.getElementById("restaurantAddressInputText").value = actualUser.indirizzoRistorante
+    document.getElementById("restaurantCAPInputText").value = actualUser.capRistorante
+    document.getElementById("phoneInputText").value = actualUser.numeroTel
+    document.getElementById("IVAInputText").value = actualUser.partitaIVA
 }

@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <link rel="stylesheet" href="../style/restaurateurStyle.css" />
+    <script src="../script/getUser.js" type="text/javascript"></script>
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
-    </script>
+    <script src="../script/sendJson.js" type="text/javascript"></script>
     <script type="text/javascript">
         function addSubmit() {
             document.getElementById("addForm").submit()
@@ -223,7 +224,7 @@
                         get_data()
                     )) {
                         echo "<div class='alert alert-success text-center' role='alert'>"
-                            .$GLOBALS["message"].
+                            . $GLOBALS["message"] .
                             "! <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
@@ -238,6 +239,9 @@
                     }
                 }
                 ?>
+                <div id="message">
+
+                </div>
                 <div class="tab-content" id="v-pills-tabContent">
                     <!-- DATI PERSONALI -->
                     <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
@@ -250,75 +254,75 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="nameInputText">Nome</label>
-                                        <input type="text" class="form-control" name="nome" id="nameInputText" placeholder="Es. Mario" required>
+                                        <input type="text" class="form-control" name="nome" id="restNameInputText" placeholder="Es. Mario" required>
                                     </div>
                                     <div class="col-md">
                                         <label for="surnameInputText">Cognome</label>
-                                        <input type="text" class="form-control" name="cognome" id="surnameInputText" placeholder="Es. Rossi" required>
+                                        <input type="text" class="form-control" name="cognome" id="restSurnameInputText" placeholder="Es. Rossi" required>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="address">Indirizzo</label>
-                                        <input type="text" class="form-control" name="indirizzo" id="addressInputText" placeholder="Es. via Verdi 8" required>
+                                        <input type="text" class="form-control" name="indirizzo" id="restAddressInputText" placeholder="Es. via Verdi 8" required>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="municipality">Comune</label>
-                                        <input type="text" class="form-control" name="comune" id="municipalityInputText" placeholder="Es. Milano" required>
+                                        <input type="text" class="form-control" name="comune" id="restMunicipalityInputText" placeholder="Es. Milano" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="province">Provincia</label>
-                                        <input type="text" class="form-control" name="provincia" id="provinceInputText" placeholder="Es. MI" required>
+                                        <input type="text" class="form-control" name="provincia" id="restProvinceInputText" placeholder="Es. MI" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="CAP">CAP</label>
-                                        <input type="text" class="form-control" name="CAP" id="CAPInputText" placeholder="Es. 20121" required>
+                                        <input type="text" class="form-control" name="CAP" id="restCAPInputText" placeholder="Es. 20121" required>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="inputEmail">Indirizzo email</label>
-                                        <input type="email" class="form-control" name="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
+                                        <input type="email" class="form-control" name="email" id="restInputEmail" aria-describedby="emailHelp" placeholder="Es. email@dominio.com" required>
                                     </div>
                                     <div class="col-md">
                                         <label for="inputPassword">Password</label>
-                                        <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Inserisci Password" required>
+                                        <input type="password" class="form-control" name="password" id="restInputPassword" placeholder="Inserisci Password" required>
                                     </div>
                                 </div>
                             </div>
 
-                            <!--Sezione di registrazione del ristorante-->
+                            <!--Sezione di modifica dei dati del ristorante-->
                             <h4 class="page-section-heading text-center text-uppercase text-secondary">Modifica i dati del ristorante</h4>
                             <div id="registrazione_ristorante">
                                 <label for="restaurNameInputText">Nome del ristorante</label>
-                                <input type="text" class="form-control" name="nomeRistorante" id="restaurNameInputText" placeholder="Es. FastFood delle Rose" required>
+                                <input type="text" class="form-control" name="nomeRistorante" id="restaurantNameInputText" placeholder="Es. FastFood delle Rose" required>
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="restaurAddressInputText">Indirizzo del ristorante</label>
-                                        <input type="text" name="indirizzoRistorante" id="restaurAddressInputText" class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
+                                        <input type="text" name="indirizzoRistorante" id="restaurantAddressInputText" class="form-control" placeholder="Es. Via Verdi 8, Milano" required>
                                     </div>
                                     <div class="col-md">
                                         <label for="restaurCAPInputText">CAP del ristorante</label>
-                                        <input type="text" name="capRistorante" id="restaurCAPInputText" class="form-control" placeholder="Es. 20121" required>
+                                        <input type="text" name="capRistorante" id="restaurantCAPInputText" class="form-control" placeholder="Es. 20121" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="restaurPhoneInputText">Numero di telefono del ristorante</label>
-                                        <input type="text" name="numeroTel" id="restaurPhoneInputText" class="form-control" placeholder="Es. 0331123123" required>
+                                        <input type="text" name="numeroTel" id="phoneInputText" class="form-control" placeholder="Es. 0331123123" required>
                                     </div>
                                     <div class="col-md">
                                         <label for="partitaIVAInputText">Numero di partita IVA</label>
-                                        <input type="text" name="partitaIVA" id="partitaIVAInputText" class="form-control" placeholder="Es. 0764352056C" required>
+                                        <input type="text" name="partitaIVA" id="IVAInputText" class="form-control" placeholder="Es. 0764352056C" required>
                                     </div>
                                 </div>
 
                             </div>
                             <div id="deleteButton">
-                                <button type="submit" name="action" value="edit" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
-                                <button type="submit" name="action" value="delete" class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
+                                <button type="button" name="action" value="edit" onclick="editRestaurateur()" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
+                                <button type="button" name="action" value="delete" onclick="deleteRestaurateur()" class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
                             </div>
                         </form>
                     </div>
@@ -330,7 +334,7 @@
                         <form method="POST">
                             <div class="list-group" id="commonDishes">
                             </div>
-                            <button type="submit" name="action" value="common" class="btn btn-primary m-2">
+                            <button type="button" name="action" value="common" onclick="checkCommonDishes()" class="btn btn-primary m-2">
                                 <i class="fas fa-check fa-fw"></i>
                                 Conferma modifiche
                             </button>
@@ -520,7 +524,6 @@
         </div>
     </footer>
     <!-- Optional JavaScript -->
-    <script src="../script/getUser.js" type="text/javascript"></script>
     <script src="../script/getDishes.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
