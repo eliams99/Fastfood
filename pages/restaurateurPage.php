@@ -124,49 +124,8 @@
                     {
                         $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
                         $restaurants = $allDishes["paniniRistoranti"];
-                        // Aggiunta/rimozione panini comuni
-                        if ($_POST['action'] == 'common') {
-                            $restaurantFound = false;
-
-                            // Controlla se il ristorante è già nel json
-                            foreach ($restaurants as &$restaurant) {
-                                // Se il ristorante è presente nel json
-                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
-                                    $restaurantFound = true;
-                                    $commonDishes = array();
-                                    if (isset($_POST["dishCheckbox"])) {
-                                        foreach ($_POST["dishCheckbox"] as $commonDish) {
-                                            $dish = array(
-                                                "nome" => $commonDish
-                                            );
-                                            array_push($commonDishes, $dish);
-                                        }
-                                    }
-                                    $restaurant["paniniComuni"] = $commonDishes;
-                                }
-                            }
-                            // Se il ristorante non è nel json (nuovo utente che non ha mai aggiunto/rimosso panini)
-                            if (!$restaurantFound) {
-                                $newRestaurant = array(
-                                    "nome" => $_POST["restaurantName"],
-                                    "email" => $_POST["restaurantEmail"],
-                                    "paniniPersonalizzati" => array(),
-                                    "paniniComuni" => array()
-                                );
-                                $commonDishes = array();
-                                foreach ($_POST["dishCheckbox"] as $commonDish) {
-                                    $dish = array(
-                                        "nome" => $commonDish
-                                    );
-                                    array_push($commonDishes, $dish);
-                                }
-                                $newRestaurant["paniniComuni"] = $commonDishes;
-                                array_push($restaurants, $newRestaurant);
-                            }
-                            $allDishes["paniniRistoranti"] = $restaurants;
-                            $GLOBALS["message"] = "Panini comuni modificati correttamente";
-                        }  // Aggiunta panini personalizzati
-                        else if ($_POST['action'] == 'addCustom') {
+                        // Aggiunta panini personalizzati
+                        if ($_POST['action'] == 'addCustom') {
                             foreach ($restaurants as &$restaurant) {
                                 // Se il ristorante è presente nel json
                                 if ($restaurant["email"] == $_POST["restaurantEmail"]) {
@@ -468,18 +427,18 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputPassword4">Nome</label>
+                                        <label for="nameNew">Nome</label>
                                         <input type="text" class="form-control" name="name" id="nameNew" placeholder="es. Double Cheeseburger">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
-                                            <label for="inputEmail4">Tipologia</label>
+                                            <label for="typeNew">Tipologia</label>
                                             <input type="text" class="form-control" name="type" id="typeNew" placeholder="es. Hamburger">
                                         </div>
 
                                         <div class="form-group col-md-5">
-                                            <label for="inputAddress">Prezzo</label>
+                                            <label for="priceNew">Prezzo</label>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">€</div>
@@ -490,7 +449,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAddress2">Descrizione</label>
+                                        <label for="description">Descrizione</label>
                                         <textarea class="form-control" id="descriptionNew" name="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 

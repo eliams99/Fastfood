@@ -31,6 +31,12 @@ function submitRestaurateur() {
     if (validateEmail(localData.utenti, "restInputEmail")) {
         var data = getRestaurateurData()
         localData.utenti.ristoratori.push(data)
+        localData.panini.paniniRistoranti.push({
+            "nome": document.getElementById("nameInputText").value,
+            "email": document.getElementById("inputEmail").value,
+            "paniniPersonalizzati": [],
+            "paniniComuni": []
+        })
         sessionStorage.setItem("actualUser", JSON.stringify(data))
         sessionStorage.setItem("userType", "ristoratore")
         message = "Utente aggiunto correttamente"
@@ -153,34 +159,21 @@ function validateEmail(data, emailType) {      // Controlla se l'email è già p
 
 function checkCommonDishes() {
     var localData = JSON.parse(localStorage.getItem("data"))
-    var index = newRestaurant(localData)
+    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    var commonDishes = new Array()
     checkBoxes = document.getElementsByName("dishCheckbox")
-    console.log(checkBoxes.length)
-    for (var i = 0; i < checkBoxes.length; i++) {
-        console.log(checkBoxes[i] + "\n")
-        if (checkBoxes[i].checked) {
-            localData.panini.paniniRistoranti[index].paniniComuni.push({"nome" : checkBoxes[i].value})
+    for (var i = 0; i < localData.panini.paniniRistoranti.length; i++) {
+        if (localData.panini.paniniRistoranti[i].email == actualUser.email) {
+            for (var j= 0; j < checkBoxes.length; j++) {
+                if (checkBoxes[j].checked) {
+                    commonDishes.push({"nome" : checkBoxes[j].value})
+                }
+            }
+            localData.panini.paniniRistoranti[i].paniniComuni = commonDishes
         }
     }
     message = "Panini comuni aggiornati"
     updateData(localData)
-}
-
-function newRestaurant(localData) {
-    actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
-    for (var i = 0; i < localData.panini.paniniRistoranti.length; i++) {
-        if (localData.panini.paniniRistoranti[i].email == actualUser.email) {
-            return i
-        }
-    }
-    var restaurant = {
-        "nome": actualUser.nome,
-        "email": actualUser.email,
-        "paniniPersonalizzati": [],
-        "paniniComuni": []
-    }
-    localData.panini.paniniRistoranti.push(restaurant)
-    return localData.panini.paniniRistoranti.length - 1
 }
 
 /* Invio dei dati al server e aggiornamento localStorage */
