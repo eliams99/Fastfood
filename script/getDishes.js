@@ -73,7 +73,7 @@ function showCustomDishes(restaurants) {
                     '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
                     '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
                     '   </button>' +
-                    '<input type="hidden" name="deleteValue[]" value="delete"/>' +
+                    '<input type="hidden" name="deleteValue" value="delete"/>' +
                     '</li>'
             }
             document.getElementById("customizedDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
@@ -98,31 +98,35 @@ function deleteButtonClicked(button) {
         button.value = "undo"
         button.parentNode.childNodes[3].value = "undo"      // input type hidden deleteValue[]
         button.parentNode.childNodes[2].disabled = true     // button edit
-        button.parentNode.parentNode.parentNode.innerHTML += '<button type="submit" id="deleteCustomButton" name="action" value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right">' +
-            + '</button>'
+        button.parentNode.parentNode.parentNode.innerHTML += '<button type="button" id="deleteCustomButton" onclick="deleteCustomDish()"' +
+            'value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right"></button>'
         document.getElementById("deleteCustomButton").innerHTML = '<i class="fas fa-check fa-fw"></i> Conferma eliminazione'
     }
-
 }
 
 function editButtonClicked(button) {
-    document.getElementById("editForm").innerHTML += '<input type="hidden" name="dishName" value="' +
+    index = findActualUser()
+    var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti[index].paniniPersonalizzati
+    document.getElementById("editForm").innerHTML += '<input type="hidden" name="dishName" id="dishName" value="' +
         button.value + '"/>'
 
-    var restaurants = JSON.parse(sessionStorage.getItem("dishes")).paniniRistoranti
-    for (var j = 0; j < restaurants.length; j++) {
-        if (restaurants[j].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
-            var customDish = restaurants[j].paniniPersonalizzati
-            // Scorre i panini personalizzati del ristorante
-            for (var i = 0; i < customDish.length; i++) {
-                if (customDish[i].nome == button.value) {
-                    document.getElementById("modalTitle").innerText = customDish[i].nome
-                    document.getElementById("nameEdit").value = customDish[i].nome
-                    document.getElementById("typeEdit").value = customDish[i].tipologia
-                    document.getElementById("priceEdit").value = customDish[i].prezzo
-                    document.getElementById("descriptionEdit").value = customDish[i].descrizione
-                }
-            }
+    for (var i = 0; i < customDishes.length; i++) {
+        if (customDishes[i].nome == button.value) {
+            document.getElementById("modalTitle").innerText = customDishes[i].nome
+            document.getElementById("nameEdit").value = customDishes[i].nome
+            document.getElementById("typeEdit").value = customDishes[i].tipologia
+            document.getElementById("priceEdit").value = customDishes[i].prezzo
+            document.getElementById("descriptionEdit").value = customDishes[i].descrizione
+        }
+    }
+}
+
+function findActualUser() {
+    var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
+    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    for (var i = 0; i < customDishes.length; i++) {
+        if (customDishes[i].email == actualUser.email) {
+            return i
         }
     }
 }

@@ -4,7 +4,7 @@ function setActualUser() {
         if (sessionStorage.getItem("userType") == "cliente") {
             document.getElementById("accountArea").href = 'customerPage.html'
         } else {
-            document.getElementById("accountArea").href = 'restaurateurPage.php'
+            document.getElementById("accountArea").href = 'restaurateurPage.html'
         }
         document.getElementById('loginDropdown').style.display = "none"
         document.getElementById('accountDropdown').style.display = "initial"

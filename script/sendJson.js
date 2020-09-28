@@ -51,14 +51,14 @@ function editCustomer() {
     userData = getCustomerData(JSON.parse(sessionStorage.getItem("actualUser")).prefPagamento)
     localData.utenti.clienti = editUser(localData.utenti.clienti, userData)
     updateData(localData)
-    setTimeout(function() { window.location.reload() }, 2000)
+    setTimeout(function () { window.location.reload() }, 2000)
 }
 
 function editRestaurateur() {
     localData = JSON.parse(localStorage.getItem("data"))
     localData.utenti.ristoratori = editUser(localData.utenti.ristoratori, getRestaurateurData())
     updateData(localData)
-    setTimeout(function() { window.location.reload() }, 2000)
+    setTimeout(function () { window.location.reload() }, 2000)
 }
 
 function editUser(users, userData) {
@@ -77,21 +77,21 @@ function deleteCustomer() {
     localData = JSON.parse(localStorage.getItem("data"))
     localData.utenti.clienti = deleteUser(localData.utenti.clienti)
     updateData(localData)
-    setTimeout(function() { window.location.replace('index.html') }, 2000)
+    setTimeout(function () { window.location.replace('index.html') }, 2000)
 }
 
 function deleteRestaurateur() {
     localData = JSON.parse(localStorage.getItem("data"))
     localData.utenti.ristoratori = deleteUser(localData.utenti.ristoratori)
     updateData(localData)
-    setTimeout(function() { window.location.replace('index.html') }, 2000)
+    setTimeout(function () { window.location.replace('index.html') }, 2000)
 }
 
 function deleteUser(users) {
     actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     for (var i = 0; i < users.length; i++) {
         if (users[i].email == actualUser.email) {
-            users.splice(users.indexOf(users[i]), 1);
+            users.splice(users.indexOf(users[i]), 1)
             sessionStorage.removeItem("actualUser")
             sessionStorage.removeItem("userType")
             message = "Utente rimosso correttamente"
@@ -159,21 +159,82 @@ function validateEmail(data, emailType) {      // Controlla se l'email è già p
 
 function checkCommonDishes() {
     var localData = JSON.parse(localStorage.getItem("data"))
-    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    var index = findActualUser()
     var commonDishes = new Array()
     checkBoxes = document.getElementsByName("dishCheckbox")
-    for (var i = 0; i < localData.panini.paniniRistoranti.length; i++) {
-        if (localData.panini.paniniRistoranti[i].email == actualUser.email) {
-            for (var j= 0; j < checkBoxes.length; j++) {
-                if (checkBoxes[j].checked) {
-                    commonDishes.push({"nome" : checkBoxes[j].value})
-                }
-            }
-            localData.panini.paniniRistoranti[i].paniniComuni = commonDishes
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if (checkBoxes[i].checked) {
+            commonDishes.push({ "nome": checkBoxes[i].value })
         }
     }
+    localData.panini.paniniRistoranti[index].paniniComuni = commonDishes
     message = "Panini comuni aggiornati"
     updateData(localData)
+}
+
+function addCustomDish() {
+    var localData = JSON.parse(localStorage.getItem("data"))
+    var index = findActualUser()
+
+    localData.panini.paniniRistoranti[index].paniniPersonalizzati.push(
+        {
+            "nome": document.getElementById("nameNew").value,
+            "tipologia": document.getElementById("typeNew").value,
+            "prezzo": document.getElementById("priceNew").value,
+            "descrizione": document.getElementById("descriptionNew").value
+        }
+    )
+    message = document.getElementById("nameNew").value + " aggiunto"
+    updateData(localData)
+    setTimeout(function () { window.location.reload() }, 2000)
+}
+
+function editCustomDish() {
+    var localData = JSON.parse(localStorage.getItem("data"))
+    var index = findActualUser()
+    var dishName = document.getElementById("dishName").value
+
+    for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
+        if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
+            localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = {
+                "nome": document.getElementById("nameEdit").value,
+                "tipologia": document.getElementById("typeEdit").value,
+                "prezzo": document.getElementById("priceEdit").value,
+                "descrizione": document.getElementById("descriptionEdit").value
+            }
+            message = document.getElementById("nameEdit").value + " modificato"
+            updateData(localData)
+            setTimeout(function () { window.location.reload() }, 2000)
+            return
+        }
+    }
+}
+
+function deleteCustomDish() {
+    var localData = JSON.parse(localStorage.getItem("data"))
+    var buttons = document.getElementsByName("deleteValue")
+    var index = findActualUser()
+
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].value == "undo") {
+            localData.panini.paniniRistoranti[index].paniniPersonalizzati.splice(i, 1)
+        }
+    }
+    message = "Panini personalizzati eliminati"
+    updateData(localData)
+    setTimeout(function () { window.location.reload() }, 2000)
+}
+
+/* Altro */
+
+function findActualUser() {
+    var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
+    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    for (var i = 0; i < customDishes.length; i++) {
+        if (customDishes[i].email == actualUser.email) {
+            return i
+        }
+    }
 }
 
 /* Invio dei dati al server e aggiornamento localStorage */

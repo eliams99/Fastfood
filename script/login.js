@@ -6,7 +6,7 @@ function validate() {
     } else {
         console.log("QUI")
         if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.ristoratori, "ristoratore")) {
-            document.getElementById("accountArea").href = 'restaurateurPage.php'
+            document.getElementById("accountArea").href = 'restaurateurPage.html'
         } else {
             uncorrectCredentials()
         }

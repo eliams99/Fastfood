@@ -16,15 +16,6 @@
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
     <script src="../script/sendJson.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function addSubmit() {
-            document.getElementById("addForm").submit()
-        }
-
-        function editSubmit() {
-            document.getElementById("editForm").submit()
-        }
-    </script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -113,91 +104,6 @@
                 </div>
             </div>
             <div class="col-9">
-
-                <!-- PHP AGGIUNTA/RIMOZIONE/MODIFICA PANINI -->
-                <?php
-
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $message = "";
-
-                    function get_data()
-                    {
-                        $allDishes = json_decode(file_get_contents("../../FastFood/Panini.json"), true);
-                        $restaurants = $allDishes["paniniRistoranti"];
-                        // Aggiunta panini personalizzati
-                        if ($_POST['action'] == 'addCustom') {
-                            foreach ($restaurants as &$restaurant) {
-                                // Se il ristorante è presente nel json
-                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
-                                    $datae = array(
-                                        'nome' => $_POST['name'],
-                                        'tipologia' => $_POST['type'],
-                                        'prezzo' => $_POST['price'],
-                                        'descrizione' => $_POST['description']
-                                    );
-                                    array_push($restaurant["paniniPersonalizzati"], $datae);
-                                    $allDishes["paniniRistoranti"] = $restaurants;
-                                }
-                            }
-                            $GLOBALS["message"] = "Panino personalizzato aggiunto correttamente";
-                        }  // Modifica panini personalizzati
-                        else if ($_POST['action'] == 'editCustom') {
-                            foreach ($restaurants as &$restaurant) {
-                                // Se il ristorante è presente nel json
-                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
-                                    // Scorre i panini personalizzati
-                                    foreach ($restaurant["paniniPersonalizzati"] as &$dish) {
-                                        if ($dish['nome'] == $_POST['dishName']) {
-                                            $dish = array(
-                                                'nome' => $_POST['nameEdit'],
-                                                'tipologia' => $_POST['typeEdit'],
-                                                'prezzo' => $_POST['priceEdit'],
-                                                'descrizione' => $_POST['descriptionEdit']
-                                            );
-                                            $allDishes["paniniRistoranti"] = $restaurants;
-                                        }
-                                    }
-                                }
-                            }
-                            $GLOBALS["message"] = "Panino personalizzato modificato correttamente";
-                        } // Eliminazione panini personalizzati
-                        else if ($_POST['action'] == 'deleteCustom') {
-                            foreach ($restaurants as &$restaurant) {
-                                // Se il ristorante è presente nel json
-                                if ($restaurant["email"] == $_POST["restaurantEmail"]) {
-                                    // Scorre i panini personalizzati
-                                    for ($i = 0; $i < count($restaurant["paniniPersonalizzati"]); $i++) {
-                                        if ($_POST['deleteValue'][$i] == "undo") {
-                                            array_splice($restaurant["paniniPersonalizzati"], $i, 1);
-                                        }
-                                    }
-                                }
-                            }
-                            $allDishes["paniniRistoranti"] = $restaurants;
-                            $GLOBALS["message"] = "Panino personalizzato eliminato correttamente";
-                        }
-                        return json_encode($allDishes);
-                    }
-                    if (file_put_contents(
-                        "../../FastFood/Panini.json",
-                        get_data()
-                    )) {
-                        echo "<div class='alert alert-success text-center' role='alert'>"
-                            . $GLOBALS["message"] .
-                            "! <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
-                            </div>";
-                    } else {
-                        echo "<div class='alert alert-danger text-center' role='alert'>
-                            C'è stato un errore
-                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
-                            </div>";
-                    }
-                }
-                ?>
                 <div id="message">
 
                 </div>
@@ -381,7 +287,7 @@
 
                                     <input type="hidden" name="action" value="editCustom">
 
-                                    <button type="submit" class="btn btn-primary" onclick="editSubmit()" data-dismiss="modal">
+                                    <button type="button" class="btn btn-primary" onclick="editCustomDish()" data-dismiss="modal">
                                         <i class="fas fa-check fa-fw"></i>
                                         Conferma modifiche
                                     </button>
@@ -455,7 +361,7 @@
 
                                     <input type="hidden" name="action" value="addCustom">
 
-                                    <button type="submit" class="btn btn-primary" onclick="addSubmit()" data-dismiss="modal">
+                                    <button type="button" class="btn btn-primary" onclick="addCustomDish()" data-dismiss="modal">
                                         <i class="fas fa-check fa-fw"></i>
                                         Aggiungi piatto
                                     </button>
