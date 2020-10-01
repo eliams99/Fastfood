@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <script src="../script/sendJson.js" type="text/javascript"></script>
     <script src="../script/navbar.js" type="text/javascript"></script>
@@ -20,21 +21,25 @@
 <body onload="nav(); setLocalStorage(); setActualUser();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
-            <a class="navbar-brand align-middle" href="#"><img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2" alt=""> FastFood </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <a class="navbar-brand align-middle" href="#"><img src="../img/logo.png" width="45" height="45"
+                    class="d-inline-block align-middle mr-2" alt=""> FastFood </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href=""><i class="fas fa-home mr-2"></i>Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href=""><i class="fas fa-home mr-2"></i>Home <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i> Accedi
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user mr-2"></i> Accedi
                         </a>
                         <!-- Login -->
                         <div class="dropdown-menu">
@@ -44,18 +49,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password"
+                                            placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
@@ -202,7 +209,8 @@
     <!-- Portfolio Modals -->
 
     <!-- Portfolio Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog"
+        aria-labelledby="portfolioModal1Label" aria-hidden="true">
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content ">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -230,8 +238,8 @@
                                 <p class="mb-5">Il nostro Hot Dog, come non lo troverai da nessun'altra parte.</p>
                                 <p class="priceP">Prezzo: <span class="price">€4.99</span></p>
                                 <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                  <i class="fas fa-shopping-cart fa-fw"></i>
-                                  Aggiungi al carrello
+                                    <i class="fas fa-shopping-cart fa-fw"></i>
+                                    Aggiungi al carrello
                                 </button>
                             </div>
                         </div>
@@ -242,20 +250,22 @@
     </div>
 
     <!-- Portfolio Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog"
+        aria-labelledby="portfolioModal2Label" aria-hidden="true">
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content ">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true ">
-          <i class="fas fa-times float-right m-3"></i>
-        </span>
-      </button>
+                    <span aria-hidden="true ">
+                        <i class="fas fa-times float-right m-3"></i>
+                    </span>
+                </button>
                 <div class="modal-body text-center">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Chicken Superior</h2>
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Chicken Superior
+                                </h2>
                                 <!-- Icon Divider -->
                                 <div class="divider-custom d-flex justify-content-center">
                                     <hr class="divider-custom-line my-auto flex-grow-0">
@@ -270,8 +280,8 @@
                                 <p class="mb-5">Pollo croccante, adatto a tutti i palati.</p>
                                 <p class="priceP">Prezzo: <span class="price">€4.99</span></p>
                                 <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                  <i class="fas fa-shopping-cart fa-fw"></i>
-                                  Aggiungi al carrello
+                                    <i class="fas fa-shopping-cart fa-fw"></i>
+                                    Aggiungi al carrello
                                 </button>
                             </div>
                         </div>
@@ -282,14 +292,15 @@
     </div>
 
     <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog"
+        aria-labelledby="portfolioModal3Label" aria-hidden="true">
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content ">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">
-          <i class="fas fa-times float-right m-3"></i>
-        </span>
-      </button>
+                    <span aria-hidden="true">
+                        <i class="fas fa-times float-right m-3"></i>
+                    </span>
+                </button>
                 <div class="modal-body text-center">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -310,8 +321,8 @@
                                 <p class="mb-5">Doppio Formaggio, doppia carne, doppio piacere.</p>
                                 <p class="priceP">Prezzo: <span class="price">€6.99</span></p>
                                 <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                  <i class="fas fa-shopping-cart fa-fw"></i>
-                                  Aggiungi al carrello
+                                    <i class="fas fa-shopping-cart fa-fw"></i>
+                                    Aggiungi al carrello
                                 </button>
                             </div>
                         </div>
@@ -337,9 +348,15 @@
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
 </body>
 
 </html>

@@ -221,6 +221,11 @@ nav.shrink .navbar-brand {
     height: 280px;
 }
 
+
+#menu {
+    border-radius: 0 0 30px 30px;
+}
+
 /* Footer */
 
 footer {
