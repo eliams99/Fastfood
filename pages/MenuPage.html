@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/menuStyle.css" />
     <script src="../script/navbar.js" type="text/javascript"></script>
@@ -21,21 +22,25 @@
 <body onload="nav(); setActualUser(); getDishes();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
-            <a class="navbar-brand align-middle" href="index.html"><img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2" alt=""> FastFood </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <a class="navbar-brand align-middle" href="index.html"><img src="../img/logo.png" width="45" height="45"
+                    class="d-inline-block align-middle mr-2" alt=""> FastFood </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href=""><i class="fas fa-home mr-2"></i>Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href=""><i class="fas fa-home mr-2"></i>Home <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
                         </a>
                         <!-- Login -->
@@ -46,18 +51,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password"
+                                            placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                Ricordami
-                              </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
@@ -67,8 +74,8 @@
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
-                            <h3 id="displayName"> </h3>
-                        </span>
+                                    <h3 id="displayName"> </h3>
+                                </span>
                                 <a class="dropdown-item" id="accountArea">Accedi alla tua area riservata</a>
                                 <a class="dropdown-item" onclick="logout()">Logout</a>
                             </div>
@@ -95,25 +102,32 @@
         <div class="row">
             <div class="col-2 justify-content-center">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-panini-tab" data-toggle="pill" href="#v-pills-panini" role="tab" aria-controls="v-pills-panini" aria-selected="true">Panini</a>
-                    <a class="nav-link" id="v-pills-snack-tab" data-toggle="pill" href="#v-pills-snack" role="tab" aria-controls="v-pills-snack" aria-selected="false">Snack</a>
-                    <a class="nav-link" id="v-pills-dessert-tab" data-toggle="pill" href="#v-pills-dessert" role="tab" aria-controls="v-pills-dessert" aria-selected="false">Dessert</a>
-                    <a class="nav-link" id="v-pills-drinks-tab" data-toggle="pill" href="#v-pills-drinks" role="tab" aria-controls="v-pills-drinks" aria-selected="false">Bevande</a>
-                    <a class="nav-link" id="v-pills-special-tab" data-toggle="pill" href="#v-pills-special" role="tab" aria-controls="v-pills-special" aria-selected="false">Panini speciali</a>
+                    <a class="nav-link active" id="v-pills-panini-tab" data-toggle="pill" href="#v-pills-panini"
+                        role="tab" aria-controls="v-pills-panini" aria-selected="true">Panini</a>
+                    <a class="nav-link" id="v-pills-snack-tab" data-toggle="pill" href="#v-pills-snack" role="tab"
+                        aria-controls="v-pills-snack" aria-selected="false">Snack</a>
+                    <a class="nav-link" id="v-pills-dessert-tab" data-toggle="pill" href="#v-pills-dessert" role="tab"
+                        aria-controls="v-pills-dessert" aria-selected="false">Dessert</a>
+                    <a class="nav-link" id="v-pills-drinks-tab" data-toggle="pill" href="#v-pills-drinks" role="tab"
+                        aria-controls="v-pills-drinks" aria-selected="false">Bevande</a>
+                    <a class="nav-link" id="v-pills-special-tab" data-toggle="pill" href="#v-pills-special" role="tab"
+                        aria-controls="v-pills-special" aria-selected="false">Speciali</a>
                 </div>
             </div>
             <div class="col-10">
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-panini" role="tabpanel" aria-labelledby="v-pills-panini-tab">
-                        <div class="row no-gutters justify-content-center" id="Panini">    
+                    <div class="tab-pane fade show active" id="v-pills-panini" role="tabpanel"
+                        aria-labelledby="v-pills-panini-tab">
+                        <div class="row no-gutters justify-content-center" id="Panini">
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-snack" role="tabpanel" aria-labelledby="v-pills-snack-tab">
                         <div class="row no-gutters justify-content-center" id="Snack">
                         </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="v-pills-dessert" role="tabpanel" aria-labelledby="v-pills-dessert-tab">
+
+                    <div class="tab-pane fade" id="v-pills-dessert" role="tabpanel"
+                        aria-labelledby="v-pills-dessert-tab">
                         <div class="row no-gutters justify-content-center" id="Dessert">
                         </div>
                     </div>
@@ -121,9 +135,10 @@
                         <div class="row no-gutters justify-content-center" id="Bevande">
                         </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="v-pills-special" role="tabpanel" aria-labelledby="v-pills-special-tab">
-                        <select name="SelectRestaurant" id="restaurantSelect" onchange="restaurantSelected(this)" >
+
+                    <div class="tab-pane fade" id="v-pills-special" role="tabpanel"
+                        aria-labelledby="v-pills-special-tab">
+                        <select class="form-control" name="SelectRestaurant" id="restaurantSelect" onchange="restaurantSelected(this)">
                             <option name="preferenzeCibo" value="" disabled selected>Scegli il ristorante</option>
                         </select>
 
@@ -135,42 +150,38 @@
         </div>
     </section>
 
-    <!-- Modals -->
-
     <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal"
+        aria-hidden="true">
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
-                      <i class="fas fa-times float-right m-3"></i>
+                        <i class="fas fa-times float-right m-3"></i>
                     </span>
                 </button>
                 <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalName">Bbq Burger</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom d-flex justify-content-center">
-                                    <hr class="divider-custom-line my-auto flex-grow-0">
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <hr class="divider-custom-line my-auto flex-grow-0">
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="../img/bbqburger.png" id="modalImg" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5" id="modalDescription">Il gusto del bacon e quello della carne alla griglia si sposano perfettamente con quello della salsa BBQ!</p>
-                                <p class="priceP">Prezzo: <span class="price" id="modalPrice">€ 5.99</span></p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                  <i class="fas fa-shopping-cart fa-fw"></i>
-                                  Aggiungi al carrello
-                                </button>
+                    <div class="container justify-content-center">
+                        <!-- Portfolio Modal - Title -->
+                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalName">Bbq Burger
+                        </h2>
+                        <!-- Icon Divider -->
+                        <div class="divider-custom d-flex justify-content-center">
+                            <hr class="divider-custom-line my-auto flex-grow-0">
+                            <div class="divider-custom-icon">
+                                <i class="fas fa-star"></i>
                             </div>
+                            <hr class="divider-custom-line my-auto flex-grow-0">
                         </div>
+                        <!-- Portfolio Modal - Image -->
+                        <img class="img-fluid rounded mb-5" src="" id="modalImg" alt="">
+                        <!-- Portfolio Modal - Text -->
+                        <p class="mb-5" id="modalDescription"></p>
+                        <p class="priceP">Prezzo: <span class="price" id="modalPrice">€ 5.99</span></p>
+                        <button class="btn btn-primary" href="#" data-dismiss="modal">
+                            <i class="fas fa-shopping-cart fa-fw"></i>
+                            Aggiungi al carrello
+                        </button>
                     </div>
                 </div>
             </div>
@@ -193,9 +204,15 @@
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
 </body>
 
 </html>
