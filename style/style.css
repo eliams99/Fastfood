@@ -274,3 +274,13 @@ footer {
     height: 5em;
     width: 5em;
 }
+
+/* Modal */
+
+.modal-dialog {
+    border-radius: 30px;
+}
+
+#quantityInput {
+    width: 50px;
+}

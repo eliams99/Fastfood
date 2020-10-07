@@ -16,6 +16,7 @@
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
     <script src="../script/getUser.js" type="text/javascript"></script>
+    <script src="../script/purchaseScript.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
@@ -199,8 +200,7 @@
                 <div class="modal-body text-center">
                     <div class="container justify-content-center">
                         <!-- Portfolio Modal - Title -->
-                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalName">Bbq Burger
-                        </h2>
+                        <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="modalName"></h2>
                         <!-- Icon Divider -->
                         <div class="divider-custom d-flex justify-content-center">
                             <hr class="divider-custom-line my-auto flex-grow-0">
@@ -213,8 +213,14 @@
                         <img class="img-fluid rounded mb-5" src="" id="modalImg" alt="">
                         <!-- Portfolio Modal - Text -->
                         <p class="mb-5" id="modalDescription"></p>
-                        <p class="priceP">Prezzo: <span class="price" id="modalPrice">€ 5.99</span></p>
-                        <button class="btn btn-primary" href="#" data-dismiss="modal">
+                        <p class="priceP">Prezzo: <span class="price" id="modalPrice"></span></p>
+                        <p>
+                            <label for="quantityInput" class="input-number-label">Quantità:</label>
+                            <span class="input-number input-number-adaptive">
+                                <input type="number" id="quantityInput" name="quantityInput" value="1" step="1">
+                            </span>
+                        </p>
+                        <button onclick="addToCart()" class="btn btn-primary" href="#" data-dismiss="modal">
                             <i class="fas fa-shopping-cart fa-fw"></i>
                             Aggiungi al carrello
                         </button>

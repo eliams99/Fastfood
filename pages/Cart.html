@@ -14,11 +14,12 @@
     <script src="../script/navbar.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
     <script src="../script/getUser.js" type="text/javascript"></script>
+    <script src="../script/purchaseScript.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body onload="nav(); setActualUser();">
+<body onload="nav(); setActualUser(); showCartItems();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -110,20 +111,6 @@
                         <th>Prezzo</th>
                         <th>Quantità</th>
                         <th>Totale</th>
-                    </tr>
-                    <tr>
-                        <td><img class="cartImg" src="../img/bbqburger.png" alt=""></td>
-                        <td>Bbq Burger</td>
-                        <td>5.99</td>
-                        <td>1</td>
-                        <td>5.99</td>
-                    </tr>
-                    <tr>
-                        <td><img class="cartImg" src="../img/chicken.png" alt=""></td>
-                        <td>Chicken Burger</td>
-                        <td>4.99</td>
-                        <td>1</td>
-                        <td>4.99</td>
                     </tr>
                 </table>
             </div>

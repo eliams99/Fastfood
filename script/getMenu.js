@@ -65,6 +65,7 @@ function modalClicked(dish) {
             document.getElementById("modalDescription").innerHTML = commonDishes[i].descrizione
             document.getElementById("modalPrice").innerHTML = "€ " + commonDishes[i].prezzo
             document.getElementById("modalImg").src = "../img/" + commonDishes[i].nome.split(' ').join('') +".png"
+            document.getElementById("quantityInput").value = "1"
         }
     }
     var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
@@ -77,6 +78,7 @@ function modalClicked(dish) {
                     document.getElementById("modalDescription").innerHTML = customDishes[i].paniniPersonalizzati[j].descrizione
                     document.getElementById("modalPrice").innerHTML = "€ " + customDishes[i].paniniPersonalizzati[j].prezzo
                     document.getElementById("modalImg").src = "../img/" + customDishes[i].paniniPersonalizzati[j].nome.split(' ').join('') +".png"
+                    document.getElementById("quantityInput").value = "1"
                 }
             }
         }
