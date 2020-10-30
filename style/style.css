@@ -134,12 +134,43 @@ nav.shrink .navbar-brand {
     font-size: 1.7em;
 }
 
+.dropdown-menu {
+    backdrop-filter: blur(15px) !important;
+    background-color: rgba(66, 66, 66, 0.5) !important;
+    color: white;
+}
+
+.dropdown-menu a {
+    color: white;
+}
+
 #accountDanger {
     display: none;
 }
 
 #accountDropdown {
     display: none;
+}
+
+
+#cartA {
+    position: relative;
+}
+
+#dot {
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+    height: 20px;
+    width: 20px;
+    background-color: rgb(216, 140, 0);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    visibility: hidden;
 }
 
 
@@ -252,7 +283,11 @@ footer {
     width: 100%;
 }
 
-#cartTable td:nth-child(2) {
+#noItemsText {
+    margin: auto;
+}
+
+#cartTable td:nth-child(2):not(.total) {
     text-align: left;
 }
 
@@ -262,7 +297,7 @@ footer {
     text-align: center;
 }
 
-#cartTable th {
+#cartTable th, .total {
     padding: 10px 20px;
     background: rgb(216, 140, 0);
     color: white;
@@ -273,6 +308,11 @@ footer {
 .cartImg {
     height: 5em;
     width: 5em;
+}
+
+.cartImg {
+    height: 5em;
+    width: auto;
 }
 
 /* Modal */

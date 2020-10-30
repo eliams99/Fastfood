@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <script src="../script/sendJson.js" type="text/javascript"></script>
-    <script src="../script/navbar.js" type="text/javascript"></script>
+    <script src="../script/main.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="nav()">
+<body onload="nav(); showDot();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -34,7 +34,11 @@
                         <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>Carrello</a>
+                        <a class="nav-link" id="cartA" href="cart.html">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                            <span id="dot">1</span>
+                            Carrello
+                        </a>
                     </li>
                 </ul>
             </div>
