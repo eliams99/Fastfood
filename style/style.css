@@ -173,6 +173,10 @@ nav.shrink .navbar-brand {
     visibility: hidden;
 }
 
+#accountDropdown > * {
+    color: white;
+}
+
 
 /* Div Masthead (Ordina ora!) */
 
@@ -213,7 +217,8 @@ nav.shrink .navbar-brand {
 #suggested,
 #menu,
 #form,
-#carrello {
+#carrello,
+#purchase {
     margin: auto;
     padding: 2em;
     width: 85%;
@@ -235,9 +240,13 @@ nav.shrink .navbar-brand {
 }
 
 #suggested,
-#form,
-#carrello {
+#form {
     border-radius: 30px 30px 0 0;
+}
+
+#carrello,
+#purchase {
+    border-radius: 30px;
 }
 
 .price {
@@ -265,7 +274,7 @@ footer {
 
 #registrationButton,
 #deleteButton,
-#bottone_acquista {
+#purchaseButton {
     margin-top: 2rem;
     text-align: center;
 }
@@ -305,15 +314,28 @@ footer {
     text-align: center;
 }
 
-.cartImg {
-    height: 5em;
-    width: 5em;
+#cartTable:first-child {
+    display: none;
+}
+
+#cartTable a {
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal;
 }
 
 .cartImg {
     height: 5em;
     width: auto;
 }
+
+#accountWarning {
+    display: none;
+    margin: auto;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
 
 /* Modal */
 
@@ -323,4 +345,20 @@ footer {
 
 #quantityInput {
     width: 50px;
+}
+
+/* Purchase */
+.custom-control-input:checked~.custom-control-label.orange::before {
+  background-color: rgb(216, 140, 0);
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color:  rgb(216, 140, 0);
+}
+
+#operationCompletedDiv {
+    display: none;
+    text-align: center;
+    margin-bottom: 2em;
 }

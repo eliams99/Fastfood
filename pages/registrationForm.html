@@ -132,12 +132,18 @@
                                 </div>
                             </div>
 
-                            <label for="preferenzePagamento">Come preferisci pagare?</label>
-                            <div class="input-group-prepend" id="preferenzePagamento">
-                                <section><input type="radio" name="preferenzePagamento" value="carta" required checked>
-                                    <label for="preferenzePagamento">Carta di credito</label></section>
-                                <section><input type="radio" class="ml-3" name="preferenzePagamento" value="contanti"
-                                        required> <label for="preferenzePagamento">Contanti</label></section>
+                            <div class="d-block" id="preferenzePagamento">
+                                <label for="preferenzePagamento">Come preferisci pagare?</label>
+                                <div class="custom-control custom-radio">
+                                    <input id="credit" name="preferenzePagamento" type="radio" class="custom-control-input" value="carta"
+                                        checked required>
+                                    <label class="custom-control-label orange" for="credit">Carta di credito</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="debit" name="preferenzePagamento" type="radio" class="custom-control-input" value="contanti"
+                                        required>
+                                    <label class="custom-control-label orange" for="debit">Contanti</label>
+                                </div>
                             </div>
                         </div>
 

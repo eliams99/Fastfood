@@ -1,7 +1,7 @@
 var sourceCoordinates
 var destCoordinates
 
-findSourceCoordinates("Via Celoria 18, Milano, 20133") //indirizzo del ristorante 
+findSourceCoordinates("Via Celoria 18, Milano, 20133")      //indirizzo del ristorante 
 var actualUser = JSON.parse(sessionStorage.getItem('actualUser'))
 address = actualUser.indirizzo + ", " + actualUser.comune + ", " + actualUser.CAP
 findDestCoordinates(address)
@@ -45,10 +45,9 @@ function calculateDistance() {
         if (this.readyState === 4 || this.status === 200) {
             distance = JSON.parse(this.responseText).routes[0].distance
             duration = JSON.parse(this.responseText).routes[0].duration
-            document.getElementById("deliveryCost").innerHTML = Math.round((distance / 1000 * 1.5 )/16) + " Euro"
-            document.getElementById("deliveryDuration").innerHTML = (Math.round(duration / 60) + 10) + " minuti"
+            document.getElementById("deliveryCost").innerHTML = "€ " + Math.round((distance / 1000 * 1.5 ) / 16)
+            document.getElementById("deliveryDuration").innerHTML = "Il tuo ordine arriverà tra " + (Math.round(duration / 60) + 10) + " minuti"
         };
     }
     xhr.send()
 }
-

@@ -2,33 +2,36 @@
 <html lang="en">
 
 <head>
-    <title>FastFood - Carrello</title>
+    <title>FastFood - Pagamento</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationstyle.css" />
     <script src="../script/main.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
     <script src="../script/getUser.js" type="text/javascript"></script>
+    <script src="../script/purchaseScript.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet'/>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 
-<body onload="nav(); setActualUser(); showDot();">
+<body onload="nav(); setActualUser(); showDot(); loadPurchaseData();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -43,7 +46,8 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
                         </a>
                         <!-- Login -->
@@ -54,18 +58,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password"
+                                            placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">
                                             <label class="form-check-label" for="dropdownCheck">
-                                        Ricordami
-                                      </label>
+                                                Ricordami
+                                            </label>
                                         </div>
                                     </div>
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
@@ -92,19 +98,95 @@
         <div class="container d-flex align-items-center flex-column">
 
             <!-- Masthead Heading -->
-            <a href="#carrello" class="masthead-heading text-uppercase">
-                <h1>Il tuo carrello</h1>
+            <a href="#purchase" class="masthead-heading text-uppercase">
+                <h1 id="title">Pagamento</h1>
             </a>
         </div>
     </header>
 
     <!-- Sezione visualizzazione prodotti nel carrello-->
-    <section class="page-section bg-light portfolio" id="carrello">
-    <div>
-        <p id = "coordinate"></p>
-        <p id = "deliveryCost"></p>
-        <p id = "deliveryDuration"></p>
-    </div>
+    <section class="page-section bg-light portfolio" id="purchase">
+        <div class="container" id="purchaseDiv">
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Il tuo carrello</span>
+                        <span class="badge badge-secondary badge-pill" id="totalCartQuantity"></span>
+                    </h4>
+                    <ul class="list-group mb-3" id="cartPurchase">
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div>
+                                <h6 class="my-0">Costi di consegna</h6>
+                            </div>
+                            <span class="text-muted" id="deliveryCost"></span>
+                        </li>  
+                    </ul>
+                </div>
+                <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3">Riepilogo dati</h4>
+                    <form class="needs-validation" novalidate>
+                        <h4 class="mb-3">Pagamento</h4>
+
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" onchange="paymentMethodChanged(this)"
+                                    checked required>
+                                <label class="custom-control-label orange" for="credit">Carta di credito</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="cash" name="paymentMethod" type="radio" class="custom-control-input" onchange="paymentMethodChanged(this)"
+                                    required>
+                                <label class="custom-control-label orange" for="cash">Contanti</label>
+                            </div>
+                        </div>
+                        <div id="creditCardPaymentDiv">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-name">Nome sulla carta</label>
+                                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                    <small class="text-muted">Nome completo sulla carta</small>
+                                    <div class="invalid-feedback">
+                                        Il nome sulla carta è richiesto
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-number">Numero carta di credito</label>
+                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Il numero della carta di credito è richiesto
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">Data di scadenza</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        La data di scadenza è richiesta
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Il codice di sicurezza è richiesto
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-block" type="button" onclick="orerClicked()">Paga</button>
+                        </div>
+                        <div id="cashPaymentDiv">
+                            <p>Pagherai al momento della consegna</p>
+                            <button class="btn btn-primary btn-lg btn-block" type="button" onclick="orerClicked()">Ordina</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="operationCompletedDiv">
+            <h2 class="mb-3">Grazie per aver ordinato!</h4>
+            <h4 id="deliveryDuration"></h3>
+        </div>
     </section>
 
     <footer class="footer text-center text-light">
@@ -124,9 +206,15 @@
     <!-- Optional JavaScript -->
     <script src="../script/mapsRequest.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
 </body>
 
 </html>

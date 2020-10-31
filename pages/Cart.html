@@ -44,13 +44,13 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="accountDropdownLi">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
                         </a>
                         <!-- Login -->
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="accountDropdowDiv">
                             <div id="loginDropdown">
                                 <form class="px-4 py-3">
                                     <div class="alert alert-danger" role="alert" id="accountDanger">
@@ -105,9 +105,12 @@
 
     <!-- Sezione visualizzazione prodotti nel carrello-->
     <section class="page-section bg-light portfolio" id="carrello">
-        <div class="container">
+        <div class="alert alert-warning" role="alert" id="accountWarning"> </div>
+        <div class="container" id="cartDiv">
+            <h2 class="page-section-heading text-center text-secondary" id="noItemsText">
+                Aggiungi dei piatti al carrello per visualizzarli qui!
+            </h2>
             <div class="row">
-                <!--Write Here-->
                 <table class="table" id="cartTable">
                     <tr>
                         <th colspan="2">Prodotto</th>
@@ -116,13 +119,9 @@
                         <th>Totale</th>
                     </tr>
                 </table>
-                <h2 class="page-section-heading text-center text-secondary" id="noItemsText">
-                    Aggiungi dei piatti al carrello per visualizzarli qui!
-                </h2>
             </div>
-            <div id="bottone_acquista">
-                <button type="button" onclick="window.location.href='purchasePage.html'"
-                    class="btn btn-primary mb-2">Acquista</button>
+            <div id="purchaseButton">
+                <button type="button" onclick="purchaseClick()" class="btn btn-primary mb-2">Acquista</button>
             </div>
         </div>
     </section>
