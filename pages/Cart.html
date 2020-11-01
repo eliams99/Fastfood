@@ -20,7 +20,7 @@
 
 </head>
 
-<body onload="nav(); setActualUser(); showCartItems(); showDot();">
+<body onload="nav(); setActualUser(); loadCartItems(); showDot();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -110,6 +110,10 @@
             <h2 class="page-section-heading text-center text-secondary" id="noItemsText">
                 Aggiungi dei piatti al carrello per visualizzarli qui!
             </h2>
+            <select class="form-control" name="SelectRestaurant" id="restaurantSelect"
+                onchange="restaurantSelected(this)">
+                <option name="preferenzeCibo" value="" disabled selected>Scegli il ristorante</option>
+            </select>
             <div class="row">
                 <table class="table" id="cartTable">
                     <tr>

@@ -114,78 +114,118 @@
                         <span class="badge badge-secondary badge-pill" id="totalCartQuantity"></span>
                     </h4>
                     <ul class="list-group mb-3" id="cartPurchase">
-                        <li class="list-group-item d-flex justify-content-between bg-light">
+                        <li class="list-group-item d-flex justify-content-between bg-light" id="deliveryCostLi">
                             <div>
                                 <h6 class="my-0">Costi di consegna</h6>
                             </div>
                             <span class="text-muted" id="deliveryCost"></span>
-                        </li>  
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Riepilogo dati</h4>
-                    <form class="needs-validation" novalidate>
-                        <h4 class="mb-3">Pagamento</h4>
 
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" onchange="paymentMethodChanged(this)"
-                                    checked required>
-                                <label class="custom-control-label orange" for="credit">Carta di credito</label>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex">
+                            <small class="text-muted">Nome</small>
+                            <h6 class="my-0 mx-2" id="name"></h6>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <small class="text-muted">Cognome</small>
+                            <h6 class="my-0 mx-2" id="surname"></h6>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <small class="text-muted">Email</small>
+                            <h6 class="my-0 mx-2" id="emailSum"></h6>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <small class="text-muted">Indirizzo</small>
+                            <h6 class="my-0 mx-2" id="address"></h6>
+                        </li>
+                    </ul>
+
+                    <h4 class="mb-3">Pagamento</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
+                                onchange="paymentMethodChanged(this)" checked required>
+                            <label class="custom-control-label orange" for="credit">Carta di credito</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="cash" name="paymentMethod" type="radio" class="custom-control-input"
+                                onchange="paymentMethodChanged(this)" required>
+                            <label class="custom-control-label orange" for="cash">Contanti</label>
+                        </div>
+                    </div>
+                    <div id="creditCardPaymentDiv">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">Nome sulla carta</label>
+                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Il nome sulla carta è richiesto
+                                </div>
                             </div>
-                            <div class="custom-control custom-radio">
-                                <input id="cash" name="paymentMethod" type="radio" class="custom-control-input" onchange="paymentMethodChanged(this)"
-                                    required>
-                                <label class="custom-control-label orange" for="cash">Contanti</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">Numero carta di credito</label>
+                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Il numero della carta di credito è richiesto
+                                </div>
                             </div>
                         </div>
-                        <div id="creditCardPaymentDiv">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Nome sulla carta</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                    <small class="text-muted">Nome completo sulla carta</small>
-                                    <div class="invalid-feedback">
-                                        Il nome sulla carta è richiesto
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Numero carta di credito</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Il numero della carta di credito è richiesto
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">Data di scadenza</label>
+                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    La data di scadenza è richiesta
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Data di scadenza</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        La data di scadenza è richiesta
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback">
-                                        Il codice di sicurezza è richiesto
-                                    </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">CVV</label>
+                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Il codice di sicurezza è richiesto
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-lg btn-block" type="button" onclick="orerClicked()">Paga</button>
                         </div>
-                        <div id="cashPaymentDiv">
-                            <p>Pagherai al momento della consegna</p>
-                            <button class="btn btn-primary btn-lg btn-block" type="button" onclick="orerClicked()">Ordina</button>
+                    </div>
+
+                    <h4 class="mb-3">Ritiro e consegna</h4>
+
+                    <div class="alert alert-warning" role="alert" id="deliveryAlert">
+                        La consegna a domicilio non è possibile perché il ristorante è più lontano di 50 km
+                    </div>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="delivery" name="delivery" type="radio" class="custom-control-input"
+                                onchange="deliveryMethodChanged(this)" checked required>
+                            <label class="custom-control-label orange" for="delivery">Consegna a domicilio</label>
                         </div>
-                    </form>
+                        <div class="custom-control custom-radio">
+                            <input id="collect" name="delivery" type="radio" class="custom-control-input"
+                                onchange="deliveryMethodChanged(this)" required>
+                            <label class="custom-control-label orange" for="collect">Ritiro al ristorante</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg btn-block" type="button"
+                        onclick="orderClicked()">Paga</button>
+                    <div id="cashPaymentDiv">
+                        <p>Pagherai al momento della consegna</p>
+                        <button class="btn btn-primary btn-lg btn-block" type="button"
+                            onclick="orderClicked()">Ordina</button>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="operationCompletedDiv">
             <h2 class="mb-3">Grazie per aver ordinato!</h4>
-            <h4 id="deliveryDuration"></h3>
+                <h4 id="deliveryDuration">
+                </h4>
         </div>
     </section>
 

@@ -314,7 +314,7 @@ footer {
     text-align: center;
 }
 
-#cartTable:first-child {
+#cartTable:first-child, #restaurantSelect {
     display: none;
 }
 
@@ -361,4 +361,8 @@ footer {
     display: none;
     text-align: center;
     margin-bottom: 2em;
+}
+
+#cashPaymentDiv, #deliveryAlert {
+    display: none;
 }

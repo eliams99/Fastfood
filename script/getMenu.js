@@ -40,9 +40,9 @@ function restaurantSelected(restaurantName) {
 
     restaurant = restaurantName.value
     var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
-    for (var i = 0; i < customDishes.length; i++) {
-        if (customDishes[i].email == restaurant) {
-            for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {
+    for (var i = 0; i < customDishes.length; i++) {     // Scorre i ristoranti con panini personalizzati
+        if (customDishes[i].email == restaurant) {      // Se il risotrante è quello selezionato, mostra i suoi panini personalizzati
+            for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {     // Scorre i panini personalizzati del determinato ristorante
                 document.getElementById("speciali").innerHTML +=
                 '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
                 + '<input type="hidden" id="dishName" value="' + customDishes[i].paniniPersonalizzati[j].nome + '">'
@@ -52,6 +52,7 @@ function restaurantSelected(restaurantName) {
                 + ' <h5 class="card-title">' + customDishes[i].paniniPersonalizzati[j].nome + '</h5>'
                 + ' <p class="card-text">' + customDishes[i].paniniPersonalizzati[j].descrizione + '</p>'
                 + '</div> </div>'
+                document.getElementById("restaurantEmail").value = restaurant   // Serve per recuperare il ristorante nel carrello e calcolare la posizione
             }
         }
     }
@@ -71,7 +72,6 @@ function modalClicked(dish) {
     var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
     for (var i = 0; i < customDishes.length; i++) {
         if (customDishes[i].email == restaurant) {
-            console.log(customDishes[i].nome)
             for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {
                 if (customDishes[i].paniniPersonalizzati[j].nome == dish.firstChild.value) {
                     document.getElementById("modalName").innerHTML = customDishes[i].paniniPersonalizzati[j].nome
