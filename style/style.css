@@ -314,7 +314,7 @@ footer {
     text-align: center;
 }
 
-#cartTable:first-child, #restaurantSelect {
+#cartTable:first-child {
     display: none;
 }
 

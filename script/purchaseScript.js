@@ -49,6 +49,7 @@ function loadCartItems() {
 function loadSelectRestaurants() {
     if (JSON.parse(sessionStorage.getItem("cart")).ristorante) {
         document.getElementById("restaurantSelect").style.display = "none"
+        document.getElementById("proceedToOrderButton").disabled = false;
     } else {
         document.getElementById("restaurantSelect").style.display = "block"
         var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
@@ -60,10 +61,11 @@ function loadSelectRestaurants() {
     }
 }
 
-function restaurantSelected(restaurantName) {
+function restaurantCartSelected(restaurantName) {
     cart = JSON.parse(sessionStorage.getItem("cart"))
     cart.ristorante = restaurantName.value
     sessionStorage.setItem("cart", JSON.stringify(cart))
+    document.getElementById("proceedToOrderButton").disabled = false;
 }
 
 function showCartItems() {
@@ -140,8 +142,6 @@ function purchaseClick() {
     } else {
         document.getElementById("accountWarning").style.display = "block"
         document.getElementById("accountWarning").innerHTML = "Accedi o registrati per proseguire con l'acquisto"
-        //$('#navbarDropdown').dropdown();
-        //$('#accountDropdownLi').dropdown('toggle')
         $("#accountDropdownLi").addClass("show")
         $("#accountDropdowDiv").addClass("show")
         $("#accountButton").attr("aria-expanded", "true")
@@ -179,6 +179,16 @@ function getSummaryInfo() {
     document.getElementById("surname").innerHTML = user.cognome
     document.getElementById("emailSum").innerHTML = user.email
     document.getElementById("address").innerHTML = user.indirizzo + ", " + user.comune + " (" + user.provincia + ") " + user.CAP
+    document.getElementById("restaurateurAddress").innerHTML = getRestaurantAddress(JSON.parse(sessionStorage.getItem("cart")).ristorante)
+}
+
+function getRestaurantAddress(restaurantEmail) {
+    var ristoratori = JSON.parse(localStorage.getItem("data")).utenti.ristoratori
+    for (var i = 0; i < ristoratori.length; i++) {
+        if (ristoratori[i].email == restaurantEmail) {
+            return ristoratori[i].indirizzo + ", " + ristoratori[i].comune + ", " + ristoratori[i].CAP
+        }
+    }
 }
 
 function getPaymentPreferences() {
@@ -209,11 +219,34 @@ function deliveryMethodChanged(radio) {
         document.getElementById("deliveryCostLi").setAttribute("style", "display: flex !important;")
     } else if (radio.id == "collect") {
         document.getElementById("deliveryCostLi").setAttribute("style", "display: none !important;")
+        document.getElementById("deliveryDuration").style.display = "none"
     }
 }
 
 function orderClicked() {
+    
     document.getElementById("title").innerHTML = "Ordine confermato"
     document.getElementById("purchaseDiv").style.display = "none"
     document.getElementById("operationCompletedDiv").style.display = "block"
+    var duration = calculatePreparationDuration()
+    var deliveryDuration = document.getElementById("deliveryDuration").value
+    var totDuration = parseInt(duration) + parseInt(deliveryDuration) 
+    console.log(duration + ", " + deliveryDuration)
+    document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
+        + totDuration + " minuti"
+}
+
+function calculatePreparationDuration() {
+    var orders = JSON.parse(localStorage.getItem("data")).ordini
+    var restaurant = JSON.parse(sessionStorage.getItem("cart")).ristorante
+    var duration = 0            // Tempo di preparazione totale
+    var dishPreparation = 3     // Tempo di preparazione per piatto
+
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].ristorante == restaurant && orders[i].evaso == false) {
+            duration += parseInt(orders[i].quantitàTotale) * dishPreparation
+        }
+    }
+
+    return duration
 }

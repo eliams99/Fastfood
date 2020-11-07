@@ -15,7 +15,7 @@ function submitCustomer() {
                 break;
             }
         }
-        var data = getCustomerData(prefPagamento)
+        var data = getCustomerData(prefPagamento)   // Prende i dati dai form e li restituisce come json
 
         localData.utenti.clienti.push(data)
         sessionStorage.setItem("actualUser", JSON.stringify(data))
@@ -134,7 +134,7 @@ function getRestaurateurData() {
 }
 
 function validateEmail(data, emailType) {      // Controlla se l'email è già presente nel json
-    var existMmessage = "<div class='alert alert-danger text-center' role='alert'>"
+    var existMessage = "<div class='alert alert-danger text-center' role='alert'>"
         + "Account già registrato"
         + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
         + "    <span aria-hidden='true'>&times;</span>"
@@ -142,13 +142,13 @@ function validateEmail(data, emailType) {      // Controlla se l'email è già p
         + "</div>"
     for (var i = 0; i < data.clienti.length; i++) {
         if (data.clienti[i].email == document.getElementById(emailType).value) {
-            document.getElementById("message").innerHTML = existMmessage
+            document.getElementById("message").innerHTML = existMessage
             return false
         }
     }
     for (var i = 0; i < data.ristoratori.length; i++) {
         if (data.ristoratori[i].email == document.getElementById(emailType).value) {
-            document.getElementById("message").innerHTML = existMmessage
+            document.getElementById("message").innerHTML = existMessage
             return false
         }
     }
@@ -225,6 +225,35 @@ function deleteCustomDish() {
     setTimeout(function () { window.location.reload() }, 2000)
 }
 
+/* Gestione ordini */
+function addOrder() {
+    var cart = JSON.parse(sessionStorage.getItem("cart"))
+    var data = JSON.parse(localStorage.getItem("data"))
+    var date = new Date()
+    cart.utente = JSON.parse(sessionStorage.getItem("actualUser")).email
+    cart.oraMill = date.getTime()
+    cart.ora = date.getHours() + ":" + date.getMinutes()
+    cart.data = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    cart.evaso = false
+    data.ordini.push(cart)
+    message = "Ordine confermato"
+    updateData(data)
+}
+
+function checkProcessedOrders() {
+    var data = JSON.parse(localStorage.getItem("data"))
+    var dishPreparation = 3     // Tempo di preparazione per piatto
+
+    for (var i = 0; i < data.ordini.length; i++) {
+        var date = new Date()
+        if (data.ordini[i].evaso == false && date.getTime() > data.ordini[i].oraMill + (dishPreparation * 60000)) {
+            data.ordini[i].evaso = true
+        }
+    }
+    message = "Ordini aggiornati"
+    updateData(data)
+}
+
 /* Altro */
 
 function findActualUser() {
@@ -268,7 +297,7 @@ function submitData(jsonData) {
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 || this.status === 200) {
-            console.log(this.responseText); // echo from php
+            console.log(this.responseText);             // echo da php
             if (this.responseText) {
                 document.getElementById("message").innerHTML = "<div class='alert alert-success text-center' role='alert' style='display : block;'>"
                     + message

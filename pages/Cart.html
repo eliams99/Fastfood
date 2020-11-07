@@ -111,7 +111,7 @@
                 Aggiungi dei piatti al carrello per visualizzarli qui!
             </h2>
             <select class="form-control" name="SelectRestaurant" id="restaurantSelect"
-                onchange="restaurantSelected(this)">
+                onchange="restaurantCartSelected(this)">
                 <option name="preferenzeCibo" value="" disabled selected>Scegli il ristorante</option>
             </select>
             <div class="row">
@@ -125,7 +125,7 @@
                 </table>
             </div>
             <div id="purchaseButton">
-                <button type="button" onclick="purchaseClick()" class="btn btn-primary mb-2">Acquista</button>
+                <button type="button" id="proceedToOrderButton" onclick="purchaseClick()" class="btn btn-primary mb-2" disabled>Procedi all'ordine</button>
             </div>
         </div>
     </section>
