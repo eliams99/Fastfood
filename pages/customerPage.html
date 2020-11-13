@@ -19,7 +19,7 @@
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="nav(); setLocalStorage(); getUserInfo(); setActualUser(); showDot();">
+<body onload="nav(); setLocalStorage(); getUserInfo(); setActualUser(); showDot(); getUserOrders();">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -81,7 +81,7 @@
                                     <h3 id="displayName"> </h3>
                                 </span>
                                 <a class="dropdown-item" id="accountArea">Accedi alla tua area riservata</a>
-                                <a class="dropdown-item" onclick="logout()">Logout</a>
+                                <a class="dropdown-item" href="index.html" onclick="logout()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -186,7 +186,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel"
-                        aria-labelledby="v-pills-statistics-tab">Nessun contenuto</div>
+                        aria-labelledby="v-pills-statistics-tab">
+                        <ul class="list-group mb-3" id="ordersUl">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

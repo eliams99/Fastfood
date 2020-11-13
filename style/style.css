@@ -140,10 +140,6 @@ nav.shrink .navbar-brand {
     color: white;
 }
 
-.dropdown-menu a {
-    color: white;
-}
-
 #accountDanger {
     display: none;
 }
@@ -151,7 +147,6 @@ nav.shrink .navbar-brand {
 #accountDropdown {
     display: none;
 }
-
 
 #cartA {
     position: relative;
@@ -173,7 +168,7 @@ nav.shrink .navbar-brand {
     visibility: hidden;
 }
 
-#accountDropdown > * {
+.dropdown-menu a, .dropdown-menu h3 {
     color: white;
 }
 

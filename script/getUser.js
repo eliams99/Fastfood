@@ -1,5 +1,5 @@
 function setActualUser() {
-    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    let actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     if (actualUser != null) {
         if (sessionStorage.getItem("userType") == "cliente") {
             document.getElementById("accountArea").href = 'customerPage.html'
@@ -21,7 +21,7 @@ function logout() {
 }
 
 function getUserInfo() {
-    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    let actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     document.getElementById("nameInputText").value = actualUser.nome
     document.getElementById("surnameInputText").value = actualUser.cognome
     document.getElementById("inputEmail").value = actualUser.email
@@ -34,7 +34,7 @@ function getUserInfo() {
 }
 
 function getRestaurateurInfo() {
-    var actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+    let actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
     document.getElementById("restNameInputText").value = actualUser.nome
     document.getElementById("restSurnameInputText").value = actualUser.cognome
     document.getElementById("restInputEmail").value = actualUser.email
@@ -47,4 +47,37 @@ function getRestaurateurInfo() {
     document.getElementById("restaurantCAPInputText").value = actualUser.capRistorante
     document.getElementById("phoneInputText").value = actualUser.numeroTel
     document.getElementById("IVAInputText").value = actualUser.partitaIVA
+}
+
+function getUserOrders() {
+    let orders = JSON.parse(localStorage.getItem("data")).ordini
+    let actualUser = JSON.parse(sessionStorage.getItem("actualUser"))
+
+    for (let i = 0; i < orders.length; i++) {
+        if (orders[i].utente == actualUser.email) {
+            document.getElementById("ordersUl").innerHTML += '<li class="d-flex px-3 pt-3 pb-1 row">'
+            + '<span class="col-5">'
+            + ' <small class="text-muted">' + orders[i].data + '</small>'
+            + ' <small class="text-mutedmy-0 mx-2"> ' +  orders[i].ora + '</small>'
+            + ' <small class="text-mutedmy-0 mx-2"> ' + findRestaurant(orders[i].ristorante).nomeRistorante + '</small></span>'
+            + '<span class="mx-2 col-2"><small class="text-mutedmy-0"> Quantità totale: ' +  orders[i].quantitàTotale + '</small></span>'
+            + '<span class="mx-2 col-3"><small class="text-mutedmy-0"> Prezzo totale: €' +  orders[i].prezzoTotale + '</small></span></li>'
+            for (let j = 0; j < orders[i].piatti.length; j++) {
+                document.getElementById("ordersUl").innerHTML += '<li class="list-group-item d-flex row">'
+                + '<h6 class="my-0 col-5" id="name">' + orders[i].piatti[j].nome + '</h6>'
+                + '<small class="text-mutedmy-0 mx-2 col-2"> Quantità: ' + orders[i].piatti[j].quantita + '</small>'
+                + '<small class="text-mutedmy-0 mx-2 col-3"> Prezzo: ' + orders[i].piatti[j].prezzo + '</small> </li>'
+            }
+        }
+    }
+}
+
+function findRestaurant(restaurateurEmail) {
+    let restaurateurs = JSON.parse(localStorage.getItem('data')).utenti.ristoratori
+    // Scorre i ristoranti
+    for (var i = 0; i < restaurateurs.length; i++) {
+        if (restaurateurs[i].email == restaurateurEmail) {
+            return restaurateurs[i]
+        }
+    }
 }
