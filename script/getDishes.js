@@ -117,6 +117,7 @@ function editButtonClicked(button) {
             document.getElementById("typeEdit").value = customDishes[i].tipologia
             document.getElementById("priceEdit").value = customDishes[i].prezzo
             document.getElementById("descriptionEdit").value = customDishes[i].descrizione
+            document.getElementById("modalImg").src = "../img/" + customDishes[i].nome.split(' ').join('') + ".png"
         }
     }
 }

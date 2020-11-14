@@ -16,10 +16,14 @@
     <script src="../script/main.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
     <script src="../script/sendJson.js" type="text/javascript"></script>
+    <script src="../script/chart.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="nav(); setLocalStorage(); getRestaurateurInfo(); setActualUser(); showDot();">
+<body onload="nav(); setLocalStorage(); getRestaurateurInfo(); setActualUser(); showDot(); getRestaurateurOrders(); showCharts();">
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -223,10 +227,17 @@
                     </div>
 
                     <!-- ORDINI RICEVUTI -->
-                    <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Da fare</div>
+                    <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
+                        <ul class="list-group mb-3" id="ordersUl">
+                        </ul>
+                    </div>
 
                     <!-- STATISTICHE -->
-                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">Da fare</div>
+                    <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">
+                        <canvas id="dishesBarplot" width="400" height="160"></canvas>
+                        <canvas id="timeLineplot" width="400" height="160"></canvas>
+                        <canvas id="categoryPie" width="400" height="160"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,7 +270,7 @@
                                 <form id="editForm" method="POST">
                                     <!-- Modal - Image -->
                                     <div class="imageDiv">
-                                        <img class="img-fluid rounded" src="../img/doublecheese.png" alt="">
+                                        <img class="img-fluid rounded" id="modalImg" src="" alt="">
                                         <button class="btn btn-secondary mb-5 float-right" type="button">
                                             <i class="fas fa-edit fa-fw"></i>
                                             Cambia immagine
