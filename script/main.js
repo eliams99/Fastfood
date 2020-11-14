@@ -16,10 +16,12 @@ function nav() {
         $(window).scroll(function () {
             if ($(window).scrollTop() > 56) {
                 $(".navbar").addClass("shadow shrink")
+                $(".navbar").addClass("navbar-dark")
                 $(".navbar").css("backdrop-filter", "blur(15px)")
                 $(".navbar").css("background-color", "rgba(66, 66, 66, 0.5)")
             } else {
                 $(".navbar").removeClass("shadow shrink")
+                $(".navbar").removeClass("navbar-dark")
                 $(".navbar").css("backdrop-filter", "")
                 $(".navbar").css("background-color", "")
             }
@@ -28,10 +30,12 @@ function nav() {
         $(".navbar-toggler").click(function () {
             if (!$(".navbar-collapse").hasClass("show")) {
                 $(".navbar").addClass("bg-dark shadow")
+                $(".navbar").addClass("navbar-dark")
                 $(".navbar").css("backdrop-filter", "blur(15px)")
                 $(".navbar").css("background-color", "rgba(66, 66, 66, 0.5)")
             } else if ($(window).scrollTop() < 56) {
                 $(".navbar").removeClass("bg-dark shadow")
+                $(".navbar").removeClass("navbar-dark")
                 $(".navbar").css("backdrop-filter", "")
                 $(".navbar").css("background-color", "")
             }

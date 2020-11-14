@@ -1,6 +1,6 @@
 #menu {
     background-color: white;
-    border-radius: 30px;
+    /*border-radius: 30px;*/
     margin: auto;
 }
 
@@ -70,3 +70,7 @@
     text-align: center;
 }
 
+#restaurantSelect {
+    width: fit-content;
+    margin: auto;
+}
