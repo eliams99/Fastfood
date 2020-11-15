@@ -21,9 +21,9 @@
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body id="homeBody" onload="nav(); setLocalStorage(); setActualUser(); setMenu(); showDot();">
+<body id="homeBody" onload="setLocalStorage(); nav(); setActualUser(); setMenu(); showDot();">
     <div id="header">
-        <nav class="navbar navbar-expand-md fixed-top navbar-light text-dark">
+        <nav class="navbar navbar-expand-md fixed-top navbar-light text-dark" id="indexNavbar">
             <div class="container">
                 <a class="navbar-brand align-middle" href="#">
                     <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2" alt="">
@@ -99,42 +99,59 @@
                 </div>
             </div>
         </nav>
-
-        <!-- Carousel Consigliati -->
-        <header class="masthead text-white text-center">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-
-                <!-- The slideshow -->
-                <div id="slideshowDiv" class="carousel-inner text-center">
-
-                </div>
-
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon icon-dark"></span>
-                </a>
-            </div>
-        </header>
     </div>
 
+    <!-- Carousel Consigliati -->
+    <header class="masthead text-white text-center">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators" id="carouselIndicators">
+            </ul>
+
+            <!-- The slideshow -->
+            <div id="slideshowDiv" class="carousel-inner text-center">
+
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev" id="prevA" role="button">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-target="#demo" data-slide="next" id="nextA" role="button">
+                <span class="carousel-control-next-icon icon-dark"></span>
+            </a>
+        </div>
+    </header>
+
     <!-- Menù Section -->
-    <!--<section class="page-section bg-secondary text-white" id="menu" name="menu"> -->
     <section class="page-section" id="menu" name="menu">
-        <select class="form-control" name="SelectRestaurant" id="restaurantSelect" data-width="20%" onchange="restaurantSelected(this)">
-            <option name="preferenzeCibo" value="" disabled>Scegli il ristorante</option>
-        </select>
+
         <!-- Section Heading -->
         <h2 class="page-section-heading text-center text-uppercase text-secondary">Il nostro menù</h2>
+
+        <!-- Alert -->
+        <div id="message">
+        </div>
+
+        <div class="d-flex justify-content-center mt-5" id="searchSelectDiv">
+            <!-- Ricerca piatti -->
+            <div class="form-inline col-4">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="form-control ml-3" id="searchDishesInput" type="search" placeholder="Cerca piatti"
+                    aria-label="Search" onkeyup="onSearchChanged()">
+            </div>
+
+            <!-- Selezione ristorante -->
+            <div class="form-inline col-4" id="restaurantSelectDiv">
+                <label for="restaurantSelect" id="restaurantSelectLabel">Scegli il ristorante:</label>
+                <select class="form-control" name="SelectRestaurant" id="restaurantSelect"
+                    onchange="restaurantSelected(this)">
+                    <option name="preferenzeCibo" value="" disabled>Scegli il ristorante</option>
+                </select>
+            </div>
+        </div>
+
         <div class="row" id="menuDiv">
             <div class="col-2 justify-content-center">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -226,10 +243,9 @@
         </div>
     </div>
 
-    <footer class="footer text-center text-light">
+    <footer class="footer text-center text-light" id="indexFooter">
         <div class="container ">
-            <div class="row ">
-
+            <div class="row">
                 <!-- Footer Location -->
                 <div class="col-lg-4 mb-5 mb-lg-0"></div>
                 <div class="col-lg-4 mb-5 mb-lg-0">

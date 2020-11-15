@@ -148,12 +148,9 @@
                         </div>
 
                         <div>
-                            <label for="preferenzeCiboSelect">Facci sapere le tue preferenze!</label>
-                            <select id="preferenzeCiboSelect" class="form-control form-control-sm" required>
-                                <option name="preferenzeCibo" value="" disabled selected>Cosa ti piace di più?</option>
-                                <option name="preferenzeCibo" value="pollo">Pollo</option>
-                                <option name="preferenzeCibo" value="mazo">Manzo</option>
-                                <option name="preferenzeCibo" value="vegano">Vegano</option>
+                            <label for="meatTypeSelect">Facci sapere le tue preferenze!</label>
+                            <select class="form-control" name="meatEdit" id="meatTypeSelect">
+                                <option name="meatType" value="" disabled>Scegli il tipo di carne</option>
                             </select>
                         </div>
                         <div class="form-check">
@@ -176,8 +173,7 @@
                     aria-labelledby="pills-restaurateur-tab">
                     <form action="../php/submitRestaurRegistrationJson.php" method="POST">
                         <!-- Section Heading -->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati
-                        </h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i tuoi dati</h2>
 
                         <div class="form-group">
                             <div class="row">
@@ -230,8 +226,7 @@
                             </div>
                         </div>
                         <!--Sezione di registrazione del ristorante-->
-                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del
-                            ristorante</h2>
+                        <h2 class="page-section-heading text-center text-uppercase text-secondary">Inserisci i dati del ristorante</h2>
                         <div id="registrazione_ristorante">
                             <label>Nome del ristorante</label>
                             <input type="text" id="restaurantNameInputText" name="nomeRistorante" class="form-control"

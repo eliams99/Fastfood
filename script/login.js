@@ -2,6 +2,7 @@ function validate() {
     sessionStorage.clear()
     if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.clienti, "cliente")) {
         document.getElementById("accountArea").href = 'customerPage.html'
+        showSuggestedDishes()
     } else {
         if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.ristoratori, "ristoratore")) {
             document.getElementById("accountArea").href = 'restaurateurPage.html'

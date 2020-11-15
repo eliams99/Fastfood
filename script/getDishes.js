@@ -1,46 +1,49 @@
+// Mostra i panini nell'area personale del ristoratore
+function showDishes() {
+    let data = JSON.parse(localStorage.getItem("data"))
+    showCommonDishes(data.panini.paniniRistoranti, data.panini.comuni)
+    showCustomDishes(data.panini.paniniRistoranti)
+    // Riempie la select di selezione della tipologia della carne (nei modal)
+    setMeatTypeSelect("meatNew")
+}
 
-data = JSON.parse(localStorage.getItem("data"))
-showCommonDishes(data.panini.paniniRistoranti, data.panini)
-showCustomDishes(data.panini.paniniRistoranti)
-
-function showCommonDishes(restaurateur, allDishes) {
-    var i = findRestaurant(restaurateur)
-    var dish = allDishes.comuni
+function showCommonDishes(restaurateurs, dishes) {
     // Scorre tutti i panini comuni
-    for (var j = 0; j < dish.length; j++) {
-        var dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
-        var dishFound = false
-        if (i) {
-            // Scorre i panini comuni del ristorante
-            selectedDishes = restaurateur[i].paniniComuni
-            for (var a = 0; a < selectedDishes.length; a++) {
-                if (dish[j].nome == selectedDishes[a].nome) {
+    for (let j = 0; j < dishes.length; j++) {
+        let dishList = '<li href="#" class="list-group-item">' + '<div class="form-check form-check-inline mt-0">'
+        let dishFound = false                           // Indica se il piatto è offerto dal ristorante
+        let i = getRestaurantIndex(restaurateurs)       // Prende l'indice del ristorante
+        if (i != -1) {                                  // Se il ristorante è stato trovato, scorre i piatti che offre
+            // Scorre i panini comuni che offre il ristorante
+            let selectedDishes = restaurateurs[i].paniniComuni
+            for (let a = 0; a < selectedDishes.length; a++) {
+                if (dishes[j].nome == selectedDishes[a].nome) {     // Se il piatto è offerto dal ristorante, allora preseleziona la checkbox
                     dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox" value="'
-                        + dish[j].nome + '" checked>'
+                        + dishes[j].nome + '" checked>'
                     dishFound = true
                 }
             }
         }
-        if (!dishFound) {
+        if (!dishFound) {      // Se il piatto non è presente tra quelli offerti dal ristorante, non seleziona la checkbox
             dishList += '<input class="form-check-input" type="checkbox" name="dishCheckbox" value="'
-                + dish[j].nome + '">'
+                + dishes[j].nome + '">'
         }
         dishList += '<label class="form-check-label mx-2">'
-            + dish[j].nome + '</label></div></li>'
+            + dishes[j].nome + '</label></div></li>'
         document.getElementById("commonDishes").innerHTML += dishList
     }
     setHiddenValues()
 }
 
-function findRestaurant(restaurateur) {
+function getRestaurantIndex(restaurateurs) {
     // Scorre i ristoranti
-    for (var i = 0; i < restaurateur.length; i++) {
+    for (var i = 0; i < restaurateurs.length; i++) {
         // Se il ristorante corrisponde all'utente che ha fatto l'accesso
-        if (restaurateur[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
+        if (restaurateurs[i].email == JSON.parse(sessionStorage.getItem('actualUser')).email) {
             return i
         }
     }
-    return false
+    return -1
 }
 
 function setHiddenValues() {
@@ -116,6 +119,7 @@ function editButtonClicked(button) {
             document.getElementById("nameEdit").value = customDishes[i].nome
             document.getElementById("typeEdit").value = customDishes[i].tipologia
             document.getElementById("priceEdit").value = customDishes[i].prezzo
+            setMeatTypeSelect("meatEdit", ) = customDishes[i].prezzo
             document.getElementById("descriptionEdit").value = customDishes[i].descrizione
             document.getElementById("modalImg").src = "../img/" + customDishes[i].nome.split(' ').join('') + ".png"
         }

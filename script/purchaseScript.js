@@ -32,11 +32,22 @@ function addToCart() {
         "prezzo": document.getElementById("modalPrice").innerHTML,
     })
     cart.ristorante = document.getElementById("restaurantEmail").value
+    disableRestaurantSelect()
     sessionStorage.setItem("cart", JSON.stringify(cart))
 }
 
+// Disabilita la select per non far aggiungere al carrello panini da ristoranti diversi
+function disableRestaurantSelect() {
+    document.getElementById("restaurantSelect").disabled = true
+    document.getElementById("message").innerHTML = "<div class='alert alert-warning text-center' role='alert'>"
+        + "<a href='#' class='alert-link' data-dismiss='alert' onClick='deleteCart()'>Elimina i piatti dal carrello</a> per cambiare ristorante"
+        + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"
+        + "    <span aria-hidden='true'>&times;</span>"
+        + "</button>"
+        + "</div>"
+}
+
 function loadCartItems() {
-    loadSelectRestaurants()
     if (sessionStorage["cart"]) {
         showCartItems()
     } else {
@@ -44,28 +55,6 @@ function loadCartItems() {
         document.getElementById("noItemsText").style.display = "block"
         document.getElementById("purchaseButton").style.display = "none"
     }
-}
-
-function loadSelectRestaurants() {
-    if (JSON.parse(sessionStorage.getItem("cart")).ristorante) {
-        document.getElementById("restaurantSelect").style.display = "none"
-        document.getElementById("proceedToOrderButton").disabled = false;
-    } else {
-        document.getElementById("restaurantSelect").style.display = "block"
-        var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
-        for (var i = 0; i < customDishes.length; i++) {
-            if (customDishes[i].paniniPersonalizzati && customDishes[i].paniniPersonalizzati.length > 0) {
-                document.getElementById("restaurantSelect").innerHTML += "<option value='" + customDishes[i].email + "'> " + customDishes[i].nome + "</option>"
-            }
-        }
-    }
-}
-
-function restaurantCartSelected(restaurantName) {
-    cart = JSON.parse(sessionStorage.getItem("cart"))
-    cart.ristorante = restaurantName.value
-    sessionStorage.setItem("cart", JSON.stringify(cart))
-    document.getElementById("proceedToOrderButton").disabled = false;
 }
 
 function showCartItems() {
@@ -121,12 +110,24 @@ function setTotal(cart) {
         totQuantity += Number(quantity[i].value)
         totPrice += Number(price[i].innerHTML.split('€ ').join(''))
     }
-    document.getElementById("totalQuantity").innerHTML = totQuantity
-    document.getElementById("totalPrice").innerHTML = "€ " + Math.round(totPrice * 100) / 100
-    document.getElementById("dot").innerHTML = totQuantity
-    cart.quantitàTotale = totQuantity
-    cart.prezzoTotale = Math.round(totPrice * 100) / 100
-    sessionStorage.setItem("cart", JSON.stringify(cart))
+    if (totQuantity == 0) {     // Se non ci sono più elementi nel carrello (quantità totale 0)
+        document.getElementById("cartTable").style.display = "none"
+        document.getElementById("noItemsText").style.display = "block"
+        deleteCart()
+    } else {                    // Se ci sono ancora elementi, aggiorna il totale nell'html e nel sessionStorage
+        document.getElementById("totalQuantity").innerHTML = totQuantity
+        document.getElementById("totalPrice").innerHTML = "€ " + Math.round(totPrice * 100) / 100
+        document.getElementById("dot").innerHTML = totQuantity
+        cart.quantitàTotale = totQuantity
+        cart.prezzoTotale = Math.round(totPrice * 100) / 100
+        sessionStorage.setItem("cart", JSON.stringify(cart))
+    }
+}
+
+function deleteCart() {
+    document.getElementById("dot").innerHTML = 0
+    sessionStorage.removeItem("cart")       // Rimuovi il carrello dal sessionStorage
+    setRestaurantSelect()
 }
 
 function removeItem(element) {
@@ -224,13 +225,12 @@ function deliveryMethodChanged(radio) {
 }
 
 function orderClicked() {
-    
     document.getElementById("title").innerHTML = "Ordine confermato"
     document.getElementById("purchaseDiv").style.display = "none"
     document.getElementById("operationCompletedDiv").style.display = "block"
     var duration = calculatePreparationDuration()
     var deliveryDuration = document.getElementById("deliveryDuration").value
-    var totDuration = parseInt(duration) + parseInt(deliveryDuration) 
+    var totDuration = parseInt(duration) + parseInt(deliveryDuration)
     console.log(duration + ", " + deliveryDuration)
     document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
         + totDuration + " minuti"

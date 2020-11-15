@@ -1,6 +1,5 @@
 #menu {
     background-color: white;
-    /*border-radius: 30px;*/
     margin: auto;
 }
 
@@ -72,5 +71,20 @@
 
 #restaurantSelect {
     width: fit-content;
-    margin: auto;
+    margin-left: 1em;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+#restaurantSelectDiv {
+    text-align: center;
+}
+
+#searchDishesInput {
+    border-radius: 8px;
+    width: 15em;
+}
+
+#searchSelectDiv {
+    align-self: center;
 }

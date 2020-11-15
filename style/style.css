@@ -55,6 +55,7 @@ h2 {
 .btn-primary:visited {
     background-color: rgb(216, 140, 0) !important;
     border-color: rgb(216, 140, 0) !important;
+    border-radius: 8px;
 }
 
 .btn-primary:hover {
@@ -301,6 +302,12 @@ nav.shrink .navbar-brand {
 footer {
     padding: 3em;
 }
+
+#indexFooter * {
+    color: black;
+}
+
+/* Form */
 
 #registrationButton,
 #deleteButton,

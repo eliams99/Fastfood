@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../style/style.css" />
     <link rel="stylesheet" href="../style/registrationStyle.css" />
     <link rel="stylesheet" href="../style/restaurateurStyle.css" />
+    <script src="../script/getDishes.js" type="text/javascript"></script>
     <script src="../script/getUser.js" type="text/javascript"></script>
     <script src="../script/main.js" type="text/javascript"></script>
     <script src="../script/login.js" type="text/javascript"></script>
@@ -21,7 +22,7 @@
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="nav(); setLocalStorage(); getRestaurateurInfo(); setActualUser(); showDot(); getRestaurateurOrders(); showCharts();">
+<body onload="nav(); setLocalStorage(); getRestaurateurInfo(); setActualUser(); showDot(); getRestaurateurOrders(); showDishes(); showCharts();">
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
@@ -278,13 +279,13 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputPassword4">Nome</label>
+                                        <label for="nameEdit">Nome</label>
                                         <input type="text" class="form-control" name="nameEdit" id="nameEdit" placeholder="es. Double Cheeseburger">
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
-                                            <label for="inputEmail4">Tipologia</label>
+                                            <label for="typeEdit">Tipologia</label>
                                             <input type="text" class="form-control" name="typeEdit" id="typeEdit" placeholder="es. Hamburger">
                                         </div>
 
@@ -300,7 +301,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputAddress2">Descrizione</label>
+                                        <label for="meatEdit">Tipo di carne</label>
+                                        <select class="form-control" name="meatEdit" id="meatEdit">
+                                            <option name="meatType" value="" disabled>Scegli il tipo di carne</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="descriptionEdit">Descrizione</label>
                                         <textarea class="form-control" name="descriptionEdit" id="descriptionEdit" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
 
@@ -374,6 +382,13 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="meatNew">Tipo di carne</label>
+                                        <select class="form-control" name="meatNew" id="meatNew">
+                                            <option name="meatType" value="" disabled selected>Scegli il tipo di carne</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="description">Descrizione</label>
                                         <textarea class="form-control" id="descriptionNew" name="description" rows="3" placeholder="es. Due gustosi hamburger avvolti da uno strato di formaggio cremoso"></textarea>
                                     </div>
@@ -408,7 +423,6 @@
         </div>
     </footer>
     <!-- Optional JavaScript -->
-    <script src="../script/getDishes.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>

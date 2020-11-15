@@ -110,7 +110,7 @@ function getCustomerData(prefPagamento) {
         "CAP": document.getElementById("CAPInputText").value,
         "email": document.getElementById("inputEmail").value,
         "password": document.getElementById("inputPassword").value,
-        "prefCibo": document.getElementById("preferenzeCiboSelect").value,
+        "prefCibo": document.getElementById("meatTypeSelect").value,
         "prefPagamento": prefPagamento
     };
 }
