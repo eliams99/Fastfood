@@ -1,5 +1,3 @@
-var restaurant
-
 function setMenu() {
     setRestaurantSelect()
     restaurantSelected(document.getElementById("restaurantSelect"))
@@ -180,7 +178,7 @@ function modalClicked(dish) {
     // Cerca tra i panini personalizzti
     var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
     for (var i = 0; i < customDishes.length; i++) {
-        if (customDishes[i].email == restaurant) {
+        if (customDishes[i].email == document.getElementById("restaurantSelect").value) {
             for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {
                 if (customDishes[i].paniniPersonalizzati[j].nome == dish.firstChild.value) {    // Se il nome corrisponde a quello dell'input hidden
                     document.getElementById("modalName").innerHTML = customDishes[i].paniniPersonalizzati[j].nome
