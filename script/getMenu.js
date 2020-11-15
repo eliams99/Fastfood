@@ -2,6 +2,11 @@ function setMenu() {
     setRestaurantSelect()
     restaurantSelected(document.getElementById("restaurantSelect"))
     showSuggestedDishes()
+    if (sessionStorage.getItem("userType") == "ristoratore") {
+        document.getElementById("addToCartButton").disabled = true      // Se sei un ristoratore non puoi aggiungere elementi al carrello
+    } else {
+        document.getElementById("addToCartButton").disabled = false
+    }
 }
 
 function onSearchChanged() {

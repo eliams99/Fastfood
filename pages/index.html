@@ -228,12 +228,12 @@
                         <p>
                             <label for="quantityInput" class="input-number-label">Quantità:</label>
                             <span class="input-number input-number-adaptive">
-                                <input type="number" id="quantityInput" name="quantityInput" value="1" step="1">
+                                <input type="number" id="quantityInput" name="quantityInput" value="1" step="1" min="1">
                             </span>
                         </p>
                         <input type="hidden" id="restaurantEmail" value="">
                         <!-- serve per recuperare il ristorante scelto -->
-                        <button onclick="addToCart(); showDot();" class="btn btn-primary" href="#" data-dismiss="modal">
+                        <button onclick="addToCart(); showDot();" id="addToCartButton" class="btn btn-primary" href="#" data-dismiss="modal">
                             <i class="fas fa-shopping-cart fa-fw"></i>
                             Aggiungi al carrello
                         </button>
