@@ -22,9 +22,7 @@ function setMeatTypeSelect(id, selectedValue) {
 // Rimpicciolisce la navbar quando si scrolla e cambia di conseguenza colore, ombra e trasparenza
 function nav() {
     $(document).ready(function () {
-        // executes when HTML-Document is loaded and DOM is ready
-
-        // Add navbar background color when scrolled
+        // Viene richiamata quando si scorre
         $(window).scroll(function () {
             if ($(window).scrollTop() > 56) {
                 if ($(".navbar").attr("id") == "indexNavbar") {     // Nell'index la nav ha testo bianco
@@ -46,7 +44,7 @@ function nav() {
                 $(".navbar").css("background-color", "")
             }
         });
-        // If Mobile, add background color when toggler is clicked
+        // In caso di versione mobile
         $(".navbar-toggler").click(function () {
             if (!$(".navbar-collapse").hasClass("show")) {
                 if ($(".navbar").attr("id") == "indexNavbar") {

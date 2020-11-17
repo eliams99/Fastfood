@@ -68,12 +68,12 @@ function showCustomDishes(restaurants) {
             var customDish = restaurants[j].paniniPersonalizzati
             // Scorre i panini personalizzati del ristorante
             for (var i = 0; i < customDish.length; i++) {
-                document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item">' +
-                    '<label class="form-check-label mx-2">' + customDish[i].nome + '</label>' +
-                    '<button class="btn btn-danger mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
+                document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item row">' +
+                    '<label class="col-sm-* mx-2 my-1 align-middle">' + customDish[i].nome + '</label>' +
+                    '<button class="btn btn-danger col-sm-2 mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
                     '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
                     '</button>' +
-                    '<button class="btn btn-secondary mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
+                    '<button class="btn btn-secondary col-sm-2 mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
                     '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
                     '   </button>' +
                     '<input type="hidden" name="deleteValue" value="delete"/>' +
@@ -90,14 +90,14 @@ function showCustomDishes(restaurants) {
 function deleteButtonClicked(button) {
     if (button.value == "undo") {
         button.innerHTML = "<i class='fas fa-trash-alt fa-fw'></i> Elimina"
-        button.className = "btn btn-danger mx-1 float-right"
+        button.className = "btn btn-danger col-sm-2 mx-1 float-right"
         button.value = "delete"
         button.parentNode.childNodes[3].value = "delete"    // input type hidden deleteValue[]
         button.parentNode.childNodes[2].disabled = false    // button edit
         document.getElementById("deleteCustomButton").remove()
     } else {
         button.innerHTML = "<i class='fas fa-undo fa-fw'></i> Annulla"
-        button.className = "btn btn-secondary mx-1 float-right"
+        button.className = "btn btn-secondary col-sm-2 mx-1 float-right"
         button.value = "undo"
         button.parentNode.childNodes[3].value = "undo"      // input type hidden deleteValue[]
         button.parentNode.childNodes[2].disabled = true     // button edit

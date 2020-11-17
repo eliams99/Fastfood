@@ -71,9 +71,12 @@
 
 #restaurantSelect {
     width: fit-content;
-    margin-left: 1em;
     border-radius: 8px;
     display: inline-block;
+}
+
+#restaurantSelectLabel {
+    margin-right: 16px;
 }
 
 #restaurantSelectDiv {

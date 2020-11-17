@@ -17,7 +17,7 @@
     <script src="https://kit.fontawesome.com/ae439a7c29.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="nav(); showDot(); setLocalStorage();">
+<body onload="nav(); showDot(); setLocalStorage(); setMeatTypeSelect('meatTypeSelect')">
     <nav class="navbar navbar-expand-md fixed-top navbar-dark">
         <div class="container">
             <a class="navbar-brand align-middle" href="index.html">
@@ -34,7 +34,7 @@
                         <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="cartA" href="cart.html">
+                        <a class="nav-link" id="cartA" href="cartPage.html">
                             <i class="fas fa-shopping-cart mr-2"></i>
                             <span id="dot">1</span>
                             Carrello
@@ -150,7 +150,7 @@
                         <div>
                             <label for="meatTypeSelect">Facci sapere le tue preferenze!</label>
                             <select class="form-control" name="meatEdit" id="meatTypeSelect">
-                                <option name="meatType" value="" disabled>Scegli il tipo di carne</option>
+                                <option name="meatType" value="" selected disabled>Scegli il tipo di carne</option>
                             </select>
                         </div>
                         <div class="form-check">

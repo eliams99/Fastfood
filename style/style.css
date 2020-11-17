@@ -71,7 +71,10 @@ button:focus {
 
 .btn-secondary,
 .btn-secondary:active,
-.btn-secondary:visited {
+.btn-secondary:visited,
+.btn-danger,
+.btn-danger:active,
+.btn-danger:visited {
     border-radius: 8px;
 }
 
@@ -219,10 +222,7 @@ nav.shrink .navbar-brand {
 
 
 /* Div Menù, form, carrello e purchase */
-#menu,
-#form,
-#carrello,
-#purchase {
+.page-section {
     margin: auto;
     padding: 2em;
     width: 85%;
@@ -330,41 +330,25 @@ footer {
 /* Carrello */
 
 #cartTable {
-    border-spacing: 0 10px;
-    font-weight: bold;
-    width: 100%;
-}
-
-#noItemsText {
-    margin: auto;
-}
-
-#cartTable td:nth-child(2):not(.total) {
-    text-align: left;
-}
-
-#cartTable td {
-    vertical-align: middle;
-    padding: 10px;
-    text-align: center;
-}
-
-#cartTable th, .total {
-    padding: 10px 20px;
-    background: rgb(216, 140, 0);
-    color: white;
-    border-right: 2px solid;
-    text-align: center;
-}
-
-#cartTable:first-child {
     display: none;
+}
+
+#cartTable td, #cartTable th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.backgroundCart {
+    background-color: rgb(216, 140, 0);
+    color: white;
+    font-weight: bold;
 }
 
 #cartTable a {
     display: block;
     font-size: 0.8em;
     font-weight: normal;
+    color: rgb(216, 140, 0);
 }
 
 .cartImg {
@@ -377,6 +361,10 @@ footer {
     margin: auto;
     margin-bottom: 1em;
     text-align: center;
+}
+
+#purchaseButton {
+    display: none;
 }
 
 
@@ -408,4 +396,11 @@ footer {
 
 #cashPaymentDiv, #deliveryAlert {
     display: none;
+}
+
+/* Ordini ristoratore e utente */
+
+#ordersUl small, #ordersUl h6 {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }

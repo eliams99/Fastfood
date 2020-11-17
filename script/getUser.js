@@ -62,18 +62,18 @@ function getUserOrders() {
         if (orders[i].utente == actualUser.email) {
             // Stampa i dettagli generali dell'intero ordine
             document.getElementById("ordersUl").innerHTML += '<li class="d-flex px-3 pt-3 pb-1 row">'
-            + '<span class="col-5">'
+            + '<span class="col-sm-5">'
             + ' <small class="text-muted">' + orders[i].data + '</small>'
             + ' <small class="text-mutedmy-0 mx-2"> ' +  orders[i].ora + '</small>'
             + ' <small class="text-mutedmy-0 mx-2"> ' + findRestaurant(orders[i].ristorante).nomeRistorante + '</small></span>'
-            + '<span class="mx-2 col-2"><small class="text-mutedmy-0"> Quantità totale: ' +  orders[i].quantitàTotale + '</small></span>'
-            + '<span class="mx-2 col-3"><small class="text-mutedmy-0"> Prezzo totale: € ' +  orders[i].prezzoTotale + '</small></span></li>'
+            + '<span class="mx-2 col-sm-2"><small class="text-mutedmy-0"> Quantità totale: ' +  orders[i].quantitàTotale + '</small></span>'
+            + '<span class="mx-2 col-sm-3"><small class="text-mutedmy-0"> Prezzo totale: € ' +  orders[i].prezzoTotale + '</small></span></li>'
             // Scorre e stampa i signoli piatti all'interno dell'ordine
             for (let j = 0; j < orders[i].piatti.length; j++) {
                 document.getElementById("ordersUl").innerHTML += '<li class="list-group-item d-flex row">'
-                + '<h6 class="my-0 col-5" id="name">' + orders[i].piatti[j].nome + '</h6>'
-                + '<small class="text-mutedmy-0 mx-2 col-2"> Quantità: ' + orders[i].piatti[j].quantita + '</small>'
-                + '<small class="text-mutedmy-0 mx-2 col-3"> Prezzo: ' + orders[i].piatti[j].prezzo + '</small> </li>'
+                + '<h6 class="my-0 col-sm-5" id="name">' + orders[i].piatti[j].nome + '</h6>'
+                + '<small class="text-mutedmy-0 mx-2 col-sm-2"> Quantità: ' + orders[i].piatti[j].quantita + '</small>'
+                + '<small class="text-mutedmy-0 mx-2 col-sm-3"> Prezzo: ' + orders[i].piatti[j].prezzo + '</small> </li>'
             }
         }
     }
@@ -97,18 +97,18 @@ function getPartialOrders(processed, message) {
         if (orders[i].ristorante == actualUser.email && orders[i].evaso == processed) {
             // Stampa i dettagli generali dell'intero ordine
             document.getElementById("ordersUl").innerHTML += '<li class="d-flex px-3 pt-3 pb-1 row">'
-            + '<span class="col-5">'
+            + '<span class="col-sm-5">'
             + ' <small class="text-muted">' + orders[i].data + '</small>'
             + ' <small class="text-mutedmy-0 mx-2"> ' +  orders[i].ora + '</small>'
             + ' <small class="text-mutedmy-0 mx-2"> ' + orders[i].utente + '</small></span>'
-            + '<span class="mx-2 col-2"><small class="text-mutedmy-0"> Quantità totale: ' +  orders[i].quantitàTotale + '</small></span>'
-            + '<span class="mx-2 col-3"><small class="text-mutedmy-0"> Prezzo totale: € ' +  orders[i].prezzoTotale + '</small></span></li>'
+            + '<span class="mx-2 col-sm-2"><small class="text-mutedmy-0"> Quantità totale: ' +  orders[i].quantitàTotale + '</small></span>'
+            + '<span class="mx-2 col-sm-3"><small class="text-mutedmy-0"> Prezzo totale: € ' +  orders[i].prezzoTotale + '</small></span></li>'
             // Scorre e stampa i signoli piatti all'interno dell'ordine
             for (let j = 0; j < orders[i].piatti.length; j++) {
                 document.getElementById("ordersUl").innerHTML += '<li class="list-group-item d-flex row">'
-                + '<h6 class="my-0 col-5" id="name">' + orders[i].piatti[j].nome + '</h6>'
-                + '<small class="text-mutedmy-0 mx-2 col-2"> Quantità: ' + orders[i].piatti[j].quantita + '</small>'
-                + '<small class="text-mutedmy-0 mx-2 col-3"> Prezzo: ' + orders[i].piatti[j].prezzo + '</small> </li>'
+                + '<h6 class="my-0 col-sm-5" id="name">' + orders[i].piatti[j].nome + '</h6>'
+                + '<small class="text-mutedmy-0 mx-2 col-sm-2"> Quantità: ' + orders[i].piatti[j].quantita + '</small>'
+                + '<small class="text-mutedmy-0 mx-2 col-sm-3"> Prezzo: ' + orders[i].piatti[j].prezzo + '</small> </li>'
             }
             noOrders = false
         }

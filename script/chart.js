@@ -85,7 +85,7 @@ function categoryPie() {
             legend: { display: false },
             title: {
                 display: true,
-                text: 'Piatti venduti per catedoria'
+                text: 'Piatti venduti per categoria'
             },
             scales: {
                 yAxes: [{

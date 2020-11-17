@@ -50,8 +50,9 @@ function disableRestaurantSelect() {
 function loadCartItems() {
     if (sessionStorage["cart"]) {
         showCartItems()
+        document.getElementById("purchaseButton").style.display = "block"
+        document.getElementById("cartTable").style.display = "table"
     } else {
-        document.getElementById("cartTable").style.display = "none"
         document.getElementById("noItemsText").style.display = "block"
         document.getElementById("purchaseButton").style.display = "none"
     }
@@ -59,15 +60,15 @@ function loadCartItems() {
 
 function showCartItems() {
     document.getElementById("cartTable").style.display = "table"
-    document.getElementById("cartTable").firstElementChild.firstChild.style.display = "table-row"
+    //document.getElementById("cartTable").firstElementChild.firstChild.style.display = "table-row"
     document.getElementById("noItemsText").style.display = "none"
     var cart = JSON.parse(sessionStorage.getItem('cart'))
     var totPrice = 0
     for (var i = 0; i < cart.piatti.length; i++) {
         var totPriceDish = Number(cart.piatti[i].prezzo.split('€ ').join('')) * Number(cart.piatti[i].quantita);
-        document.getElementById('cartTable').innerHTML += '<tr>'
-            + '    <td><img src="../img/' + cart.piatti[i].nome.split(' ').join('') + '.png" class="cartImg" alt="..."></td>'
-            + '        <td>' + cart.piatti[i].nome + '</td>'
+        document.getElementById('cartTableBody').innerHTML += '<tr>'
+            + '    <td scope="row"><img src="../img/' + cart.piatti[i].nome.split(' ').join('') + '.png" class="cartImg" alt="...">'
+            + '       ' + cart.piatti[i].nome + '</td>'
             + '        <td>' + cart.piatti[i].prezzo + '</td>'
             + '        <td>'
             + '            <input onInput="priceChange(this)" type="number" id="quantityInput" class="quantityInput" min="0" value="' + cart.piatti[i].quantita + '" step="1">'
@@ -77,17 +78,17 @@ function showCartItems() {
             + '</tr>'
         totPrice += totPriceDish
     }
-    document.getElementById('cartTable').innerHTML += '<tr id="lastRow">'
-        + '        <td colspan="3"></td>'
-        + '        <td class="total" id="totalQuantity">' + cart.quantitàTotale + '</td>'
-        + '        <td class="total" id="totalPrice">€ ' + Math.round(totPrice * 100) / 100 + '</td>'
+    document.getElementById('cartTableBody').innerHTML += '<tr id="lastRow">'
+        + '        <td colspan="2" scope="row"></td>'
+        + '        <td class="backgroundCart" id="totalQuantity">' + cart.quantitàTotale + '</td>'
+        + '        <td class=" backgroundCart" id="totalPrice">€ ' + Math.round(totPrice * 100) / 100 + '</td>'
         + '</tr>'
     cart.prezzoTotale = Math.round(totPrice * 100) / 100
     sessionStorage.setItem("cart", JSON.stringify(cart))
 }
 
-function priceChange(quantity) {
-    var price = quantity.parentElement.previousElementSibling.innerHTML.split('€ ').join('')
+function priceChange(quantity) {        // quantity è il link "rimuovi" che ha generato l'evento
+    var price = quantity.parentElement.previousElementSibling.innerHTML.split('€ ').join('')    // Prende il prezzo del singolo prodotto (colonna prece)
     var cart = JSON.parse(sessionStorage.getItem("cart"))
     var index = quantity.parentElement.parentElement.rowIndex - 1
     if (quantity.value) {
@@ -104,6 +105,7 @@ function priceChange(quantity) {
 function setTotal(cart) {
     var quantity = document.getElementsByClassName("quantityInput")
     var price = document.getElementsByClassName("totPriceInput")
+    console.log(quantity)
     var totQuantity = 0, totPrice = 0
 
     for (var i = 0; i < quantity.length; i++) {
@@ -112,6 +114,7 @@ function setTotal(cart) {
     }
     if (totQuantity == 0) {     // Se non ci sono più elementi nel carrello (quantità totale 0)
         document.getElementById("cartTable").style.display = "none"
+        document.getElementById("purchaseButton").style.display = "none"
         document.getElementById("noItemsText").style.display = "block"
         deleteCart()
     } else {                    // Se ci sono ancora elementi, aggiorna il totale nell'html e nel sessionStorage
@@ -127,7 +130,6 @@ function setTotal(cart) {
 function deleteCart() {
     document.getElementById("dot").innerHTML = 0
     sessionStorage.removeItem("cart")       // Rimuovi il carrello dal sessionStorage
-    setRestaurantSelect()
 }
 
 function removeItem(element) {

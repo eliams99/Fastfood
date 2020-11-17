@@ -30,39 +30,44 @@
             <a class="navbar-brand align-middle" href="index.html">
                 <img src="../img/logo.png" width="45" height="45" class="d-inline-block align-middle mr-2"> FastFood
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="cartA" href="cart.html">
+                        <a class="nav-link" id="cartA" href="cartPage.html">
                             <i class="fas fa-shopping-cart mr-2"></i>
                             <span id="dot">1</span>
                             Carrello
                         </a>
                     </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item active dropdown" id="accountDropdownLi">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i> Accedi
+                            <span class="sr-only">(current)</span>
                         </a>
                         <!-- Login -->
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="accountDropdowDiv">
                             <div id="loginDropdown">
                                 <form class="px-4 py-3">
                                     <div class="alert alert-danger" role="alert" id="accountDanger">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormEmail1">Indirizzo email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="email@dominio.com">
+                                        <input type="email" class="form-control" id="email"
+                                            placeholder="email@dominio.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" value="" class="form-control" id="password" placeholder="Password">
+                                        <input type="password" value="" class="form-control" id="password"
+                                            placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
@@ -75,14 +80,14 @@
                                     <button type="button" onclick='validate()' class="btn btn-primary">Accedi</button>
                                 </form>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="registrationForm.html">Prima volta qui? Registrati</a>
+                                <a class="dropdown-item" href="registrationPage.html">Prima volta qui? Registrati</a>
                             </div>
                             <div id="accountDropdown">
                                 <span class="dropdown-item-text">
                                     <h3 id="displayName"> </h3>
                                 </span>
                                 <a class="dropdown-item" id="accountArea">Accedi alla tua area riservata</a>
-                                <a class="dropdown-item" href="index.html" onclick="logout()">Logout</a>
+                                <a class="dropdown-item" href="" onclick="logout()">Logout</a>
                             </div>
                         </div>
                     </li>
@@ -105,7 +110,7 @@
     <!-- Gestione profilo -->
     <section class="page-section bg-light portfolio justify-content-center" id="form">
         <div class="row">
-            <div class="col-3 justify-content-center">
+            <div class="col-sm-3 justify-content-center">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-personalData-tab" data-toggle="pill" href="#v-pills-personalData" role="tab" aria-controls="v-pills-personalData" aria-selected="true">Dati personali</a>
                     <a class="nav-link" id="v-pills-menuManagement-tab" data-toggle="pill" href="#v-pills-menuManagement" role="tab" aria-controls="v-pills-menuManagement" aria-selected="false">Gestione menù</a>
@@ -113,7 +118,7 @@
                     <a class="nav-link" id="v-pills-statistics-tab" data-toggle="pill" href="#v-pills-statistics" role="tab" aria-controls="v-pills-statistics" aria-selected="false">Statistiche</a>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-sm-9">
                 <div id="message">
 
                 </div>
@@ -229,7 +234,8 @@
 
                     <!-- ORDINI RICEVUTI -->
                     <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
-                        <ul class="list-group mb-3" id="ordersUl">
+                        <ul class="list-group mb-3" id="orde
+                        rsUl">
                         </ul>
                     </div>
 

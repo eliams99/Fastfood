@@ -19,3 +19,9 @@
 canvas {
     margin-bottom: 1.5em;
 }
+
+/* Lista panini personalizzati */
+button {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
