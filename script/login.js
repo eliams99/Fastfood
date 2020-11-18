@@ -1,8 +1,8 @@
 function validate() {
-    sessionStorage.clear()
+    sessionStorage.removeItem("actualUser")
+    sessionStorage.removeItem("userType")
     if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.clienti, "cliente")) {
         document.getElementById("accountArea").href = 'customerPage.html'
-        showSuggestedDishes()
     } else {
         if (validateUsers(JSON.parse(localStorage.getItem('data')).utenti.ristoratori, "ristoratore")) {
             document.getElementById("accountArea").href = 'restaurateurPage.html'
