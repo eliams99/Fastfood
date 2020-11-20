@@ -26,7 +26,8 @@ function setRestaurantSelect() {
                 document.getElementById("restaurantSelect").innerHTML += "<option value='" + customDishes[i].email + "' selected> " + customDishes[i].nome + "</option>"
                 disableRestaurantSelect()
             }
-        } else if (customDishes[i].paniniPersonalizzati && customDishes[i].paniniPersonalizzati.length > 0) {
+        } else if (customDishes[i].paniniPersonalizzati && customDishes[i].paniniPersonalizzati.length > 0
+            || customDishes[i].paniniPersonalizzati && customDishes[i].paniniComuni.length > 0) {
             document.getElementById("restaurantSelect").innerHTML += "<option value='" + customDishes[i].email + "'> " + customDishes[i].nome + "</option>"
         }
     }
@@ -39,6 +40,7 @@ function restaurantSelected(restaurant) {
     showSuggestedDishes()
 }
 
+// Mostra i panini personalizzati del ristorante
 function showCustomDishes(restaurantEmail) {
     document.getElementById("speciali").innerHTML = ""
     let customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
@@ -47,7 +49,7 @@ function showCustomDishes(restaurantEmail) {
         if (customDishes[i].email == restaurantEmail) {      // Se il risotrante è quello selezionato, mostra i suoi panini personalizzati
             for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {     // Scorre i panini personalizzati del determinato ristorante
                 let lowerCaseDishName = customDishes[i].paniniPersonalizzati[j].nome.toLowerCase()
-                if (searchDish == "" || lowerCaseDishName.includes(searchDish)) {
+                if (searchDish == "" || lowerCaseDishName.includes(searchDish)) {   // Filtraggio in base a cosa è stato inserito nel box di ricerca del panino
                     document.getElementById("speciali").innerHTML += '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
                         + '<input type="hidden" id="dishName" value="' + customDishes[i].paniniPersonalizzati[j].nome + '">'
                         + '<div class="card-body">'
@@ -78,9 +80,9 @@ function showCommonDishes(restaurantIndex) {
     let searchDish = document.getElementById("searchDishesInput").value.toLowerCase()
     for (var i = 0; i < commonDishes.length; i++) {
         let lowerCaseDishName = commonDishes[i].nome.toLowerCase()
-        if ((isDishAvailable(restaurantIndex, commonDishes[i].nome) && searchDish == "") ||
-            (isDishAvailable(restaurantIndex, commonDishes[i].nome) && lowerCaseDishName.includes(searchDish))) {
-            document.getElementById(commonDishes[i].tipologia).innerHTML +=
+        if (isDishAvailable(restaurantIndex, commonDishes[i].nome) &&           // Se il piatto è offerto dal ristorante e se il nome del panino
+            (searchDish == "" || lowerCaseDishName.includes(searchDish))) {     // corrisponde a quello inserito nel box di ricerca del panino
+            document.getElementById(commonDishes[i].tipologia).innerHTML +=                                                                  
                 '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
                 + '<input type="hidden" id="dishName" value="' + commonDishes[i].nome + '">'
                 + '<div class="card-body">'

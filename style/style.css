@@ -101,6 +101,7 @@ button:focus {
     color: white !important;
     background-color: rgb(216, 140, 0) !important;
     border-color: rgb(216, 140, 0) !important;
+    border-radius: 8px;
 }
 
 .nav .nav-link {
@@ -336,6 +337,16 @@ footer {
 #cartTable td, #cartTable th {
     text-align: center;
     vertical-align: middle;
+}
+
+.totPriceInput {
+    font-weight: bold;
+}
+
+.nameCartItem {
+    font-weight: bold;
+    font-size: large;
+    text-align: left !important;
 }
 
 .backgroundCart {

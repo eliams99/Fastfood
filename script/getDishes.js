@@ -1,3 +1,5 @@
+var deleteCounter = 0   // Numero di panini in lista per essere eliminati tra i panini personalizzati (serve per togliere il bottone di conferma eliminazione)
+
 // Mostra i panini nell'area personale del ristoratore
 function showDishes() {
     let data = JSON.parse(localStorage.getItem("data"))
@@ -68,18 +70,20 @@ function showCustomDishes(restaurants) {
             var customDish = restaurants[j].paniniPersonalizzati
             // Scorre i panini personalizzati del ristorante
             for (var i = 0; i < customDish.length; i++) {
-                document.getElementById("customizedDishes").innerHTML += '<li href="#" class="list-group-item row">' +
+                document.getElementById("customizedDishesList").innerHTML += '<li href="#" class="list-group-item row">' +
                     '<label class="col-sm-* mx-2 my-1 align-middle">' + customDish[i].nome + '</label>' +
-                    '<button class="btn btn-danger col-sm-2 mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
+                    '<button class="btn btn-danger col-sm-auto mx-1 float-right" type="button" onClick="deleteButtonClicked(this)" name="delete" value="delete">' +
                     '   <i class="fas fa-trash-alt fa-fw"></i> Elimina ' +
                     '</button>' +
-                    '<button class="btn btn-secondary col-sm-2 mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
+                    '<button class="btn btn-secondary col-sm-auto mx-1 float-right" type="button" onClick="editButtonClicked(this)" data-toggle="modal" data-target="#editDishModal" name="edit[]" value="' + customDish[i].nome + '">' +
                     '   <i class="fas fa-edit fa-fw"></i> Modifica ' +
                     '   </button>' +
                     '<input type="hidden" name="deleteValue" value="delete"/>' +
                     '</li>'
             }
-            document.getElementById("customizedDishes").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
+            document.getElementById("customizedDishesForm").innerHTML += '<button type="button" id="deleteCustomButton" onclick="deleteCustomDish()"' +
+            'value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right"><i class="fas fa-check fa-fw"></i> Conferma eliminazione</button>'
+            document.getElementById("customizedDishesList").innerHTML += '<input type="hidden" name="restaurantEmail" value="' +
                 JSON.parse(sessionStorage.getItem('actualUser')).email + '">' +
                 '<input type="hidden" name="restaurantName" value="' +
                 JSON.parse(sessionStorage.getItem('actualUser')).nome + '">'
@@ -90,20 +94,22 @@ function showCustomDishes(restaurants) {
 function deleteButtonClicked(button) {
     if (button.value == "undo") {
         button.innerHTML = "<i class='fas fa-trash-alt fa-fw'></i> Elimina"
-        button.className = "btn btn-danger col-sm-2 mx-1 float-right"
+        button.className = "btn btn-danger col-sm-auto mx-1 float-right"
         button.value = "delete"
         button.parentNode.childNodes[3].value = "delete"    // input type hidden deleteValue[]
         button.parentNode.childNodes[2].disabled = false    // button edit
-        document.getElementById("deleteCustomButton").remove()
+        deleteCounter--
+        if (deleteCounter == 0) {
+            document.getElementById("deleteCustomButton").style.display = "none"
+        }
     } else {
         button.innerHTML = "<i class='fas fa-undo fa-fw'></i> Annulla"
-        button.className = "btn btn-secondary col-sm-2 mx-1 float-right"
+        button.className = "btn btn-secondary col-sm-auto mx-1 float-right"
         button.value = "undo"
         button.parentNode.childNodes[3].value = "undo"      // input type hidden deleteValue[]
         button.parentNode.childNodes[2].disabled = true     // button edit
-        button.parentNode.parentNode.parentNode.innerHTML += '<button type="button" id="deleteCustomButton" onclick="deleteCustomDish()"' +
-            'value="deleteCustom" class="btn btn-danger m-2 mx-1 float-right"></button>'
-        document.getElementById("deleteCustomButton").innerHTML = '<i class="fas fa-check fa-fw"></i> Conferma eliminazione'
+        deleteCounter++
+        document.getElementById("deleteCustomButton").style.display = "block"
     }
 }
 
@@ -119,7 +125,7 @@ function editButtonClicked(button) {
             document.getElementById("nameEdit").value = customDishes[i].nome
             document.getElementById("typeEdit").value = customDishes[i].tipologia
             document.getElementById("priceEdit").value = customDishes[i].prezzo
-            setMeatTypeSelect("meatEdit", ) = customDishes[i].prezzo
+            setMeatTypeSelect("meatEdit") = customDishes[i].prezzo
             document.getElementById("descriptionEdit").value = customDishes[i].descrizione
             document.getElementById("modalImg").src = "../img/" + customDishes[i].nome.split(' ').join('') + ".png"
         }

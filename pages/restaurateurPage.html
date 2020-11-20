@@ -128,7 +128,7 @@
                         <form action="../php/editDeleteRestaurateur.php" method="POST">
 
                             <!-- Section Heading -->
-                            <h4 class="page-section-heading text-center text-uppercase text-secondary">Modifica i tuoi dati</h4>
+                            <h4 class="page-section-heading">Modifica i tuoi dati</h4>
 
                             <div class="form-group">
                                 <div class="row">
@@ -174,7 +174,7 @@
                             </div>
 
                             <!--Sezione di modifica dei dati del ristorante-->
-                            <h4 class="page-section-heading text-center text-uppercase text-secondary">Modifica i dati del ristorante</h4>
+                            <h4 class="page-section-heading">Modifica i dati del ristorante</h4>
                             <div id="registrazione_ristorante">
                                 <label for="restaurNameInputText">Nome del ristorante</label>
                                 <input type="text" class="form-control" name="nomeRistorante" id="restaurantNameInputText" placeholder="Es. FastFood delle Rose" required>
@@ -210,7 +210,7 @@
                     <!-- GESTIONE MENU -->
                     <div class="tab-pane fade" id="v-pills-menuManagement" role="tabpanel" aria-labelledby="v-pills-menuManagement-tab">
                         <!-- Panini comuni-->
-                        <h4 class="page-section-heading text-center text-uppercase text-secondary">Panini comuni</h4>
+                        <h4 class="page-section-heading">Piatti comuni</h4>
                         <form method="POST">
                             <div class="list-group" id="commonDishes">
                             </div>
@@ -221,28 +221,32 @@
                         </form>
 
                         <!-- Panini personalizzati -->
-                        <h4 class="page-section-heading text-center text-uppercase text-secondary mt-4">Panini personalizzati</h4>
-                        <form method="POST">
+                        <h4 class="page-section-heading mt-4">Piatti personalizzati</h4>
+                        <form method="POST" id="customizedDishesForm">
                             <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#newDishModal1">
                                 <i class="fas fa-plus fa-fw"></i>
                                 Aggiungi piatto
                             </button>
-                            <div class="list-group" id="customizedDishes">
+                            <div class="list-group" id="customizedDishesList">
                             </div>
                         </form>
                     </div>
 
                     <!-- ORDINI RICEVUTI -->
                     <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
-                        <ul class="list-group mb-3" id="orde
-                        rsUl">
+                        <ul class="list-group mb-3" id="ordersUl">
                         </ul>
                     </div>
 
                     <!-- STATISTICHE -->
                     <div class="tab-pane fade" id="v-pills-statistics" role="tabpanel" aria-labelledby="v-pills-statistics-tab">
+                        <h4 class="page-section-heading">Numero di ordini per piatto</h4>
                         <canvas id="dishesBarplot" width="400" height="160"></canvas>
+
+                        <h4 class="page-section-heading">Numero di ordini per orario</h4>
                         <canvas id="timeLineplot" width="400" height="160"></canvas>
+
+                        <h4 class="page-section-heading">Numero di ordini per categoria</h4>
                         <canvas id="categoryPie" width="400" height="160"></canvas>
                     </div>
                 </div>

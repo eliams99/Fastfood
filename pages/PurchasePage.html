@@ -212,7 +212,7 @@
                     </div>
 
                     <!-- Scelta ritiro/consegna -->
-                    <h4 class="mb-3">Ritiro e consegna</h4>
+                    <h4 class="mb-3">Ritiro o consegna</h4>
 
                     <div class="alert alert-warning" role="alert" id="deliveryAlert">
                         La consegna a domicilio non è possibile perché il ristorante è più lontano di 50 km
@@ -232,10 +232,10 @@
                     </div>
 
                     <!-- Conferma ordine -->
-                    <button class="btn btn-primary btn-lg btn-block" type="button"
+                    <button class="btn btn-primary btn-lg btn-block" type="button" id="payButton"
                         onclick="addOrder(); checkProcessedOrders(); orderClicked();">Paga</button>
                     <div id="cashPaymentDiv">
-                        <p>Pagherai al momento della consegna</p>
+                        <p id="paymentInfo">Pagherai al momento della consegna</p>
                         <button class="btn btn-primary btn-lg btn-block" type="button"
                             onclick="addOrder(); orderClicked();">Ordina</button>
                     </div>

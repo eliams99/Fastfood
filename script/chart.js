@@ -20,8 +20,7 @@ function dishesBarplot() {
         options: {
             legend: { display: false },
             title: {
-                display: true,
-                text: 'Piatti venduti'
+                display: false
             },
             scales: {
                 yAxes: [{
@@ -52,8 +51,7 @@ function timeLineplot() {
         options: {
             legend: { display: false },
             title: {
-                display: true,
-                text: 'Piatti venduti per orario'
+                display: false
             },
             scales: {
                 yAxes: [{
@@ -84,8 +82,7 @@ function categoryPie() {
         options: {
             legend: { display: false },
             title: {
-                display: true,
-                text: 'Piatti venduti per categoria'
+                display: false
             },
             scales: {
                 yAxes: [{
@@ -125,7 +122,7 @@ function getDishesData() {
         labels: [],
         data: []
     }
-    let orders = JSON.parse(localStorage.getItem("data")).ordini
+    let orders = getOnlyActualRestaurantOrders(JSON.parse(localStorage.getItem("data")).ordini)
     let dishes = getOnlyDishes(orders)
     let dishesNoRep = getDishesWithoutDishRepetitions(dishes)
 
@@ -172,7 +169,7 @@ function getOrders() {
         labels: [],
         data: []
     }
-    let orders = JSON.parse(localStorage.getItem("data")).ordini
+    let orders = getOnlyActualRestaurantOrders(JSON.parse(localStorage.getItem("data")).ordini)
     orders = splitTime(orders)
 
     for (let i = 0; i < orders.length; i++) {

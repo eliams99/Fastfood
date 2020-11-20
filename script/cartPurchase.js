@@ -7,32 +7,33 @@ function addToCart() {
     var quantity = Number(document.getElementById("quantityInput").value)
     var cart
 
-    if (sessionStorage["cart"]) {
-        cart = JSON.parse(sessionStorage.getItem("cart"))
-        cart.quantitàTotale += quantity
-        for (var i = 0; i < cart.piatti.length; i++) {
-            if (nomePanino == cart.piatti[i].nome) {        // Se il piatto è già presente incrementarne solamente la quantità
-                cart.piatti[i].quantita += quantity;
-                sessionStorage.setItem("cart", JSON.stringify(cart))
-                return;
+    if (sessionStorage["cart"]) {       // Se c'è già l'elemento cart
+        cart = JSON.parse(sessionStorage.getItem("cart"))   // Prende l'elemento cart
+        cart.quantitàTotale += quantity                     // Aggiorna la quantità totale aggiungendo quella del panino appena aggiunto
+        for (var i = 0; i < cart.piatti.length; i++) {      // Scorre i piatti già presenti nel carrello
+            if (nomePanino == cart.piatti[i].nome) {             // Se il piatto è già presente 
+                cart.piatti[i].quantita += quantity;                // Incrementa solamente la quantità del panino
+                sessionStorage.setItem("cart", JSON.stringify(cart))// Setta il sessionStorage
+                return;                                             // Ritorna, in modo da non eseguire le operazioni dopo
             }
         }
-    } else {
-        cart = {
+    } else {                            // Se l'elemento cart non c'è (non ci sono piatti nel carrello)
+        cart = {                            // Crea l'oggetto json
             "quantitàTotale": 0,
             "prezzoTotale": 0,
             "piatti": [],
             "ristorante": ""
         }
-        cart.quantitàTotale += quantity
+        cart.quantitàTotale += quantity     // Aggiorna la quantità totale aggiungendo quella del panino appena aggiunto
     }
-    cart.piatti.push({
+    // Le operazioni di seguito vengono eseguite se il carrello non era stato creato (else) o se viene aggiunto un nuovo elemento al carrello già esistente
+    cart.piatti.push({                                                  // Aggiunge il piatto all'array dei piatti nel carrello
         "nome": nomePanino,
         "quantita": quantity,
         "prezzo": document.getElementById("modalPrice").innerHTML,
     })
-    cart.ristorante = document.getElementById("restaurantEmail").value
-    disableRestaurantSelect()
+    cart.ristorante = document.getElementById("restaurantEmail").value  // Setta il nome del ristorante (input hidden nel modal, settato tramite la select)
+    disableRestaurantSelect()                                           // Disabilita la select in modo da non aggiungere al carrello piatti di ristoranti diversi
     sessionStorage.setItem("cart", JSON.stringify(cart))
 }
 
@@ -67,8 +68,9 @@ function showCartItems() {
     for (var i = 0; i < cart.piatti.length; i++) {
         var totPriceDish = Number(cart.piatti[i].prezzo.split('€ ').join('')) * Number(cart.piatti[i].quantita);
         document.getElementById('cartTableBody').innerHTML += '<tr>'
-            + '    <td scope="row"><img src="../img/' + cart.piatti[i].nome.split(' ').join('') + '.png" class="cartImg" alt="...">'
-            + '       ' + cart.piatti[i].nome + '</td>'
+            + '    <td scope="row">'
+            + '        <img src="../img/' + cart.piatti[i].nome.split(' ').join('') + '.png" class="cartImg" alt="..."> </td>'
+            + '    <td class="nameCartItem">' + cart.piatti[i].nome + '</td>'
             + '        <td>' + cart.piatti[i].prezzo + '</td>'
             + '        <td>'
             + '            <input onInput="priceChange(this)" type="number" id="quantityInput" class="quantityInput" min="0" value="' + cart.piatti[i].quantita + '" step="1">'
@@ -79,7 +81,7 @@ function showCartItems() {
         totPrice += totPriceDish
     }
     document.getElementById('cartTableBody').innerHTML += '<tr id="lastRow">'
-        + '        <td colspan="2" scope="row"></td>'
+        + '        <td colspan="3" scope="row"></td>'
         + '        <td class="backgroundCart" id="totalQuantity">' + cart.quantitàTotale + '</td>'
         + '        <td class=" backgroundCart" id="totalPrice">€ ' + Math.round(totPrice * 100) / 100 + '</td>'
         + '</tr>'
@@ -211,18 +213,23 @@ function paymentMethodChanged(radio) {
     if (radio.id == "cash") {
         document.getElementById("creditCardPaymentDiv").style.display = "none"
         document.getElementById("cashPaymentDiv").style.display = "block"
+        document.getElementById("payButton").style.display = "none"
     } else if (radio.id == "credit") {
         document.getElementById("creditCardPaymentDiv").style.display = "block"
         document.getElementById("cashPaymentDiv").style.display = "none"
+        document.getElementById("payButton").style.display = "block"
+        
     }
 }
 
 function deliveryMethodChanged(radio) {
     if (radio.id == "delivery") {
         document.getElementById("deliveryCostLi").setAttribute("style", "display: flex !important;")
+        document.getElementById("paymentInfo").innerHTML = "Pagherai al momento della consegna"
     } else if (radio.id == "collect") {
         document.getElementById("deliveryCostLi").setAttribute("style", "display: none !important;")
         document.getElementById("deliveryDuration").style.display = "none"
+        document.getElementById("paymentInfo").innerHTML = "Pagherai al ristorante"
     }
 }
 
