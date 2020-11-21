@@ -240,6 +240,7 @@ function addOrder() {
     updateData(data)
 }
 
+// Mette evaso=false agli ordini che sono stati già evasi (sono passati almeno 'dishPreparation' secondi)
 function checkProcessedOrders() {
     var data = JSON.parse(localStorage.getItem("data"))
     var dishPreparation = 3     // Tempo di preparazione per piatto

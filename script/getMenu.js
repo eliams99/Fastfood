@@ -35,6 +35,7 @@ function setRestaurantSelect() {
 
 // Quando il ristorante viene selezionato, visualizza di conseguenza i panini che esso offre
 function restaurantSelected(restaurant) {
+    clearCategories()
     let restaurantIndex = showCustomDishes(restaurant.value)
     showCommonDishes(restaurantIndex)   // restaurantIndex serve per recuperare direttamente l'indice del ristorante senza fare di nuovo il ciclo per trovarlo
     showSuggestedDishes()
@@ -42,7 +43,6 @@ function restaurantSelected(restaurant) {
 
 // Mostra i panini personalizzati del ristorante
 function showCustomDishes(restaurantEmail) {
-    document.getElementById("speciali").innerHTML = ""
     let customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti
     let searchDish = document.getElementById("searchDishesInput").value.toLowerCase()
     for (var i = 0; i < customDishes.length; i++) {     // Scorre i ristoranti con panini personalizzati
@@ -50,7 +50,7 @@ function showCustomDishes(restaurantEmail) {
             for (var j = 0; j < customDishes[i].paniniPersonalizzati.length; j++) {     // Scorre i panini personalizzati del determinato ristorante
                 let lowerCaseDishName = customDishes[i].paniniPersonalizzati[j].nome.toLowerCase()
                 if (searchDish == "" || lowerCaseDishName.includes(searchDish)) {   // Filtraggio in base a cosa è stato inserito nel box di ricerca del panino
-                    document.getElementById("speciali").innerHTML += '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
+                    document.getElementById(customDishes[i].paniniPersonalizzati[j].tipologia).innerHTML += '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
                         + '<input type="hidden" id="dishName" value="' + customDishes[i].paniniPersonalizzati[j].nome + '">'
                         + '<div class="card-body">'
                         + ' <img src="../img/' + customDishes[i].paniniPersonalizzati[j].nome.split(' ').join('') + '.png" class="img-fluid card-img-top" alt="...">'
@@ -75,7 +75,6 @@ function clearCategories() {
 }
 
 function showCommonDishes(restaurantIndex) {
-    clearCategories()
     let commonDishes = JSON.parse(localStorage.getItem("data")).panini.comuni
     let searchDish = document.getElementById("searchDishesInput").value.toLowerCase()
     for (var i = 0; i < commonDishes.length; i++) {
@@ -134,6 +133,7 @@ function showSuggestedDishes() {
     }
 }
 
+// Ritorna i piatti suggeriti in base alla preferenza sul tipo di carne dell'utente loggato
 function getSuggestedDishes() {
     let userType = sessionStorage.getItem("userType")
 
@@ -165,7 +165,6 @@ function getAllDishes() {
             }
         }
     }
-
     return commonDishes
 }
 

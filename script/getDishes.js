@@ -7,6 +7,18 @@ function showDishes() {
     showCustomDishes(data.panini.paniniRistoranti)
     // Riempie la select di selezione della tipologia della carne (nei modal)
     setMeatTypeSelect("meatNew")
+    setTypeSelect("typeNew")
+}
+
+function setTypeSelect(id, selectedValue) {
+    var types = JSON.parse(localStorage.getItem("data")).panini.tipologie
+    for (let i = 0; i < types.length; i++) {
+        if (types[i] == selectedValue) {
+            document.getElementById(id).innerHTML += "<option value='" + types[i] + "' selected> " + types[i] + "</option>"
+        } else {
+            document.getElementById(id).innerHTML += "<option value='" + types[i] + "'> " + types[i] + "</option>"
+        }
+    }
 }
 
 function showCommonDishes(restaurateurs, dishes) {
@@ -114,18 +126,18 @@ function deleteButtonClicked(button) {
 }
 
 function editButtonClicked(button) {
-    index = findActualUser()
-    var customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti[index].paniniPersonalizzati
+    let index = findActualUser()
+    let customDishes = JSON.parse(localStorage.getItem("data")).panini.paniniRistoranti[index].paniniPersonalizzati
     document.getElementById("editForm").innerHTML += '<input type="hidden" name="dishName" id="dishName" value="' +
         button.value + '"/>'
 
-    for (var i = 0; i < customDishes.length; i++) {
+    for (let i = 0; i < customDishes.length; i++) {
         if (customDishes[i].nome == button.value) {
             document.getElementById("modalTitle").innerText = customDishes[i].nome
             document.getElementById("nameEdit").value = customDishes[i].nome
-            document.getElementById("typeEdit").value = customDishes[i].tipologia
+            setTypeSelect("typeEdit", customDishes[i].tipologia)
             document.getElementById("priceEdit").value = customDishes[i].prezzo
-            setMeatTypeSelect("meatEdit") = customDishes[i].prezzo
+            setMeatTypeSelect("meatEdit", customDishes[i].tipoCarne)
             document.getElementById("descriptionEdit").value = customDishes[i].descrizione
             document.getElementById("modalImg").src = "../img/" + customDishes[i].nome.split(' ').join('') + ".png"
         }

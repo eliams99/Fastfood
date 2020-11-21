@@ -81,7 +81,7 @@ function getUserOrders() {
 
 // Mostra gli ordini ricevuti dal ristorante
 function getRestaurateurOrders() {
-    checkProcessedOrders()
+    checkProcessedOrders()      // Aggiorna gli ordini già evasi
     document.getElementById("ordersUl").innerHTML += '<h4 class="page-section-heading">Ordini da evadere </h4>'
     getPartialOrders(false, "Non ci sono ordini da evadere")    // Mostra solo gli ordini ancora da evadere
     document.getElementById("ordersUl").innerHTML += '<h4 class="page-section-heading mt-3 mb-0">Ordini già evasi</h4>'

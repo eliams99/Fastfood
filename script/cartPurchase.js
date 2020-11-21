@@ -49,20 +49,18 @@ function disableRestaurantSelect() {
 }
 
 function loadCartItems() {
-    if (sessionStorage["cart"]) {
+    if (sessionStorage["cart"]) {   // Se ci sono elelemnti nel carrello, mostra la tabella e gli elementi
         showCartItems()
+        document.getElementById("noItemsText").style.display = "none"
         document.getElementById("purchaseButton").style.display = "block"
         document.getElementById("cartTable").style.display = "table"
-    } else {
+    } else {                        // Altrimenti mostra il messaggio che non ci sono elementi
         document.getElementById("noItemsText").style.display = "block"
         document.getElementById("purchaseButton").style.display = "none"
     }
 }
 
 function showCartItems() {
-    document.getElementById("cartTable").style.display = "table"
-    //document.getElementById("cartTable").firstElementChild.firstChild.style.display = "table-row"
-    document.getElementById("noItemsText").style.display = "none"
     var cart = JSON.parse(sessionStorage.getItem('cart'))
     var totPrice = 0
     for (var i = 0; i < cart.piatti.length; i++) {
@@ -89,6 +87,7 @@ function showCartItems() {
     sessionStorage.setItem("cart", JSON.stringify(cart))
 }
 
+// Funzione chiamata quando viene modificata la quantità di un prodotto nel carrello
 function priceChange(quantity) {        // quantity è il link "rimuovi" che ha generato l'evento
     var price = quantity.parentElement.previousElementSibling.innerHTML.split('€ ').join('')    // Prende il prezzo del singolo prodotto (colonna prece)
     var cart = JSON.parse(sessionStorage.getItem("cart"))
@@ -104,6 +103,7 @@ function priceChange(quantity) {        // quantity è il link "rimuovi" che ha 
     setTotal(cart)
 }
 
+// Calcola il totale in base ai cambiamenti effettuati, contenuti nel parametro cart
 function setTotal(cart) {
     var quantity = document.getElementsByClassName("quantityInput")
     var price = document.getElementsByClassName("totPriceInput")
@@ -134,6 +134,7 @@ function deleteCart() {
     sessionStorage.removeItem("cart")       // Rimuovi il carrello dal sessionStorage
 }
 
+// Funzione chiamata quando si preme su "rimuovi" nel carrello
 function removeItem(element) {
     element.previousElementSibling.value = 0
     priceChange(element)
@@ -141,10 +142,11 @@ function removeItem(element) {
     document.getElementById("cartTable").deleteRow(rowIndex)
 }
 
+// Funzione chiamata quando si preme "Prosegui all'ordine"
 function purchaseClick() {
     if (JSON.parse(sessionStorage.getItem("actualUser"))) {
         window.location.href = 'purchasePage.html'
-    } else {
+    } else {        // Se l'utente non ha ancora effettuato il login, visualizza il dropdown di login invece di farlo proseguire
         document.getElementById("accountWarning").style.display = "block"
         document.getElementById("accountWarning").innerHTML = "Accedi o registrati per proseguire con l'acquisto"
         $("#accountDropdownLi").addClass("show")
@@ -161,6 +163,7 @@ function loadPurchaseData() {
     getPaymentPreferences()
 }
 
+// Mostra il carrello nell'apposita sezione
 function showCartItemsPurchase() {
     if (sessionStorage["cart"]) {
         var cart = JSON.parse(sessionStorage.getItem('cart'))
@@ -178,6 +181,7 @@ function showCartItemsPurchase() {
     }
 }
 
+// Mostra le informazioni principali dell'utente e l'indirizzo del ristorante nell'apposita sezione
 function getSummaryInfo() {
     var user = JSON.parse(sessionStorage.getItem('actualUser'))
     document.getElementById("name").innerHTML = user.nome
@@ -187,6 +191,7 @@ function getSummaryInfo() {
     document.getElementById("restaurateurAddress").innerHTML = getRestaurantAddress(JSON.parse(sessionStorage.getItem("cart")).ristorante)
 }
 
+// Ritorna l'indirizzo del ristorante data in input l'email
 function getRestaurantAddress(restaurantEmail) {
     var ristoratori = JSON.parse(localStorage.getItem("data")).utenti.ristoratori
     for (var i = 0; i < ristoratori.length; i++) {
@@ -196,6 +201,7 @@ function getRestaurantAddress(restaurantEmail) {
     }
 }
 
+// Preseleziona il radio button in base a quanto l'utente ha dichiarato di preferire al momento della registrazione
 function getPaymentPreferences() {
     var user = JSON.parse(sessionStorage.getItem('actualUser'))
     if (user.prefPagamento == "contanti") {
@@ -209,6 +215,7 @@ function getPaymentPreferences() {
     }
 }
 
+// Gestione dell'evento di cambio del radio button contanti/carta
 function paymentMethodChanged(radio) {
     if (radio.id == "cash") {
         document.getElementById("creditCardPaymentDiv").style.display = "none"
@@ -222,6 +229,7 @@ function paymentMethodChanged(radio) {
     }
 }
 
+// Gestione dell'evento di cambio del radio button consegna/ritiro
 function deliveryMethodChanged(radio) {
     if (radio.id == "delivery") {
         document.getElementById("deliveryCostLi").setAttribute("style", "display: flex !important;")
@@ -233,18 +241,22 @@ function deliveryMethodChanged(radio) {
     }
 }
 
+// Gestione dell'evento di click sul bottone acquista/ordine
 function orderClicked() {
+    // Cambio visualizzazione
     document.getElementById("title").innerHTML = "Ordine confermato"
     document.getElementById("purchaseDiv").style.display = "none"
     document.getElementById("operationCompletedDiv").style.display = "block"
+    // Calcolo durata
     var duration = calculatePreparationDuration()
-    var deliveryDuration = document.getElementById("deliveryDuration").value
+    var deliveryDuration = document.getElementById("deliveryDuration").value    // Prende la durata precedentemente calcolata con mapBox
     var totDuration = parseInt(duration) + parseInt(deliveryDuration)
     console.log(duration + ", " + deliveryDuration)
     document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
         + totDuration + " minuti"
 }
 
+// Calcola la durata in base agli ordini in coda
 function calculatePreparationDuration() {
     var orders = JSON.parse(localStorage.getItem("data")).ordini
     var restaurant = JSON.parse(sessionStorage.getItem("cart")).ristorante
@@ -256,6 +268,5 @@ function calculatePreparationDuration() {
             duration += parseInt(orders[i].quantitàTotale) * dishPreparation
         }
     }
-
     return duration
 }
