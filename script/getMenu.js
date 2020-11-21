@@ -10,6 +10,7 @@ function setMenu() {
 }
 
 function onSearchChanged() {
+    clearCategories()
     let restaurantIndex = showCustomDishes(document.getElementById("restaurantSelect").value)
     showCommonDishes(restaurantIndex)
 }
