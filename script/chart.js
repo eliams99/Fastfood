@@ -277,11 +277,16 @@ function getCommonCustomDishes(dishes) {
 
 // Ritorna solo gli ordini del ristorante attualmente loggato
 function getOnlyActualRestaurantOrders(orders) {
+    let actualRestaurant = JSON.parse(sessionStorage.getItem("actualUser")).email
+    let actualRestOrders = new Array()
     for (let i = 0; i < orders.length; i++) {
         // Se il ristorante di quell'ordine non è quello attualmente loggato lo toglie dall'array
-        if (orders[i].ristorante != JSON.parse(sessionStorage.getItem("actualUser")).email) {
-            orders.splice(orders.indexOf(orders[i]), 1)
+        if (orders[i].ristorante == actualRestaurant) {
+            actualRestOrders.push(orders[i])
         }
     }
-    return orders
+    if (actualRestOrders.length == 0) {
+        document.getElementById("noChartOrdersAlert").style.display = "block"
+    }
+    return actualRestOrders
 }

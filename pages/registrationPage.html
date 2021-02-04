@@ -76,7 +76,7 @@
                 <!-- Registrazione cliente -->
                 <div class="tab-pane fade show active" id="pills-customer" role="tabpanel"
                     aria-labelledby="pills-customer-tab">
-                    <form id="registrationForm" method="POST" action="../php/submitCustomerRegistrationJson.php">
+                    <form id="registrationForm" method="POST">
 
                         <!-- Section Heading -->
                         <h4 class="page-section-heading">Inserisci i tuoi dati</h4>
@@ -108,12 +108,12 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="provinceInputText">Provincia</label>
-                                    <input type="text" class="form-control" id="provinceInputText" name="provincia"
+                                    <input type="text" class="form-control" id="provinceInputText" name="provincia" maxlength="4"
                                         placeholder="Es. MI" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="CAPInputText">CAP</label>
-                                    <input type="text" class="form-control" id="CAPInputText" name="CAP"
+                                    <input type="text" class="form-control" id="CAPInputText" name="CAP" maxlength="5"
                                         placeholder="Es. 20121" required>
                                 </div>
                             </div>
@@ -153,14 +153,13 @@
                             </select>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck"
-                                required>
+                            <input class="form-check-input" type="checkbox" name="consensoPrivacy" id="defaultCheck" required>
                             <label class="form-check-label" for="defaultCheck">
                                 Ho letto e accetto l'<a href="GarantePrivacy-36573-7.3.pdf">informativa sulla
                                     privacy</a>.
                             </label>
                             <div id="registrationButton">
-                                <button type="button" onclick="submitCustomer()"
+                                <button type="click" onclick="submitCustomer()"
                                 class="btn btn-primary mb-2">Registrati</button>
                             </div> 
                         </div>
@@ -201,12 +200,12 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="restProvinceInputText">Provincia</label>
-                                    <input type="text" name="provincia" class="form-control" id="restProvinceInputText"
+                                    <input type="text" name="provincia" class="form-control" id="restProvinceInputText" maxlength="4"
                                         placeholder="Es. MI" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="restCAPInputText">CAP</label>
-                                    <input type="text" name="CAP" class="form-control" id="restCAPInputText"
+                                    <input type="text" name="CAP" class="form-control" id="restCAPInputText" maxlength="5"
                                         placeholder="Es. 20121" required>
                                 </div>
                             </div>
@@ -230,7 +229,7 @@
                         <div id="registrazione_ristorante">
                             <label>Nome del ristorante</label>
                             <input type="text" id="restaurantNameInputText" name="nomeRistorante" class="form-control"
-                                placeholder="Es. FastFood delle Rose">
+                                placeholder="Es. FastFood delle Rose" required>
                             <div class="row">
                                 <div class="col-md">
                                     <label for="restaurantAddressInputText">Indirizzo del ristorante</label>

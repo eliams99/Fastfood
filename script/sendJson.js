@@ -3,44 +3,51 @@ var message;
 /* Creazione account clienti e ristoratori */
 
 function submitCustomer() {
-    var localData
-
-    localData = JSON.parse(localStorage.getItem("data"))
-    if (validateEmail(localData.utenti, "inputEmail")) {
-        var pagamentoRadio = document.getElementsByName("preferenzePagamento")
-        var prefPagamento = ""
-        for (var i = 0; i < pagamentoRadio.length; i++) {
-            if (pagamentoRadio[i].type == 'radio' && pagamentoRadio[i].checked) {
-                prefPagamento = pagamentoRadio[i].value
-                break;
+    if (!document.getElementById("defaultCheck").checked) {
+        alert("Per registrarti devi prima accettare l'informativa sulla privacy")
+    } else {
+        var localData
+        localData = JSON.parse(localStorage.getItem("data"))
+        if (validateEmail(localData.utenti, "inputEmail")) {
+            var pagamentoRadio = document.getElementsByName("preferenzePagamento")
+            var prefPagamento = ""
+            for (var i = 0; i < pagamentoRadio.length; i++) {
+                if (pagamentoRadio[i].type == 'radio' && pagamentoRadio[i].checked) {
+                    prefPagamento = pagamentoRadio[i].value
+                    break;
+                }
             }
-        }
-        var data = getCustomerData(prefPagamento)   // Prende i dati dai form e li restituisce come json
+            var data = getCustomerData(prefPagamento)   // Prende i dati dai form e li restituisce come json
 
-        localData.utenti.clienti.push(data)
-        sessionStorage.setItem("actualUser", JSON.stringify(data))
-        sessionStorage.setItem("userType", "cliente")
-        message = "Utente aggiunto correttamente"
-        updateData(localData)
+            localData.utenti.clienti.push(data)
+            sessionStorage.setItem("actualUser", JSON.stringify(data))
+            sessionStorage.setItem("userType", "cliente")
+            message = "Utente aggiunto correttamente"
+            updateData(localData)
+        }
     }
 }
 
 function submitRestaurateur() {
-    var localData
-    localData = JSON.parse(localStorage.getItem("data"))
-    if (validateEmail(localData.utenti, "restInputEmail")) {
-        var data = getRestaurateurData()
-        localData.utenti.ristoratori.push(data)
-        localData.panini.paniniRistoranti.push({
-            "nome": document.getElementById("nameInputText").value,
-            "email": document.getElementById("inputEmail").value,
-            "paniniPersonalizzati": [],
-            "paniniComuni": []
-        })
-        sessionStorage.setItem("actualUser", JSON.stringify(data))
-        sessionStorage.setItem("userType", "ristoratore")
-        message = "Utente aggiunto correttamente"
-        updateData(localData)
+    if (!document.getElementById("restDefaultCheck").checked) {
+        alert("Per registrarti devi prima accettare l'informativa sulla privacy")
+    } else {
+        var localData
+        localData = JSON.parse(localStorage.getItem("data"))
+        if (validateEmail(localData.utenti, "restInputEmail")) {
+            var data = getRestaurateurData()
+            localData.utenti.ristoratori.push(data)
+            localData.panini.paniniRistoranti.push({
+                "nome": document.getElementById("nameInputText").value,
+                "email": document.getElementById("inputEmail").value,
+                "paniniPersonalizzati": [],
+                "paniniComuni": []
+            })
+            sessionStorage.setItem("actualUser", JSON.stringify(data))
+            sessionStorage.setItem("userType", "ristoratore")
+            message = "Utente aggiunto correttamente"
+            updateData(localData)
+        }
     }
 }
 

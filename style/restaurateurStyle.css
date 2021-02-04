@@ -20,6 +20,10 @@ canvas {
     margin-bottom: 1.5em;
 }
 
+#noChartOrdersAlert {
+    display: none;
+}
+
 /* Lista panini personalizzati */
 button {
     margin-top: 2px;
