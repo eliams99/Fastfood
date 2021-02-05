@@ -233,11 +233,11 @@
 
                     <!-- Conferma ordine -->
                     <button class="btn btn-primary btn-lg btn-block" type="button" id="payButton"
-                        onclick="addOrder(); checkProcessedOrders(); orderClicked();">Paga</button>
+                        onclick="addOrder(); checkProcessedOrders(); orderClicked('delivery');">Paga</button>
                     <div id="cashPaymentDiv">
                         <p id="paymentInfo">Pagherai al momento della consegna</p>
                         <button class="btn btn-primary btn-lg btn-block" type="button"
-                            onclick="addOrder(); orderClicked();">Ordina</button>
+                            onclick="addOrder(); orderClicked('collect');">Ordina</button>
                     </div>
                 </div>
             </div>

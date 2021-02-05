@@ -12,7 +12,7 @@ findCoordinates(restAddress)
                     .then((routeData) => {
                         document.getElementById("deliveryCost").innerHTML = "€ " + Math.round((routeData.distance / 1000 * 1.5) / 10)
                         document.getElementById("deliveryDuration").value = Math.round(routeData.duration / 60) + 2
-                        console.log(routeData.distance)
+                        console.log("Distanza: " + routeData.distance / 1000 + " km")
                         manageOrder(routeData.distance)
                     })
             })

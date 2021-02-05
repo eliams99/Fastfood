@@ -288,7 +288,12 @@ function addOrder() {
     var date = new Date()
     cart.utente = JSON.parse(sessionStorage.getItem("actualUser")).email
     cart.oraMill = date.getTime()
-    cart.ora = date.getHours() + ":" + date.getMinutes()
+    if (date.getMinutes() < 10) {
+        cart.ora = date.getHours() + ":0" + date.getMinutes()
+    } else {
+        cart.ora = date.getHours() + ":" + date.getMinutes()
+    }
+    
     cart.data = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
     cart.evaso = false
     data.ordini.push(cart)

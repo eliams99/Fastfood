@@ -225,7 +225,6 @@ function paymentMethodChanged(radio) {
         document.getElementById("creditCardPaymentDiv").style.display = "block"
         document.getElementById("cashPaymentDiv").style.display = "none"
         document.getElementById("payButton").style.display = "block"
-        
     }
 }
 
@@ -242,18 +241,24 @@ function deliveryMethodChanged(radio) {
 }
 
 // Gestione dell'evento di click sul bottone acquista/ordine
-function orderClicked() {
+function orderClicked(orderType) {
+    deleteCart()
     // Cambio visualizzazione
     document.getElementById("title").innerHTML = "Ordine confermato"
     document.getElementById("purchaseDiv").style.display = "none"
     document.getElementById("operationCompletedDiv").style.display = "block"
     // Calcolo durata
     var duration = calculatePreparationDuration()
-    var deliveryDuration = document.getElementById("deliveryDuration").value    // Prende la durata precedentemente calcolata con mapBox
+    console.log("Preparazione: " + duration + " min, Spedizione: " + deliveryDuration + " min")
+    if (orderType == "delivery") {
+        var deliveryDuration = document.getElementById("deliveryDuration").value    // Prende la durata precedentemente calcolata con mapBox
     var totDuration = parseInt(duration) + parseInt(deliveryDuration)
-    console.log(duration + ", " + deliveryDuration)
-    document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
-        + totDuration + " minuti"
+        document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
+            + totDuration + " minuti"
+    } else {
+        document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine sarà pronto tra " +
+            duration + " minuti"
+    }
 }
 
 // Calcola la durata in base agli ordini in coda
