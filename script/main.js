@@ -10,6 +10,7 @@ function showDot() {
 
 function setMeatTypeSelect(id, selectedValue) {
     var meatTypes = JSON.parse(localStorage.getItem("data")).panini.tipoCarne
+    document.getElementById(id).innerHTML = ""
     for (let i = 0; i < meatTypes.length; i++) {
         if (meatTypes[i] == selectedValue) {
             document.getElementById(id).innerHTML += "<option value='" + meatTypes[i] + "' selected> " + meatTypes[i] + "</option>"

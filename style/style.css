@@ -389,6 +389,11 @@ footer {
     width: 50px;
 }
 
+.modal-content {
+    border-radius: 1.5em !important;
+    border: none;
+}
+
 /* Purchase */
 .custom-control-input:checked~.custom-control-label.orange::before {
   background-color: rgb(216, 140, 0);

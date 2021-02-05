@@ -5,9 +5,9 @@
 }
 
 
-/* Style the button and place it in the middle of the container/image */
+/* Bottone sopra all'immagine */
 
-.imageDiv button {
+.imageDiv .file-input-container {
     position: absolute;
     top: 85%;
     left: 50%;
@@ -32,4 +32,31 @@ button {
 
 #deleteCustomButton {
     display: none;
+}
+
+/* Input file */
+.file-input-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 8px;
+  font-size: 17px;
+  color: #b8b8b8;
+}
+
+.button-wrap {
+  position: relative;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 18px;
+  color: white;
 }

@@ -179,42 +179,91 @@ function checkCommonDishes() {
     updateData(localData)
 }
 
-function addCustomDish() {
+async function addCustomDish() {
+    const fileInput = document.getElementById('fileToUpload');
+    const selectedFile = fileInput.files[0];
+    let base64 = await toBase64(selectedFile);
     var localData = JSON.parse(localStorage.getItem("data"))
     var index = findActualUser()
-
-    localData.panini.paniniRistoranti[index].paniniPersonalizzati.push(
-        {
-            "nome": document.getElementById("nameNew").value,
-            "tipologia": document.getElementById("typeNew").value,
-            "prezzo": document.getElementById("priceNew").value,
-            "descrizione": document.getElementById("descriptionNew").value
-        }
-    )
-    message = document.getElementById("nameNew").value + " aggiunto"
-    updateData(localData)
-    setTimeout(function () { window.location.reload() }, 2000)
+    resizeBase64Img(base64, 200, 200).then((result) => {
+        localData.panini.paniniRistoranti[index].paniniPersonalizzati.push(getDishDataFromModal("New", result))
+        message = document.getElementById("nameNew").value + " aggiunto"
+        updateData(localData)
+        setTimeout(function () { window.location.reload() }, 2000)
+    })
 }
 
-function editCustomDish() {
+async function editCustomDish() {
+    const fileInput = document.getElementById('fileEditToUpload');
+    const selectedFile = fileInput.files[0];
     var localData = JSON.parse(localStorage.getItem("data"))
     var index = findActualUser()
     var dishName = document.getElementById("dishName").value
-
-    for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
-        if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
-            localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = {
-                "nome": document.getElementById("nameEdit").value,
-                "tipologia": document.getElementById("typeEdit").value,
-                "prezzo": document.getElementById("priceEdit").value,
-                "descrizione": document.getElementById("descriptionEdit").value
+    if (selectedFile == undefined) {        // Se non è stata caricata l'immagine mantiene quella precedente (prendendola da modalImg)
+        for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
+            if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
+                localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", document.getElementById("modalImg").src)
+                message = document.getElementById("nameEdit").value + " modificato"
+                updateData(localData)
+                setTimeout(function () { window.location.reload() }, 2000)
+                return
             }
-            message = document.getElementById("nameEdit").value + " modificato"
-            updateData(localData)
-            setTimeout(function () { window.location.reload() }, 2000)
-            return
+        }
+    } else {
+        let base64 = await toBase64(selectedFile);
+        for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
+            if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
+                resizeBase64Img(base64, 200, 200).then((result) => {
+                    localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", result)
+                    message = document.getElementById("nameEdit").value + " modificato"
+                    updateData(localData)
+                    setTimeout(function () { window.location.reload() }, 2000)
+                    return
+                })
+                return
+            }
         }
     }
+}
+
+function searchAndSubmitEditDish() {
+
+}
+
+function getDishDataFromModal(action, image) {
+    return {
+        "nome": document.getElementById("name" + action).value,
+        "tipologia": document.getElementById("type" + action).value,
+        "tipoCarne": document.getElementById("meat" + action).value,
+        "prezzo": document.getElementById("price" + action).value,
+        "descrizione": document.getElementById("description" + action).value,
+        "immagine": image
+    }
+}
+
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+function resizeBase64Img(base64, newWidth, newHeight) {
+    return new Promise((resolve, reject) => {
+        var canvas = document.createElement("canvas");
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        let context = canvas.getContext("2d");
+        var img = new Image();
+        img.src = base64;
+        img.onload = function () {
+            //context.scale(newWidth/img.width,  newHeight/img.height);
+            context.drawImage(img,
+                0, 0, img.width, img.height,
+                0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL());
+        }
+    });
 }
 
 function deleteCustomDish() {

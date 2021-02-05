@@ -54,7 +54,7 @@ function showCustomDishes(restaurantEmail) {
                     document.getElementById(customDishes[i].paniniPersonalizzati[j].tipologia).innerHTML += '<div class="card col-" data-toggle="modal" data-target="#modal" onclick="modalClicked(this)" >'
                         + '<input type="hidden" id="dishName" value="' + customDishes[i].paniniPersonalizzati[j].nome + '">'
                         + '<div class="card-body">'
-                        + ' <img src="../img/' + customDishes[i].paniniPersonalizzati[j].nome.split(' ').join('') + '.png" class="img-fluid card-img-top" alt="...">'
+                        + ' <img src="' + customDishes[i].paniniPersonalizzati[j].immagine + '" class="card-img-top" alt="...">'
                         + ' <div href="#" class="discover"><i class="fas fa-plus fa-3x"></i></div>'
                         + ' <h5 class="card-title">' + customDishes[i].paniniPersonalizzati[j].nome + '</h5>'
                         + ' <p class="card-text">' + customDishes[i].paniniPersonalizzati[j].descrizione + '</p>'
@@ -112,10 +112,16 @@ function showSuggestedDishes() {
     document.getElementById("carouselIndicators").innerHTML = ""
     var commonDishes = getSuggestedDishes()     // Ottiene i piatti suggeriti
     for (var i = 0; i < commonDishes.length; i++) {
+        let image
+        if (commonDishes[i].immagine == undefined) {
+            image = '../img/' + commonDishes[i].nome.split(' ').join('') + '.png'
+        } else {
+            image = commonDishes[i].immagine
+        }
         if (i == 0) {       // Se è il primo elemento lo setto come active
             document.getElementById("slideshowDiv").innerHTML += '<div class="carousel-item active" data-toggle="modal" data-target="#modal" onClick="modalClicked(this)">'
                 + '<input type="hidden" id="dishName" value="' + commonDishes[i].nome + '">'
-                + '    <img class="d-block mx-auto my-4 mb-5" src="../img/' + commonDishes[i].nome.split(' ').join('') + '.png" alt="' + commonDishes[i].nome + '">'
+                + '    <img class="d-block mx-auto my-4 mb-5" src="' + image + '" alt="' + commonDishes[i].nome + '">'
                 + '    <div class="carousel-caption d-none d-md-block">'
                 + '    <h5>' + commonDishes[i].nome + '</h5> <p>' + commonDishes[i].descrizione + '</p> </div></div>'
             document.getElementById("carouselIndicators").innerHTML += '<li data-target="#demo" data-slide-to="' + i + '" class="active" role="button"></li>'
@@ -124,7 +130,7 @@ function showSuggestedDishes() {
         } else {            // Altrimenti
             document.getElementById("slideshowDiv").innerHTML += '<div class="carousel-item" data-toggle="modal" data-target="#modal" onClick="modalClicked(this)">'
                 + '<input type="hidden" id="dishName" value="' + commonDishes[i].nome + '">'
-                + '    <img class="d-block mx-auto my-4 mb-5" src="../img/' + commonDishes[i].nome.split(' ').join('') + '.png" alt="' + commonDishes[i].nome + '">'
+                + '    <img class="d-block mx-auto my-4 mb-5" src="' + image + '" alt="' + commonDishes[i].nome + '">'
                 + '    <div class="carousel-caption d-none d-md-block">'
                 + '    <h5>' + commonDishes[i].nome + '</h5> <p>' + commonDishes[i].descrizione + '</p> </div></div>'
             document.getElementById("carouselIndicators").innerHTML += '<li data-target="#demo" data-slide-to="' + i + '" role="button"></li>'
@@ -191,7 +197,7 @@ function modalClicked(dish) {
                     document.getElementById("modalName").innerHTML = customDishes[i].paniniPersonalizzati[j].nome
                     document.getElementById("modalDescription").innerHTML = customDishes[i].paniniPersonalizzati[j].descrizione
                     document.getElementById("modalPrice").innerHTML = "€ " + customDishes[i].paniniPersonalizzati[j].prezzo
-                    document.getElementById("modalImg").src = "../img/" + customDishes[i].paniniPersonalizzati[j].nome.split(' ').join('') + ".png"
+                    document.getElementById("modalImg").src = customDishes[i].paniniPersonalizzati[j].immagine
                     document.getElementById("quantityInput").value = "1"
                 }
             }

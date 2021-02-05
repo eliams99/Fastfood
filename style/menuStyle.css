@@ -91,8 +91,3 @@
 #searchSelectDiv {
     align-self: center;
 }
-
-.modal-content {
-    border-radius: 1.5em !important;
-    border: none;
-}

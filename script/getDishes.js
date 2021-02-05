@@ -12,6 +12,7 @@ function showDishes() {
 
 function setTypeSelect(id, selectedValue) {
     var types = JSON.parse(localStorage.getItem("data")).panini.tipologie
+    document.getElementById(id).innerHTML = ""
     for (let i = 0; i < types.length; i++) {
         if (types[i] == selectedValue) {
             document.getElementById(id).innerHTML += "<option value='" + types[i] + "' selected> " + types[i] + "</option>"
@@ -139,7 +140,7 @@ function editButtonClicked(button) {
             document.getElementById("priceEdit").value = customDishes[i].prezzo
             setMeatTypeSelect("meatEdit", customDishes[i].tipoCarne)
             document.getElementById("descriptionEdit").value = customDishes[i].descrizione
-            document.getElementById("modalImg").src = "../img/" + customDishes[i].nome.split(' ').join('') + ".png"
+            document.getElementById("modalImg").src =  customDishes[i].immagine
         }
     }
 }
