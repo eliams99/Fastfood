@@ -154,6 +154,7 @@ function setTotal(cart) {
 function deleteCart() {
     document.getElementById("dot").innerHTML = 0
     sessionStorage.removeItem("cart")       // Rimuovi il carrello dal sessionStorage
+    document.getElementById("restaurantSelect").disabled = false
 }
 
 // Funzione chiamata quando si preme su "rimuovi" nel carrello
