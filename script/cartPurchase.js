@@ -63,11 +63,17 @@ function loadCartItems() {
 function showCartItems() {
     var cart = JSON.parse(sessionStorage.getItem('cart'))
     var totPrice = 0
-    for (var i = 0; i < cart.piatti.length; i++) {
+    for (let i = 0; i < cart.piatti.length; i++) {
         var totPriceDish = Number(cart.piatti[i].prezzo.split('€ ').join('')) * Number(cart.piatti[i].quantita);
+        let image;
+        if (cart.piatti[i].immagine == undefined) {
+            image = '../img/' + cart.piatti[i].nome.split(' ').join('') + '.png'
+        } else {
+            image = cart.piatti[i].immagine
+        }
         document.getElementById('cartTableBody').innerHTML += '<tr>'
             + '    <td scope="row">'
-            + '        <img src="../img/' + cart.piatti[i].nome.split(' ').join('') + '.png" class="cartImg" alt="..."> </td>'
+            + '        <img src="' + image + '" class="cartImg" alt="..."> </td>'
             + '    <td class="nameCartItem">' + cart.piatti[i].nome + '</td>'
             + '        <td>' + cart.piatti[i].prezzo + '</td>'
             + '        <td>'
@@ -242,7 +248,6 @@ function deliveryMethodChanged(radio) {
 
 // Gestione dell'evento di click sul bottone acquista/ordine
 function orderClicked(orderType) {
-    deleteCart()
     // Cambio visualizzazione
     document.getElementById("title").innerHTML = "Ordine confermato"
     document.getElementById("purchaseDiv").style.display = "none"
@@ -259,6 +264,7 @@ function orderClicked(orderType) {
         document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine sarà pronto tra " +
             duration + " minuti"
     }
+    deleteCart()
 }
 
 // Calcola la durata in base agli ordini in coda
