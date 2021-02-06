@@ -65,32 +65,48 @@ function showCartItems() {
     var totPrice = 0
     for (let i = 0; i < cart.piatti.length; i++) {
         var totPriceDish = Number(cart.piatti[i].prezzo.split('€ ').join('')) * Number(cart.piatti[i].quantita);
-        let image;
-        if (cart.piatti[i].immagine == undefined) {
-            image = '../img/' + cart.piatti[i].nome.split(' ').join('') + '.png'
-        } else {
-            image = cart.piatti[i].immagine
+        var dishImg = new Image()
+        let imagePath = '../img/' + cart.piatti[i].nome.split(' ').join('') + '.png'
+        dishImg.src = imagePath
+        dishImg.onload = function () {
+            insertTableRow(cart.piatti[i], imagePath, totPriceDish)
+            if (i == cart.piatti.length - 1) {
+                insertTotalTableRow(cart.quantitàTotale, totPrice)
+            }
         }
-        document.getElementById('cartTableBody').innerHTML += '<tr>'
-            + '    <td scope="row">'
-            + '        <img src="' + image + '" class="cartImg" alt="..."> </td>'
-            + '    <td class="nameCartItem">' + cart.piatti[i].nome + '</td>'
-            + '        <td>' + cart.piatti[i].prezzo + '</td>'
-            + '        <td>'
-            + '            <input onInput="priceChange(this)" type="number" id="quantityInput" class="quantityInput" min="0" value="' + cart.piatti[i].quantita + '" step="1">'
-            + '            <a href="#" onClick="removeItem(this)"> Rimuovi </a>'
-            + '        </td>'
-            + '        <td class="totPriceInput">€ ' + totPriceDish + '</td>'
-            + '</tr>'
+        dishImg.onerror = function () {
+            imagePath = '../img/special-dish.png'
+            insertTableRow(cart.piatti[i], imagePath, totPriceDish)
+            if (i == cart.piatti.length - 1) {
+                insertTotalTableRow(cart.quantitàTotale, totPrice)
+            }
+        }
         totPrice += totPriceDish
     }
-    document.getElementById('cartTableBody').innerHTML += '<tr id="lastRow">'
-        + '        <td colspan="3" scope="row"></td>'
-        + '        <td class="backgroundCart" id="totalQuantity">' + cart.quantitàTotale + '</td>'
-        + '        <td class=" backgroundCart" id="totalPrice">€ ' + Math.round(totPrice * 100) / 100 + '</td>'
-        + '</tr>'
     cart.prezzoTotale = Math.round(totPrice * 100) / 100
     sessionStorage.setItem("cart", JSON.stringify(cart))
+}
+
+function insertTableRow(dish, imagePath, totPriceDish) {
+    document.getElementById('cartTableBody').innerHTML += '<tr>'
+        + '    <td scope="row">'
+        + '        <img src="' + imagePath + '" class="cartImg" alt="..."> </td>'
+        + '    <td class="nameCartItem">' + dish.nome + '</td>'
+        + '        <td>' + dish.prezzo + '</td>'
+        + '        <td>'
+        + '            <input onInput="priceChange(this)" type="number" id="quantityInput" class="quantityInput" min="0" value="' + dish.quantita + '" step="1">'
+        + '            <a href="#" onClick="removeItem(this)"> Rimuovi </a>'
+        + '        </td>'
+        + '        <td class="totPriceInput">€ ' + totPriceDish + '</td>'
+        + '</tr>'
+}
+
+function insertTotalTableRow(totQuantity, totPrice) {
+    document.getElementById('cartTableBody').innerHTML += '<tr id="lastRow">'
+        + '        <td colspan="3" scope="row"></td>'
+        + '        <td class="backgroundCart" id="totalQuantity">' + totQuantity + '</td>'
+        + '        <td class=" backgroundCart" id="totalPrice">€ ' + Math.round(totPrice * 100) / 100 + '</td>'
+        + '</tr>'
 }
 
 // Funzione chiamata quando viene modificata la quantità di un prodotto nel carrello
@@ -257,7 +273,7 @@ function orderClicked(orderType) {
     console.log("Preparazione: " + duration + " min, Spedizione: " + deliveryDuration + " min")
     if (orderType == "delivery") {
         var deliveryDuration = document.getElementById("deliveryDuration").value    // Prende la durata precedentemente calcolata con mapBox
-    var totDuration = parseInt(duration) + parseInt(deliveryDuration)
+        var totDuration = parseInt(duration) + parseInt(deliveryDuration)
         document.getElementById("deliveryDurationMessage").innerHTML = "Il tuo ordine arriverà tra " +
             + totDuration + " minuti"
     } else {

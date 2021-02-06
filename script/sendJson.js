@@ -226,10 +226,6 @@ async function editCustomDish() {
     }
 }
 
-function searchAndSubmitEditDish() {
-
-}
-
 function getDishDataFromModal(action, image) {
     return {
         "nome": document.getElementById("name" + action).value,
@@ -257,7 +253,6 @@ function resizeBase64Img(base64, newWidth, newHeight) {
         var img = new Image();
         img.src = base64;
         img.onload = function () {
-            //context.scale(newWidth/img.width,  newHeight/img.height);
             context.drawImage(img,
                 0, 0, img.width, img.height,
                 0, 0, canvas.width, canvas.height);
