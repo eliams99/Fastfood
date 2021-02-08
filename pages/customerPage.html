@@ -123,7 +123,7 @@
                         <div class="form-group">
                             <h4 class="page-section-heading"> Dati utente</h4>
 
-                            <form method='POST' action="../php/editDeleteUser.php">
+                            <form id="editCustomerDataForm" method="POST">
                                 <div class="row">
                                     <div class="col-md">
                                         <label for="nameInputText">Nome</label>
@@ -131,26 +131,22 @@
                                     </div>
                                     <div class="col-md">
                                         <label for="surnameInputText">Cognome</label>
-                                        <input type="text" class="form-control" id="surnameInputText" name="cognome"
-                                            required>
+                                        <input type="text" class="form-control" id="surnameInputText" name="cognome" required>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="addressInputText">Indirizzo</label>
-                                        <input type="text" class="form-control" id="addressInputText" name="indirizzo"
-                                            required>
+                                        <input type="text" class="form-control" id="addressInputText" name="indirizzo" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="municipalityInputText">Comune</label>
-                                        <input type="text" class="form-control" id="municipalityInputText"
-                                            name="comune">
+                                        <input type="text" class="form-control" id="municipalityInputText" name="comune">
                                     </div>
                                     <div class="col-md-1">
                                         <label for="provinceInputText">Provincia</label>
-                                        <input type="text" class="form-control" id="provinceInputText" name="provincia"
-                                            required>
+                                        <input type="text" class="form-control" id="provinceInputText" name="provincia" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="CAPInputText">CAP</label>

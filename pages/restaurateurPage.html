@@ -125,7 +125,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     <!-- DATI PERSONALI -->
                     <div class="tab-pane fade show active" id="v-pills-personalData" role="tabpanel" aria-labelledby="v-pills-personalData-tab">
-                        <form action="../php/editDeleteRestaurateur.php" method="POST">
+                        <form id="editRestaurateurDataForm" method="POST">
 
                             <!-- Section Heading -->
                             <h4 class="page-section-heading">Modifica i tuoi dati</h4>
@@ -201,7 +201,7 @@
 
                             </div>
                             <div id="deleteButton">
-                                <button type="button" name="action" value="edit" onclick="editRestaurateur()" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
+                                <button type="click" name="action" value="edit" onclick="editRestaurateur()" class="btn btn-primary mb-2">Modifica i tuoi dati</button>
                                 <button type="button" name="action" value="delete" onclick="deleteRestaurateur()" class="btn btn-secondary mb-2">Elimina la tua iscrizione</button>
                             </div>
                         </form>
@@ -301,13 +301,13 @@
 
                                     <div class="form-group">
                                         <label for="nameEdit">Nome</label>
-                                        <input type="text" class="form-control" name="nameEdit" id="nameEdit" placeholder="es. Double Cheeseburger">
+                                        <input type="text" class="form-control" name="nameEdit" id="nameEdit" placeholder="es. Double Cheeseburger" required>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
                                             <label for="typeEdit">Tipologia</label>
-                                            <select class="form-control" name="typeEdit" id="typeEdit">
+                                            <select class="form-control" name="typeEdit" id="typeEdit" required>
                                                 <option name="type" value="" disabled>Scegli la tipologia</option>
                                             </select>
                                         </div>
@@ -318,14 +318,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">€</div>
                                                 </div>
-                                                <input type="text" class="form-control" name="priceEdit" id="priceEdit" placeholder="7.50" size="5">
+                                                <input type="text" class="form-control" name="priceEdit" id="priceEdit" placeholder="7.50" size="5" required>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="meatEdit">Tipo di carne</label>
-                                        <select class="form-control" name="meatEdit" id="meatEdit">
+                                        <select class="form-control" name="meatEdit" id="meatEdit" required>
                                             <option name="meatType" value="" disabled>Scegli il tipo di carne</option>
                                         </select>
                                     </div>
@@ -337,7 +337,7 @@
 
                                     <input type="hidden" name="action" value="editCustom">
 
-                                    <button type="button" class="btn btn-primary" onclick="editCustomDish()" data-dismiss="modal">
+                                    <button type="click" class="btn btn-primary" onclick="editCustomDish()">
                                         <i class="fas fa-check fa-fw"></i>
                                         Conferma modifiche
                                     </button>
@@ -389,13 +389,13 @@
 
                                     <div class="form-group">
                                         <label for="nameNew">Nome</label>
-                                        <input type="text" class="form-control" name="name" id="nameNew" placeholder="es. Double Cheeseburger">
+                                        <input type="text" class="form-control" name="name" id="nameNew" placeholder="es. Double Cheeseburger" required>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-7">
                                             <label for="typeNew">Tipologia</label>
-                                            <select class="form-control" name="typeNew" id="typeNew">
+                                            <select class="form-control" name="typeNew" id="typeNew" required>
                                                 <option name="type" value="" disabled selected>Scegli la tipologia</option>
                                             </select>
                                         </div>
@@ -406,14 +406,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">€</div>
                                                 </div>
-                                                <input type="text" class="form-control" name="price" id="priceNew" placeholder="7.50" size="5">
+                                                <input type="text" class="form-control" name="price" id="priceNew" placeholder="7.50" size="5" required>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="meatNew">Tipo di carne</label>
-                                        <select class="form-control" name="meatNew" id="meatNew">
+                                        <select class="form-control" name="meatNew" id="meatNew" required>
                                             <option name="meatType" value="" disabled selected>Scegli il tipo di carne</option>
                                         </select>
                                     </div>
@@ -425,7 +425,7 @@
 
                                     <input type="hidden" name="action" value="addCustom">
 
-                                    <button type="button" class="btn btn-primary" onclick="addCustomDish()" data-dismiss="modal">
+                                    <button type="click" class="btn btn-primary" onclick="addCustomDish()">
                                         <i class="fas fa-check fa-fw"></i>
                                         Aggiungi piatto
                                     </button>

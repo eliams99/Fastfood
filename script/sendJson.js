@@ -3,9 +3,7 @@ var message;
 /* Creazione account clienti e ristoratori */
 
 function submitCustomer() {
-    if (!document.getElementById("defaultCheck").checked) {
-        alert("Per registrarti devi prima accettare l'informativa sulla privacy")
-    } else {
+    if (document.getElementById("customerRegistrationForm").checkValidity()) {
         var localData
         localData = JSON.parse(localStorage.getItem("data"))
         if (validateEmail(localData.utenti, "inputEmail")) {
@@ -29,9 +27,7 @@ function submitCustomer() {
 }
 
 function submitRestaurateur() {
-    if (!document.getElementById("restDefaultCheck").checked) {
-        alert("Per registrarti devi prima accettare l'informativa sulla privacy")
-    } else {
+    if (document.getElementById("restaurateurRegistrationForm").checkValidity()) {
         var localData
         localData = JSON.parse(localStorage.getItem("data"))
         if (validateEmail(localData.utenti, "restInputEmail")) {
@@ -54,18 +50,22 @@ function submitRestaurateur() {
 /* Modifica dati account cliente ristoratori */
 
 function editCustomer() {
-    localData = JSON.parse(localStorage.getItem("data"))
-    userData = getCustomerData(JSON.parse(sessionStorage.getItem("actualUser")).prefPagamento)
-    localData.utenti.clienti = editUser(localData.utenti.clienti, userData)
-    updateData(localData)
-    setTimeout(function () { window.location.reload() }, 2000)
+    if (document.getElementById("editCustomerDataForm").checkValidity()) {
+        localData = JSON.parse(localStorage.getItem("data"))
+        userData = getCustomerData(JSON.parse(sessionStorage.getItem("actualUser")).prefPagamento)
+        localData.utenti.clienti = editUser(localData.utenti.clienti, userData)
+        updateData(localData)
+        setTimeout(function () { window.location.reload() }, 2000)
+    }
 }
 
 function editRestaurateur() {
-    localData = JSON.parse(localStorage.getItem("data"))
-    localData.utenti.ristoratori = editUser(localData.utenti.ristoratori, getRestaurateurData())
-    updateData(localData)
-    setTimeout(function () { window.location.reload() }, 2000)
+    if (document.getElementById("editRestaurateurDataForm").checkValidity()) {
+        localData = JSON.parse(localStorage.getItem("data"))
+        localData.utenti.ristoratori = editUser(localData.utenti.ristoratori, getRestaurateurData())
+        updateData(localData)
+        setTimeout(function () { window.location.reload() }, 2000)
+    }
 }
 
 function editUser(users, userData) {
@@ -180,47 +180,53 @@ function checkCommonDishes() {
 }
 
 async function addCustomDish() {
-    const fileInput = document.getElementById('fileToUpload');
-    const selectedFile = fileInput.files[0];
-    let base64 = await toBase64(selectedFile);
-    var localData = JSON.parse(localStorage.getItem("data"))
-    var index = findActualUser()
-    resizeBase64Img(base64, 200, 200).then((result) => {
-        localData.panini.paniniRistoranti[index].paniniPersonalizzati.push(getDishDataFromModal("New", result))
-        message = document.getElementById("nameNew").value + " aggiunto"
-        updateData(localData)
-        setTimeout(function () { window.location.reload() }, 2000)
-    })
+    console.log(document.getElementById("addForm").checkValidity())
+    if (document.getElementById("addForm").checkValidity()) {
+        const fileInput = document.getElementById('fileToUpload');
+        const selectedFile = fileInput.files[0];
+        let base64 = await toBase64(selectedFile);
+        var localData = JSON.parse(localStorage.getItem("data"))
+        var index = findActualUser()
+        resizeBase64Img(base64, 200, 200).then((result) => {
+            localData.panini.paniniRistoranti[index].paniniPersonalizzati.push(getDishDataFromModal("New", result))
+            message = document.getElementById("nameNew").value + " aggiunto"
+            updateData(localData)
+            setTimeout(function () { window.location.reload() }, 2000)
+        })
+    }
 }
 
 async function editCustomDish() {
-    const fileInput = document.getElementById('fileEditToUpload');
-    const selectedFile = fileInput.files[0];
-    var localData = JSON.parse(localStorage.getItem("data"))
-    var index = findActualUser()
-    var dishName = document.getElementById("dishName").value
-    if (selectedFile == undefined) {        // Se non è stata caricata l'immagine mantiene quella precedente (prendendola da modalImg)
-        for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
-            if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
-                localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", document.getElementById("modalImg").src)
-                message = document.getElementById("nameEdit").value + " modificato"
-                updateData(localData)
-                setTimeout(function () { window.location.reload() }, 2000)
-                return
-            }
-        }
-    } else {
-        let base64 = await toBase64(selectedFile);
-        for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
-            if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
-                resizeBase64Img(base64, 200, 200).then((result) => {
-                    localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", result)
+    console.log(document.getElementById("editForm").checkValidity())
+    if (document.getElementById("editForm").checkValidity()) {
+        const fileInput = document.getElementById('fileEditToUpload');
+        const selectedFile = fileInput.files[0];
+        var localData = JSON.parse(localStorage.getItem("data"))
+        var index = findActualUser()
+        var dishName = document.getElementById("dishName").value
+        if (selectedFile == undefined) {        // Se non è stata caricata l'immagine mantiene quella precedente (prendendola da modalImg)
+            for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
+                if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
+                    localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", document.getElementById("modalImg").src)
                     message = document.getElementById("nameEdit").value + " modificato"
                     updateData(localData)
                     setTimeout(function () { window.location.reload() }, 2000)
                     return
-                })
-                return
+                }
+            }
+        } else {
+            let base64 = await toBase64(selectedFile);
+            for (var i = 0; i < localData.panini.paniniRistoranti[index].paniniPersonalizzati.length; i++) {
+                if (localData.panini.paniniRistoranti[index].paniniPersonalizzati[i].nome == dishName) {
+                    resizeBase64Img(base64, 200, 200).then((result) => {
+                        localData.panini.paniniRistoranti[index].paniniPersonalizzati[i] = getDishDataFromModal("Edit", result)
+                        message = document.getElementById("nameEdit").value + " modificato"
+                        updateData(localData)
+                        setTimeout(function () { window.location.reload() }, 2000)
+                        return
+                    })
+                    return
+                }
             }
         }
     }
@@ -288,7 +294,7 @@ function addOrder() {
     } else {
         cart.ora = date.getHours() + ":" + date.getMinutes()
     }
-    
+
     cart.data = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
     cart.evaso = false
     data.ordini.push(cart)
